@@ -1,0 +1,638 @@
+[
+  {
+    "id": "quant-mathematics",
+    "track": "Quant & markets",
+    "title": "The mathematical language of models and money",
+    "level": "Foundations",
+    "minutes": 45,
+    "prerequisites": [],
+    "summary": "Build vectors, derivatives, probability and numerical reasoning from concrete portfolio and prediction examples.",
+    "sections": [
+      {
+        "title": "Start with quantities and units",
+        "body": "A return is a change divided by a starting value: buying at ₹100 and valuing at ₹103 produces 0.03, or 3%, before costs. A three percentage-point change is not a 3% relative change. If a probability rises from 20% to 23%, it rises three percentage points and 15% relative to its old value. Write units alongside every formula. A daily return cannot be inserted directly into a formula expecting annual volatility; a percentage stored as 3 rather than 0.03 changes an answer by a factor of one hundred.\n\nAlgebra turns a verbal rule into something testable. If revenue is quantity times price, R=qP, changing q changes exposure, not the quality of your prediction. If a position loses q(Pentry−Pstop), solve q≤budget/(Pentry−Pstop) before rounding down. This inequality describes a planned price move, not a guarantee that a stop fills at that price. The difference between a model assumption and an operational guarantee begins here."
+      },
+      {
+        "title": "Vectors, matrices and geometry",
+        "body": "A vector is an ordered collection with meaning attached to each position. Let x=[1,0.02,1.5] contain an intercept, a return and a relative-volume feature. With weights w=[−0.1,2,0.2], the score w·x=−0.1+0.04+0.3=0.24. Multiplying the vector of features by learned weights is the same operation in a linear model and in one layer of a neural network. Its interpretation depends on scale: changing return units changes the corresponding coefficient.\n\nA matrix stacks these observations. X has n rows and p columns; Xw gives n predictions. XᵀX is p by p. Shape checking catches errors before mathematics becomes code. Two nearly identical columns cause unstable coefficient estimates because many different weight combinations make almost the same predictions. Singular values reveal weak directions; regularization penalizes excessively large weights. Matrix inversion is a mathematical notation, not a command to use everywhere: numerical solvers are usually more stable than explicitly computing an inverse."
+      },
+      {
+        "title": "Calculus as sensitivity and learning",
+        "body": "A derivative measures a local rate of change. If loss L(w)=(2w−6)², then dL/dw=4(2w−6). At w=1, the gradient is −16. Gradient descent with step size 0.1 gives wnew=1−0.1(−16)=2.6, moving toward the minimum w=3. A larger step can overshoot; learning rate is part of the algorithm, not an accuracy setting.\n\nThe chain rule connects nested transformations: dL/dw=(dL/dprediction)(dprediction/dw). Backpropagation applies this rule efficiently across a graph. A gradient is a vector of partial derivatives; a Hessian describes curvature. Option delta and gamma are likewise first and second price derivatives. Integration accumulates small contributions, as in probability over an interval or discounted cash flows over continuous time. Learn derivatives by drawing slopes and checking finite differences: [L(w+h)−L(w−h)]/(2h). Extremely tiny h can amplify floating-point cancellation."
+      },
+      {
+        "title": "Probability and decision quality",
+        "body": "Expectation is a probability-weighted average, not a promised outcome. A game pays ₹100 with probability 0.4 and loses ₹50 otherwise; its expected result is ₹10. If each play costs ₹12, expectation becomes −₹2. Variance measures spread around the mean. Covariance measures how deviations co-move; correlation rescales it between −1 and 1 when both variances are positive.\n\nConditional probability requires a denominator: P(A|B)=P(A and B)/P(B). Suppose profitable regimes occupy 10% of observations. A detector catches 80% of those and falsely triggers on 20% of the rest. Out of 1,000 observations, there are 80 true detections and 180 false detections. Only 80/260≈30.8% of alerts belong to the profitable regime. Good sensitivity alone does not imply useful alerts. This base-rate calculation is essential when rare opportunities, failures or fraud are being detected."
+      },
+      {
+        "title": "From understanding to implementation",
+        "body": "Implement dot products, sample means and a finite-difference derivative without a statistics library, then compare against a trusted library. Test empty inputs, missing values, constant features and large numbers. Separate mathematical equivalence from numerical equivalence: floating-point addition is not perfectly associative.\n\nFor KINT10d, these ideas connect feature vectors to logistic predictions, covariance to portfolio risk, and probability to cost-adjusted expectancy. Mastery means explaining the assumptions, deriving a small example and diagnosing a broken implementation. Memorizing a formula without its units is insufficient. Move to probability distributions, eigenvectors and constrained optimization after these examples become routine."
+      }
+    ],
+    "exercise": {
+      "prompt": "Calculate a portfolio return with weights 0.6 and 0.4 and asset returns 2% and −1%. Then calculate the weighted mean of outcomes +₹90 and −₹60 with probabilities 0.45 and 0.55.",
+      "solution": "Portfolio return = 0.6×0.02+0.4×(−0.01)=0.008, or 0.8%. Expected payoff=0.45×90−0.55×60=₹7.50 before costs. Neither result states the probability of loss for a whole portfolio path."
+    },
+    "interview": {
+      "question": "Why can two strongly correlated features produce unstable coefficients even when predictions appear stable?",
+      "answer": "Their effects can offset in many combinations. The design matrix has a weakly identified direction; small data changes can cause large coefficient changes along that direction while leaving predictions similar. Inspect conditioning, reduce redundancy or regularize, and validate out of sample."
+    },
+    "quiz": {
+      "question": "A detector has high sensitivity. What else is essential to interpret its positive alerts?",
+      "options": [
+        "Only its training loss",
+        "Base rate and false-positive rate",
+        "The number of model parameters alone",
+        "Whether its output is rounded"
+      ],
+      "correct": 1,
+      "explanation": "Bayes’ rule combines the base rate with sensitivity and false-positive rate."
+    },
+    "sources": [
+      {
+        "title": "Mathematics for Machine Learning — free author textbook",
+        "url": "https://mml-book.github.io/"
+      },
+      {
+        "title": "Seeing Theory — interactive probability",
+        "url": "https://seeing-theory.brown.edu/"
+      }
+    ]
+  },
+  {
+    "id": "quant-inference",
+    "track": "Quant & markets",
+    "title": "Inference, uncertainty and the cost of searching",
+    "level": "Mechanisms",
+    "minutes": 45,
+    "prerequisites": [
+      "quant-mathematics"
+    ],
+    "summary": "Understand what confidence intervals and p-values do, then protect research from repeated testing and dependent observations.",
+    "sections": [
+      {
+        "title": "Samples are not the underlying process",
+        "body": "A backtest contains observed outcomes, while the question concerns future outcomes under a process that may change. The sample mean estimates a population expectation only under assumptions about sampling and stability. Ten trades from one market shock are not ten independent economic experiments. Separate measurement noise, parameter uncertainty, model misspecification and future regime change; collecting more copies of the same event only reduces some of these.\n\nFor independent observations with sample standard deviation s, the estimated standard error of the mean is s/√n. If 100 trades average ₹8 with standard deviation ₹50, the standard error is ₹5. An approximate normal 95% interval is ₹8±₹9.80, including zero. Positive observed profit is therefore compatible with a non-positive underlying average. With small samples or unusual distributions, the approximation needs more care."
+      },
+      {
+        "title": "Tests answer a narrower question than people expect",
+        "body": "A p-value measures how incompatible the statistic is with a specified null model: it is the probability, under that null and the testing procedure, of an outcome at least as extreme as the observed one. It is not the probability that the hypothesis is false. A confidence interval is a procedure with long-run coverage under its assumptions; it does not allocate a frequentist probability to one fixed parameter after the data have arrived.\n\nSpecify the estimand before testing. Mean net return, probability of target before stop, drawdown and outperforming a benchmark are different questions. A model can improve classification accuracy while worsening average money earned. A minimum effect size matters: an expected advantage below uncertain transaction costs is not useful simply because a very large dataset yields a small p-value. Report effect size, interval, sample composition and assumptions together."
+      },
+      {
+        "title": "Searching changes the reference distribution",
+        "body": "Imagine 100 independent strategies with zero true advantage and tests at a 5% false-positive threshold. The expected number of false positives is five. The probability of at least one is 1−0.95¹⁰⁰≈99.4%. Real strategies are correlated, so that exact number is illustrative, but correlation does not make search disappear. Trying instruments, windows, exits and feature sets creates a family of comparisons even if only the final chart is saved.\n\nA Bonferroni threshold of 0.05/100=0.0005 controls a familywise error bound without requiring independence, though it can be conservative. False-discovery-rate procedures answer a different question about the expected proportion of false discoveries among selected hypotheses under their conditions. Neither replaces sound data or an economic mechanism. Keep a ledger of all attempted candidates, including failed and abandoned versions. Reusing a holdout to make improvements converts it into development data."
+      },
+      {
+        "title": "Dependence, resampling and selection",
+        "body": "For a stationary mean with positive serial correlation, effective information can be much smaller than the row count. The rough relation neffective≈n/[1+2Σρk] illustrates why correlated returns enlarge uncertainty; it is not a universal plug-in formula for every trading dataset. A block bootstrap samples contiguous chunks to preserve some temporal dependence. Block length is a modeling choice and must be stress-tested. Resampling individual five-minute bars destroys day-level structure and overlapping trade relationships.\n\nCompare strategies on matched dates where possible. A paired difference removes common market variation and directly estimates incremental value. Avoid bootstrapping only winning trades or selected symbols. When the pipeline includes model selection, uncertainty should consider selection as well as the final fitted strategy. Deflated-Sharpe and backtest-overfitting research offer useful diagnostics, but their assumptions and inputs must be documented; no single score certifies a strategy."
+      },
+      {
+        "title": "A defensible research decision",
+        "body": "Freeze the question, dataset version, split boundaries, cost assumptions and stopping rule. Use development data for exploration, validation for choosing among registered alternatives, and a protected confirmation period once the procedure is fixed. A failed result is information: record whether the mechanism failed, costs overwhelmed it, or the test lacked power. Do not rename a failed hypothesis and pretend the next test is the first.\n\nIn KINT10d, software test success shows that code obeyed expectations; it does not show market predictability. A monthly return aspiration is a research question, not a significance threshold. Interview-level understanding includes explaining how a statistically significant result can be economically trivial, how an economically interesting result can be uncertain, and why a beautiful selected backtest is an especially biased estimator."
+      }
+    ],
+    "exercise": {
+      "prompt": "Twenty independent null strategies are each tested at 5%. What is the chance of at least one false positive? What happens if the best result alone is shown?",
+      "solution": "1−0.95²⁰≈64.2%. Showing only the winner hides the selection process and exaggerates apparent evidence. Correlation changes the exact probability, so retain the actual candidate family and use an appropriate joint procedure."
+    },
+    "interview": {
+      "question": "Why is a random train/test split often inappropriate for market time series?",
+      "answer": "It may mix future and past observations, overlap event labels across folds, and hide regime shifts. Use chronological evaluation with causal feature computation and appropriate gap/purge rules, then state exactly which deployment situation it simulates."
+    },
+    "quiz": {
+      "question": "A p-value of 0.03 means:",
+      "options": [
+        "There is a 97% chance the strategy is profitable",
+        "The strategy will win 97% of trades",
+        "Under the specified null, the observed-or-more-extreme statistic has probability 3%",
+        "Transaction costs cannot erase the result"
+      ],
+      "correct": 2,
+      "explanation": "The p-value is conditional on the null and testing assumptions; it is not posterior profitability."
+    },
+    "sources": [
+      {
+        "title": "Harvey, Liu & Zhu — multiple testing in expected returns",
+        "url": "https://www.nber.org/papers/w20592"
+      },
+      {
+        "title": "Bailey et al. — probability of backtest overfitting",
+        "url": "https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf"
+      }
+    ]
+  },
+  {
+    "id": "quant-time-series",
+    "track": "Quant & markets",
+    "title": "Time series: forecasting a changing process",
+    "level": "Mechanisms",
+    "minutes": 45,
+    "prerequisites": [
+      "quant-inference"
+    ],
+    "summary": "Connect stationarity, autocorrelation, volatility and walk-forward evaluation to the actual forecasting decision.",
+    "sections": [
+      {
+        "title": "The index is part of the data",
+        "body": "A time series is more than an ordered array. Its timestamp specifies when an event occurred, when information became available, and which trading session it belongs to. A five-minute candle stamped 09:20 may mean its opening time or its closing time depending on the provider. The model cannot use its final high, low or volume until the interval has ended and the data are available. Missing bars can mean no trades, a closed market, a network failure or an instrument that did not yet exist; these meanings are not interchangeable.\n\nBuild explicit calendars and distinguish event time from ingestion time. A business-day series has a different frequency from continuous seconds. Never interpolate prices across an overnight closure merely to make a numerical routine accept the input. Record timezone, interval convention, adjustment policy and revision history before fitting a forecast."
+      },
+      {
+        "title": "Levels, returns and stationarity",
+        "body": "Weak stationarity requires a stable mean, variance and covariance depending on lag rather than calendar time. A random-walk price Pₜ=Pₜ₋₁+εₜ is not stationary even when its independent increments are. Regressing one drifting price on another can produce impressive but spurious relationships. Returns or differences sometimes produce a more stable modeling target, but differencing is not a magic cure for structural change.\n\nA simple return is Pₜ/Pₜ₋₁−1. A log return is log(Pₜ/Pₜ₋₁); log returns add over time, while simple returns compound through products. A 10% gain followed by a 10% loss produces 1.1×0.9−1=−1%, although the arithmetic average is zero. Corporate actions must be handled before interpreting apparent price jumps. Choosing adjusted or raw prices depends on whether you are measuring economic return or simulating an executable historical order."
+      },
+      {
+        "title": "Forecasts need a baseline and a horizon",
+        "body": "An AR(1) model yₜ=c+φyₜ₋₁+εₜ predicts the next value from the preceding value. With c=0.001, φ=0.2 and yₜ=0.01, the next prediction is 0.003, or 0.3%. If |φ|<1 and the other conditions hold, its long-run mean is c/(1−φ)=0.00125. This mathematical property does not prove those parameters stay constant in a market.\n\nCompare against a zero-return or historical-mean baseline, as appropriate, before adding complexity. The forecast horizon must match the label and execution horizon. Predicting the next close is different from predicting whether a path hits an upper barrier before a lower one. Mean absolute error, squared error, direction accuracy and economic utility reward different behavior. Evaluate a forecast at the point where its decision would actually have been made."
+      },
+      {
+        "title": "Volatility is predictable differently from direction",
+        "body": "Returns may have weak linear autocorrelation while squared or absolute returns show persistence. A simple conditional variance recursion hₜ=ω+αε²ₜ₋₁+βhₜ₋₁ models clustering: large recent surprises raise future uncertainty. Under common GARCH(1,1) conditions, α+β<1 supports a finite unconditional variance ω/(1−α−β). A good variance estimate can improve sizing and scenario analysis without predicting return direction.\n\nResidual diagnostics matter. Plot errors against time, examine their autocorrelation and compare predicted intervals with realized coverage. A nominal 90% interval containing only 60% of outcomes is miscalibrated even if its mean forecast seems good. Heavy tails and jumps can make Gaussian intervals too narrow. Volatility forecasts also need carefully aligned targets; overlapping realized-volatility windows create dependent errors."
+      },
+      {
+        "title": "Walk-forward and honest deployment simulation",
+        "body": "At each evaluation date, fit using only data available before that date, make a forecast, record it and move forward. Expanding windows use more history; rolling windows forget older observations. Select this policy using development evidence, not the final holdout. Fit scaling, imputation and feature selection inside each training window. An embargo or purge must match the label’s information span rather than an arbitrary number of rows.\n\nIn KINT10d, begin by forecasting a transparent target and beating a simple baseline under realistic costs. Show performance across dates and regimes, not just one aggregate number. Monitoring should detect data drift, calibration failure and changes in liquidity. Retraining is a controlled new experiment with a versioned model, not an automatic response to every losing day. Explain why the model fails before assuming more parameters will fix it."
+      }
+    ],
+    "exercise": {
+      "prompt": "A model forecasts +1% and then −1% for two successive periods. What is the compounded return? Why might a random shuffle evaluation exaggerate its reliability?",
+      "solution": "1.01×0.99−1=−0.0001, or −0.01%. Shuffling can expose future regimes, overlap labels and destroy the temporal structure the live system must face."
+    },
+    "interview": {
+      "question": "Can volatility forecasting be useful if direction forecasting fails?",
+      "answer": "Yes. It can inform risk budgets, uncertainty intervals and exposure constraints, provided forecasts are calibrated and evaluated causally. It does not itself establish positive expected return after costs."
+    },
+    "quiz": {
+      "question": "A completed 09:15–09:20 candle can normally inform a decision:",
+      "options": [
+        "At 09:15 using its final high",
+        "Only after completion and availability",
+        "At any time if the database contains it",
+        "Yesterday after backfilling"
+      ],
+      "correct": 1,
+      "explanation": "Information availability, not eventual database presence, controls causal use."
+    },
+    "sources": [
+      {
+        "title": "Forecasting: Principles and Practice — author textbook",
+        "url": "https://otexts.com/fpp3/"
+      },
+      {
+        "title": "Time Series Momentum — authors’ research page",
+        "url": "https://www.aqr.com/Insights/Research/Journal-Article/Time-Series-Momentum"
+      }
+    ]
+  },
+  {
+    "id": "quant-instruments",
+    "track": "Quant & markets",
+    "title": "Stocks, bonds and funds: what exactly do you own?",
+    "level": "Foundations",
+    "minutes": 45,
+    "prerequisites": [
+      "quant-mathematics"
+    ],
+    "summary": "Understand cash flows, claims, accounting and valuation before treating every instrument as a price chart.",
+    "sections": [
+      {
+        "title": "Ownership and claims",
+        "body": "An equity share is a residual ownership claim: shareholders participate after contractual obligations, and their value depends on uncertain future cash flows and required returns. Revenue is not profit, and accounting profit is not cash flow. A firm may report earnings while cash is tied up in inventory or receivables. Read the balance sheet, income statement and cash-flow statement together. Market capitalization equals share price times shares outstanding; enterprise value also reflects financing claims and relevant cash adjustments.\n\nA low share price does not make a company cheap. A two-for-one split doubles shares and halves price mechanically without doubling value. For research, total-return calculations include distributions appropriately, while an order simulator must use historical tradable prices and quantities. Point-in-time financial statements matter: a restated annual report published later was unavailable to an earlier trading decision."
+      },
+      {
+        "title": "Discounting converts time into value",
+        "body": "A promised ₹1,100 one year from now discounted at 10% is worth ₹1,000 today: PV=CF/(1+r)ᵗ. For several cash flows, sum their discounted values. Discount rates combine time value and relevant risk compensation; they are not arbitrary knobs to obtain a desired valuation. A higher required return lowers present value, holding cash flows fixed. Expected growth and risk interact, so a fast-growing business can still be overpriced.\n\nFor a one-year zero-coupon bond paying ₹1,000, a 5% yield implies a price of ₹952.38. At 6%, its price is ₹943.40, a decline of about 0.943%. This calculation assumes payment occurs as specified and ignores dealing costs. A bond’s coupon is its contractual payment rate on face value, whereas yield depends on the purchase price and cash-flow schedule. High coupon does not automatically mean high realized return."
+      },
+      {
+        "title": "Duration, convexity and credit",
+        "body": "Macaulay duration is a present-value-weighted average time to cash flows. Modified duration approximates percentage price sensitivity: ΔP/P≈−DmodifiedΔy for a small parallel yield change. A bond with modified duration four would lose roughly 2% for a 0.5-percentage-point yield increase, before convexity and other changes. Convexity improves the approximation for larger moves. These are local sensitivities, not forecasts of interest rates.\n\nCredit adds default, recovery and spread risk. A government bond and a corporate bond of equal maturity can respond differently because their credit and liquidity exposures differ. Holding to maturity does not remove default or opportunity-cost risk, and selling before maturity exposes price risk. Callable bonds embed options, so duration can change substantially with rates. Learn yield curves rather than pretending all maturities share one discount rate."
+      },
+      {
+        "title": "Funds are wrappers around exposures",
+        "body": "A mutual fund pools assets; net asset value reflects assets less liabilities per unit under its valuation process. An ETF additionally trades on an exchange, where its market price can differ from NAV and its spread matters. An index fund follows a stated methodology; it is not free of market risk. An active fund chooses deviations from a benchmark, which must be assessed after relevant expenses and against a suitable comparison.\n\nTwo funds holding the same large stocks are not two independent sources of diversification. Examine underlying holdings, sector exposure, fees, tracking difference and liquidity. Direct and regular plans, distribution options, entry/exit conditions and applicable taxes are product-specific and should be checked in current official documents. A SIP is a contribution schedule, not a separate asset class or a guarantee of favorable returns."
+      },
+      {
+        "title": "Research implications and deliberate practice",
+        "body": "Compare strategies on compatible return definitions. Price-only equity performance against a total-return benchmark is misleading; fund NAV returns may already include recurring expenses, so subtracting them again double-counts costs. Deposits and withdrawals require careful return measurement: time-weighted return evaluates portfolio performance apart from external flow timing, while money-weighted return reflects the investor’s actual cash-flow timing.\n\nFor KINT10d, begin with an instrument dictionary explaining ownership, settlement, cash flows, corporate actions and available data. An intraday candle engine cannot automatically become a bond valuation model or mutual-fund allocator. Each has different clocks, liquidity and decision rules. This lesson supplies conceptual building blocks, not a product recommendation. Interview competence means tracing a change in yield, earnings or fees through cash flows to valuation and then to portfolio risk."
+      }
+    ],
+    "exercise": {
+      "prompt": "A zero-coupon instrument pays ₹10,000 in two years. Compute its value at an annual yield of 5%, then 6%.",
+      "solution": "At 5%: 10000/1.05²=₹9,070.29. At 6%: 10000/1.06²=₹8,899.96. The price falls approximately 1.878%. This assumes the promised cash flow is paid and uses annual compounding."
+    },
+    "interview": {
+      "question": "Why can a bond fund lose money when its holdings continue paying coupons?",
+      "answer": "Market yields or credit spreads can rise, lowering the present value of remaining cash flows. Coupon income may be smaller than the mark-to-market decline, particularly for longer-duration exposure."
+    },
+    "quiz": {
+      "question": "Which is a method of contributing money rather than an asset class?",
+      "options": [
+        "Equity",
+        "Corporate bond",
+        "SIP",
+        "Government bond"
+      ],
+      "correct": 2,
+      "explanation": "A systematic investment plan describes payment timing; risk comes from the underlying assets."
+    },
+    "sources": [
+      {
+        "title": "AMFI — official mutual fund education and disclosures",
+        "url": "https://www.amfiindia.com/"
+      },
+      {
+        "title": "Markowitz — foundations of portfolio theory lecture",
+        "url": "https://www.nobelprize.org/uploads/2018/06/markowitz-lecture.pdf"
+      }
+    ],
+    "lab": "bonds"
+  },
+  {
+    "id": "quant-microstructure",
+    "track": "Quant & markets",
+    "title": "How Indian market orders become executions",
+    "level": "Mechanisms",
+    "minutes": 45,
+    "prerequisites": [
+      "quant-instruments"
+    ],
+    "summary": "Trace quotes, auctions, matching, fills and settlement; distinguish a visible price from executable liquidity.",
+    "sections": [
+      {
+        "title": "A market is a mechanism",
+        "body": "An exchange brings together orders under a matching mechanism. In continuous trading, the best bid is the highest displayed buying price and the best ask is the lowest displayed selling price. Their difference is the spread. The last traded price describes an earlier transaction; it is not necessarily the price available for your order. A quote must include exchange timestamp, receipt time, instrument identity and depth to support an execution claim.\n\nSuppose bids show 100 shares at ₹99.90 and asks show 30 at ₹100.10 plus 100 at ₹100.20. A market buy for 50 shares, if that book remains unchanged and the order is eligible to execute, consumes 30 at ₹100.10 and 20 at ₹100.20. Its average price is ₹100.14. A single last price of ₹100 would conceal this cost. Real books can change before arrival, and hidden or interacting orders complicate reconstruction."
+      },
+      {
+        "title": "Order instructions describe tradeoffs",
+        "body": "A market order prioritizes execution but does not guarantee a price. A limit buy at ₹100.10 caps its execution price but may fill only partially or not at all. A stop is a trigger condition; the resulting order type determines what happens after triggering. A stop-limit order may fail to execute in a gap. A stop-market order, where supported, can execute beyond the intended price. Exact broker and exchange capabilities must be checked rather than inferred from generic definitions.\n\nOrder accepted, order working, partially filled, filled, canceled and rejected are distinct states. A timeout is ambiguous: the server might have accepted the order before the client lost its response. Reliable trading software reconciles order status before retrying and uses identifiers to prevent duplication. Research software should model the same distinctions rather than converting every signal into an immediate full fill."
+      },
+      {
+        "title": "Auctions, sessions and contracts",
+        "body": "An opening auction aggregates eligible orders to determine a clearing price according to exchange rules. Indicative prices can change as orders arrive or are withdrawn; they are not completed executions. Continuous-session assumptions should not be applied to auction observations. Holidays, special sessions, outages and segment-specific schedules must come from dated official exchange information.\n\nNSE’s published pages define current market timings and contract specifications, but these rules evolve. Store the historical rule version relevant to each experiment, including lot size, tick size, expiry and settlement method. Never hard-code a familiar weekday as a permanent derivatives expiry rule. Corporate actions, symbol changes and reintroduced contracts also require stable instrument identifiers and effective-date ranges. A ticker string alone is not a historical contract identity."
+      },
+      {
+        "title": "Costs hidden behind a clean candle",
+        "body": "A candle gives open, high, low, close and aggregated volume, but not queue position, bid/ask path or which barrier was reached first. If both target and stop lie inside one bar, the winning path is not established. Use finer data where justified, or apply a predeclared conservative ambiguity rule and report its effect. Volume traded somewhere in a bar does not prove your limit order would have filled.\n\nSlippage includes movement between decision and execution and the effect of consuming liquidity. Adverse selection means a passive order may fill precisely when the price is about to move against it. Fees, taxes, brokerage and financing depend on product and historical tariff rules; use official schedules and reconcile against real statements when available. Do not treat a broker’s institutional reputation as proof that downloaded timestamps, adjustment policies or missing rows are correct."
+      },
+      {
+        "title": "A collection-to-research contract",
+        "body": "Validate monotonic timestamps, duplicate records, out-of-session bars, OHLC inequalities and negative or missing volumes. Cross-check a sample against another authorized source where available, but do not average incompatible bars to hide discrepancies. Identify whether data are delayed, revised or incomplete. Rate limits apply per provider and account according to its terms; multiple sources are for resilience and validation, not bypassing contractual restrictions.\n\nFor KINT10d, a successful login proves authentication, a successful candle response proves retrieval, and a passed quality check establishes only the specific checks performed. Execution qualification requires additional quote and liquidity evidence. Keep these states separate in the dashboard. An interview answer should follow a proposed order from decision timestamp through validation, matching, partial fills, reconciliation and settlement, while naming what the available data cannot establish."
+      }
+    ],
+    "exercise": {
+      "prompt": "The ask has 20 shares at ₹250.10 and 40 at ₹250.20. Assuming no changes, what is the average execution price of a 50-share market buy?",
+      "solution": "(20×250.10+30×250.20)/50=₹250.16. The calculation is conditional on the displayed liquidity still being available and says nothing about fees or subsequent price movement."
+    },
+    "interview": {
+      "question": "Why is a candle backtest insufficient to prove a limit order filled?",
+      "answer": "The candle omits order-book queue position, available depth at arrival and the sequence of trades. A touch is not evidence that enough executable liquidity reached the order after earlier queued orders."
+    },
+    "quiz": {
+      "question": "A broker request times out after submission. The safest state interpretation is:",
+      "options": [
+        "Definitely rejected",
+        "Definitely filled",
+        "Unknown until reconciled",
+        "Submit repeatedly until a response arrives"
+      ],
+      "correct": 2,
+      "explanation": "Transport failure does not uniquely determine broker-side order state."
+    },
+    "sources": [
+      {
+        "title": "NSE — market timings",
+        "url": "https://www.nseindia.com/static/market-data/market-timings"
+      },
+      {
+        "title": "NSE — individual-security derivatives specifications",
+        "url": "https://www.nseindia.com/static/products-services/equity-derivatives-individual-securities"
+      },
+      {
+        "title": "NSE — futures pre-open session",
+        "url": "https://www.nseindia.com/static/products-services/equity-derivatives-pre-open-session"
+      }
+    ]
+  },
+  {
+    "id": "quant-derivatives",
+    "track": "Quant & markets",
+    "title": "Derivatives: replication, leverage and Greeks",
+    "level": "Mechanisms",
+    "minutes": 45,
+    "prerequisites": [
+      "quant-microstructure",
+      "quant-mathematics"
+    ],
+    "summary": "Build option and futures intuition from cash flows and no-arbitrage, then confront the assumptions that fail in live markets.",
+    "sections": [
+      {
+        "title": "Payoff is not profit",
+        "body": "A derivative’s value depends on an underlying variable and contract terms. A long futures position gains when the underlying contract price rises and loses when it falls, multiplied by contract quantity. Margin is collateral, not the maximum possible loss and not the full economic exposure. A call gives its holder a contractual right to buy; a put gives a right to sell, subject to exercise and settlement terms. A long call’s expiry payoff is max(S−K,0), but profit subtracts premium and costs.\n\nFor an illustrative call with strike ₹100 and premium ₹6, expiry at ₹104 gives a ₹4 payoff and a ₹2 loss per unit. Expiry at ₹110 gives ₹10 payoff and ₹4 profit before costs. A correct bullish view can therefore still lose money. Actual contract lot size and settlement obligations must be checked in the dated exchange specification; affordability cannot be inferred from the quoted premium alone."
+      },
+      {
+        "title": "Replication explains risk-neutral pricing",
+        "body": "Consider one period with stock price ₹100 that will become either ₹120 or ₹80. A strike-₹100 call pays ₹20 or zero. Holding 0.5 share gives ₹60 or ₹40; borrowing ₹40 at zero interest leaves exactly the call payoff. The replicating cost is ₹50−₹40=₹10. If frictionless trading and the stated assumptions hold, another price permits an arbitrage through the replicating portfolio.\n\nThe corresponding risk-neutral probability is 0.5 because 100=0.5×120+0.5×80 at zero interest. This is a pricing probability derived from traded prices, not a claim that the actual chance of an up move is 50%. With nonzero interest, discount the replicated payoff and adjust that probability. Learn this small tree before memorizing a continuous-time formula: the important idea is hedging and consistent pricing, not predicting the stock’s real expected return."
+      },
+      {
+        "title": "Black–Scholes and its boundaries",
+        "body": "For a European call on a non-dividend-paying underlying, the classic model gives C=S N(d1)−K exp(−rT)N(d2), with d1=[ln(S/K)+(r+σ²/2)T]/(σ√T) and d2=d1−σ√T. Inputs must use consistent annualized units and maturity conventions. The formula rests on idealized assumptions including continuous dynamics, specified volatility and frictionless hedging. It is a model of valuation, not a trading signal.\n\nImplied volatility is the volatility input that makes the model reproduce an observed option price. It is not identical to a forecast of realized volatility. Market smiles and skews show that a single constant volatility does not explain all strikes and maturities. Jumps, discrete hedging, dividends, transaction costs and liquidity create risks outside the simplest derivation. Numerical root-finding for implied volatility should enforce feasible prices and report failures rather than silently output a plausible-looking number."
+      },
+      {
+        "title": "Greeks describe local exposures",
+        "body": "Delta is the first sensitivity to underlying price; gamma describes how delta changes; vega measures sensitivity to volatility; theta measures time sensitivity under a specified convention; rho concerns rates. An approximate change is ΔV≈delta×ΔS+0.5×gamma×(ΔS)²+vega×Δσ+theta×Δt. Units differ across systems: vega may be quoted per one volatility point or per unit volatility. Verify conventions before aggregating positions.\n\nSuppose delta=0.5 and gamma=0.02 per rupee. A ₹2 underlying rise contributes approximately 0.5×2+0.5×0.02×4=₹1.04 to option value if other inputs stay fixed. Falling implied volatility or elapsed time can offset it. Greeks are local approximations; large moves and approaching expiry can change exposures quickly. A delta-neutral position is not risk-free because gamma, volatility, jumps and execution remain."
+      },
+      {
+        "title": "Derivative research needs additional evidence",
+        "body": "An options dataset requires exact strike, expiry, right, underlying, multiplier, timestamps and corporate-action treatment. Last trades may be stale while bids and asks have moved. Avoid constructing a volatility surface from inconsistent timestamps or treating zero volume as proof of an executable market. Historical expired-contract coverage and survivorship must be tested explicitly.\n\nFor KINT10d, test futures and options data separately from equities and keep contracts with uncertain specifications blocked. A small account can be unable to express a desired risk budget because the minimum lot is too large. Do not force a trade by confusing premium paid with a carefully controlled stop loss. A derivative edge must survive spread, slippage, discrete sizing, funding and settlement assumptions, as well as statistical validation. Passing data checks establishes readiness for research, not permission to declare a profitable strategy."
+      }
+    ],
+    "exercise": {
+      "prompt": "A call costs ₹8 with strike ₹200. At expiry the underlying is ₹205. Find payoff, profit and expiry break-even, ignoring costs.",
+      "solution": "Payoff=max(205−200,0)=₹5. Profit=₹5−₹8=−₹3 per unit. Break-even is ₹208. Multiply by the actual contract quantity only after verifying its specification."
+    },
+    "interview": {
+      "question": "Why is risk-neutral probability different from a forecast probability?",
+      "answer": "Risk-neutral probabilities price replicable cash flows consistently with traded asset prices and financing. They incorporate the pricing transformation; real-world probabilities describe expected frequencies and risk premia. Using one as the other confuses valuation with forecasting."
+    },
+    "quiz": {
+      "question": "A delta-neutral options portfolio necessarily has:",
+      "options": [
+        "No risk",
+        "No local first-order underlying-price exposure under its model",
+        "No volatility exposure",
+        "Guaranteed profit"
+      ],
+      "correct": 1,
+      "explanation": "Gamma, vega, jumps, financing and execution can remain substantial."
+    },
+    "sources": [
+      {
+        "title": "Black & Scholes — original paper, publisher abstract; full text may require access",
+        "url": "https://doi.org/10.1086/260062"
+      },
+      {
+        "title": "NSE — contract information",
+        "url": "https://www.nseindia.com/static/products-services/equity-derivatives-contract-information"
+      }
+    ]
+  },
+  {
+    "id": "quant-risk",
+    "track": "Quant & markets",
+    "title": "Risk, costs and the arithmetic of survival",
+    "level": "Practice",
+    "minutes": 45,
+    "prerequisites": [
+      "quant-derivatives",
+      "quant-inference"
+    ],
+    "summary": "Turn a hypothetical loss budget into feasible sizing and learn why reward–risk ratios alone cannot establish an edge.",
+    "sections": [
+      {
+        "title": "Separate several meanings of risk",
+        "body": "Price risk is the loss between a planned entry and stop under an assumed fill. All-in planned risk adds estimated costs and slippage. Tail risk includes gaps, outages, liquidity disappearance and losses beyond a stop. Portfolio risk aggregates exposures and dependence. Operational risk includes duplicate orders or stale credentials. A single rupee budget cannot describe all of these; the system must state which one it is controlling.\n\nKINT10d’s educational baseline uses ₹10,000 hypothetical capital, ₹50 planned all-in loss, 25% cash reserve and one position. These are research assumptions, not a recommendation or evidence of a validated strategy. Cash availability and risk allowance impose different constraints. An attractive mathematical position may still be infeasible because it requires more capital, margin or minimum contract quantity than available."
+      },
+      {
+        "title": "Worked sizing with costs",
+        "body": "Suppose an illustrative share entry is ₹500, stop ₹497 and available deployment cash is ₹7,500. Assume a simplified fixed round-trip cost of ₹10 and no additional slippage for this calculation. The risk constraint is 3q+10≤50, so q≤13.33 and integer quantity is at most 13. The cash constraint gives q≤15. Taking the smaller limit gives 13 shares, ₹6,500 exposure and ₹49 planned loss. Real tariffs can vary with turnover and tax components; solve the actual cost function rather than assuming a universal ₹10.\n\nA target of ₹506 offers ₹78 gross profit for 13 shares but only ₹68 after the illustrative costs. Net reward to planned net risk is 68/49≈1.39, not two. To obtain net reward of at least ₹98 with that same fixed-cost model requires gross profit ₹108, or a price gain of at least ₹8.3077 per share. Tick rounding and actual exit costs must then be applied. The target cannot be moved mechanically if the market structure provides no defensible opportunity."
+      },
+      {
+        "title": "Expectancy beats a slogan",
+        "body": "If an outcome wins W with probability p and loses L otherwise, expected result is pW−(1−p)L, where W and L must use the same net convention. With W=₹100 and L=₹50, break-even p is 1/3 before any omitted costs. If additional costs reduce a win to ₹90 and increase a loss to ₹60, break-even rises to 60/(90+60)=40%. A 1:2 price target is not automatically a 1:2 net outcome.\n\nObserved win rate estimates are uncertain and path dependence matters. A strategy with positive expectancy can have long losing streaks. Constant fractional sizing makes capital evolve multiplicatively. Losing 10% requires an 11.11% gain to recover; losing 50% requires 100%. Do not average returns arithmetically to describe long-run wealth. Capacity also matters: a strategy that works for a tiny order may lose its advantage when increased size moves prices."
+      },
+      {
+        "title": "Tail metrics and stress tests",
+        "body": "Value at Risk is a loss quantile for a stated horizon and confidence level; it does not describe the size of losses beyond that quantile. Expected shortfall averages losses in the tail under the chosen definition and distribution. Both depend on model and data quality. Maximum historical drawdown is one realized path, not a limit on future drawdown.\n\nStress scenarios should include spread widening, stop gaps, delayed data, failed exits and correlated positions. Model a severe but coherent scenario separately from an estimated everyday distribution. A stop can constrain a decision rule without guaranteeing its financial outcome. Kelly sizing maximizes expected log growth under idealized known probabilities; estimation error and constraints make blindly applying it dangerous. Fractional or capped exposure policies still need uncertainty analysis."
+      },
+      {
+        "title": "Operational controls are part of research quality",
+        "body": "Record the sizing inputs, fee version, instrument multiplier and rejected-trade reasons. Check that the simulator cannot spend reserved cash or silently round a fractional derivative lot upward. Reconcile a few calculations by hand. Distinguish realized P&L, unrealized P&L, equity and cash; fees should appear exactly once.\n\nFor interview preparation, be able to explain why one-position limits do not eliminate tail risk, why a tighter stop can increase quantity and transaction sensitivity, and why a monthly target cannot justify raising risk after losses. A research agent should report infeasibility and uncertainty as first-class outcomes. The goal is to test whether a repeatable net advantage exists while preserving a clear account of what can go wrong."
+      }
+    ],
+    "exercise": {
+      "prompt": "With ₹50 all-in budget, ₹4 per-share stop distance and fixed ₹6 costs, what is maximum integer quantity? At ₹8 target distance, what is net reward/risk?",
+      "solution": "q=floor((50−6)/4)=11. Planned loss=44+6=₹50. Net gain=88−6=₹82, ratio=1.64. This assumes sufficient cash and the simplified cost/fill model."
+    },
+    "interview": {
+      "question": "Why does a 2:1 target not prove positive expectancy?",
+      "answer": "Profitability also depends on the probability and realized distribution of wins and losses, costs, slippage, gaps and selection bias. A rarely reached target can have negative expectancy even with a large nominal payoff."
+    },
+    "quiz": {
+      "question": "A portfolio falls 20%. What gain restores its starting value?",
+      "options": [
+        "20%",
+        "25%",
+        "40%",
+        "80%"
+      ],
+      "correct": 1,
+      "explanation": "0.8×1.25=1; recovery is measured from the reduced capital base."
+    },
+    "sources": [
+      {
+        "title": "BIS — market risk and expected shortfall framework",
+        "url": "https://www.bis.org/publications/201601-standards-minimum-capital-requirements-market-risk"
+      },
+      {
+        "title": "CFA Institute — risk-adjusted performance measures",
+        "url": "https://rpc.cfainstitute.org/topics/performance-attribution/risk-adjusted-performance"
+      }
+    ],
+    "lab": "risk"
+  },
+  {
+    "id": "quant-backtesting",
+    "track": "Quant & markets",
+    "title": "Backtesting as a causal event simulation",
+    "level": "Practice",
+    "minutes": 45,
+    "prerequisites": [
+      "quant-time-series",
+      "quant-microstructure",
+      "quant-risk"
+    ],
+    "summary": "Build a reproducible historical experiment whose information, orders and accounting follow the sequence a live system could face.",
+    "sections": [
+      {
+        "title": "A backtest is an executable claim",
+        "body": "The claim is not merely that a line on a chart rises. It is that a fully specified procedure, supplied only with information available at each historical decision time, could have generated the modeled actions and outcomes under stated execution assumptions. Separate the strategy rule, market data, event clock, execution model, accounting and evaluation. This separation allows a failed result to be diagnosed rather than buried in one notebook.\n\nA simple event sequence is: observe finalized data; update causal features; produce a signal; validate risk and eligibility; create an order intent; simulate eligible arrival and fills; update positions and cash; record results. A signal based on the closing price cannot usually assume it simultaneously traded at that same close without a specific executable mechanism and timing model."
+      },
+      {
+        "title": "Leakage has many disguises",
+        "body": "Direct leakage includes tomorrow’s return in a feature. Indirect leakage includes scaling all rows before splitting, choosing features using the full dataset, using later revised fundamentals, or constructing a universe from today’s surviving stocks. The most dangerous errors often look like harmless preparation. A centered moving average contains future observations. A daily high is unavailable at 10 a.m. even if it appears on every intraday row after a merge.\n\nLet a label use the interval from 10:00 to 10:30. Another sample beginning at 10:20 overlaps that outcome. If one is in training and the other in testing, the split is not clean merely because their start timestamps differ. Purge training labels whose information spans overlap the evaluation interval and apply a suitable separation rule. Fit preprocessing within each training fold and carry the fitted transformation forward."
+      },
+      {
+        "title": "Fill ambiguity and accounting",
+        "body": "Suppose a bar opens at ₹100, reaches high ₹105 and low ₹97, and closes at ₹102. A long position has a ₹104 target and ₹98 stop. OHLC alone cannot reveal which was touched first. Assuming the target first systematically favors the strategy. A declared conservative rule, finer timestamps, or reporting bounds is more honest; selecting the rule after seeing profitability introduces another search choice.\n\nAccounting should conserve value. Buying q shares reduces cash by q times fill price plus entry costs, increases holdings by q, and does not create profit simply because the position exists. Selling realizes price difference minus all relevant costs. Corporate actions, splits, dividends, contract expiry and settlement require explicit events. Ensure no simultaneous positions appear if the protocol permits only one. Repeated signals during an open position need a defined policy."
+      },
+      {
+        "title": "Reproducibility and tests that matter",
+        "body": "Persist an immutable dataset identifier, content hashes, code version, environment, random seeds, parameter specification and ordered event log. Determinism requires more than a seed when concurrency, hardware or external data revisions differ. Raw data should remain preserved; cleaned datasets document transformations and exclusions. A failed download should not silently become an empty but valid trading day.\n\nWrite invariant tests: cash and holdings reconcile; future rows cannot alter earlier features; a known flat-price path cannot generate unexplained gross profits; no order predates the information that triggered it; fees reconcile exactly once. Use synthetic paths with known outcomes, including gaps and same-bar ambiguities. These tests verify implementation. They do not count as successful market experiments or evidence of return predictability."
+      },
+      {
+        "title": "Evaluation aligned with deployment",
+        "body": "A walk-forward test should emulate the proposed retraining schedule, universe selection and availability delays. Include rejected trades, missing-data intervals and periods with no signals. Compare against simple benchmarks under consistent costs. Report net return, drawdown, turnover, exposure, uncertainty and how much performance comes from a small number of events. Decompose discrepancies between idealized signal return and executable simulation.\n\nKINT10d’s research agent should be allowed to conclude that a dataset is inadequate, a strategy is infeasible or no edge was found. Confirmation data remain protected until the procedure is fixed. If a later bug is corrected, rerun relevant tests and preserve both versions with an explanation; do not selectively keep whichever result looks better. An honest simulation is valuable even when its answer is disappointing."
+      }
+    ],
+    "exercise": {
+      "prompt": "A feature normalizer uses the mean and standard deviation of all dates before a chronological split. Identify the error and fix it.",
+      "solution": "Future distribution information entered training preprocessing. Fit the normalizer only on each training interval, store its parameters, and apply those parameters unchanged to validation/test rows. Refitting occurs only on the predeclared retraining schedule."
+    },
+    "interview": {
+      "question": "How would you test that a feature pipeline is causal?",
+      "answer": "Compute features on a prefix, then append or perturb future observations and recompute. Earlier feature values should remain unchanged, subject only to explicitly modeled data revisions. Also inspect rolling windows, merges, timestamps and preprocessing fit boundaries."
+    },
+    "quiz": {
+      "question": "Both stop and target occur inside one OHLC bar. What is known?",
+      "options": [
+        "Target occurred first",
+        "Stop occurred first",
+        "Their order is unknown from OHLC alone",
+        "The trade must be excluded only if it loses"
+      ],
+      "correct": 2,
+      "explanation": "OHLC records extrema, not the complete path ordering."
+    },
+    "sources": [
+      {
+        "title": "Bailey et al. — backtest overfitting",
+        "url": "https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf"
+      },
+      {
+        "title": "Forecasting: Principles and Practice — evaluation methods",
+        "url": "https://otexts.com/fpp3/"
+      }
+    ],
+    "lab": "leakage"
+  },
+  {
+    "id": "quant-edge",
+    "track": "Quant & markets",
+    "title": "Edge hunting: from observation to falsifiable evidence",
+    "level": "Practice",
+    "minutes": 45,
+    "prerequisites": [
+      "quant-backtesting",
+      "quant-inference"
+    ],
+    "summary": "Turn a market anecdote into a registered hypothesis, a selection policy and an experiment capable of rejecting the idea.",
+    "sections": [
+      {
+        "title": "Observation is the beginning",
+        "body": "“A stock rose after a strong opening” describes one observed path. It does not establish a selection rule, tradable entry, expected return or generalizable advantage. If the ticker was chosen from two names without a market-wide ranking, document that limitation rather than retroactively inventing a rigorous screen. If a later rise attracts attention, outcome knowledge can distort the remembered clarity of the earlier setup.\n\nA useful research notebook records what was known at the time: candidate universe, publication timestamps, prices, missing evidence, candidate ranking, entry conditions and reasons for waiting. The historical KINT10d example is a user-reported process case, not an independently validated market result. Its value is identifying missing preparation and a testable hypothesis, not labeling the missed move a guaranteed winner."
+      },
+      {
+        "title": "Write the mechanism and its competing explanation",
+        "body": "A hypothesis might be: among a predeclared liquid-stock universe, unusually strong opening volume combined with sector-relative strength predicts a specified later return net of costs. Define “unusually strong,” the comparison time, the sector benchmark, the trading horizon and eligibility rules before testing. A relative-volume denominator should compare like times of day; 09:20 volume against a full-day average has a different meaning.\n\nState why the effect might exist: delayed information incorporation, constrained liquidity or investor behavior. Then state why it might disappear: the move is already priced, spreads widen, selection favors survivors, or a market-wide rally explains it. A mechanism makes an experiment interpretable but does not prove it. Alternative explanations should become controls or ablations rather than an introductory story that the analysis ignores."
+      },
+      {
+        "title": "Candidate selection is itself a model",
+        "body": "The universe and ranking policy are part of the strategy. If only the eventual winner is studied, selection bias starts before entry logic. Compare a registered screen against a simple baseline such as all eligible stocks or a liquidity-only selection, using compatible timing. Keep rejected candidates and missing-data flags. A screen that produces one attractive chart from hundreds of names needs evaluation across all its decisions.\n\nFor an opening-range idea, define the range using completed observations, then specify whether entry follows a breakout, retest or later confirmation. Each variant is a separate trial unless explicitly part of one fixed policy. Define the no-trade outcome. A system that correctly waits because required data are missing has made an operational decision, but it has not generated evidence that the trading hypothesis works."
+      },
+      {
+        "title": "An experiment has stages and a ledger",
+        "body": "Stage one checks data and contract eligibility. Stage two tests a minimal baseline and verifies the simulator. Stage three explores a limited registered family on development data. Stage four chooses a fixed candidate using validation. Stage five evaluates protected confirmation once, with declared statistical and practical gates. Paper trading then tests operational assumptions using fresh data; it does not automatically establish sufficiently long-run profitability.\n\nThe experiment ledger records hypothesis ID, parents, inputs, parameters, data hash, costs, test family, decision and failure reason. Failed ideas remain visible. Distinguish a software fixture, a data-quality check, a market experiment and a prospective observation. If a paper suggests a method, record the exact change required for Indian intraday data; a result on developed-market monthly futures cannot be imported as evidence for five-minute single-stock trading."
+      },
+      {
+        "title": "Aspirations are not evidence thresholds",
+        "body": "A 10% monthly aspiration on ₹10,000 is ₹1,000 before unmodeled effects; sustained compounding at that rate would imply approximately 214% growth over twelve months. That arithmetic explains why the target is demanding, not why it is achievable. Do not optimize a backtest until its headline reaches the target. Study feasible capacity, drawdown, time exposure and uncertainty together.\n\nAn honest outcome may be “no candidate passed,” “sample too small,” or “data cannot establish execution.” Such outcomes prevent false confidence and guide the next useful task. Interview-level research reasoning means proposing a test that could disconfirm your favorite idea, describing what evidence would change your mind, and explaining why a missed winning move is not proof of a failed strategy. Preparation can improve while the market hypothesis remains unproven."
+      }
+    ],
+    "exercise": {
+      "prompt": "Convert “stocks with strong pre-open moves keep rising” into a testable statement without using future knowledge.",
+      "solution": "Specify the dated universe and liquidity filter, exact pre-open observation timestamp and source, signal threshold, entry after an executable time, exit horizon, costs, missing-data policy and benchmark. Register it before inspecting confirmation outcomes. Auction indications must not be treated as guaranteed fills."
+    },
+    "interview": {
+      "question": "What is the difference between an economic mechanism and empirical evidence?",
+      "answer": "A mechanism explains a plausible causal or behavioral reason for an effect. Evidence tests whether the specified effect appears with sufficient magnitude and robustness under appropriate data, costs and validation. Either can be weak independently of the other."
+    },
+    "quiz": {
+      "question": "A single missed trade later becomes profitable. This establishes:",
+      "options": [
+        "The entry was guaranteed",
+        "The selection policy has an edge",
+        "One realized price path, requiring a separate evaluation of the ex-ante decision",
+        "The risk budget should increase"
+      ],
+      "correct": 2,
+      "explanation": "Outcome knowledge cannot retroactively fill gaps in decision-time evidence."
+    },
+    "sources": [
+      {
+        "title": "Harvey, Liu & Zhu — selection and factor discovery",
+        "url": "https://www.nber.org/papers/w20592"
+      },
+      {
+        "title": "Deflated Sharpe Ratio — author paper",
+        "url": "https://www.davidhbailey.com/dhbpapers/deflated-sharpe.pdf"
+      }
+    ]
+  },
+  {
+    "id": "quant-portfolios",
+    "track": "Quant & markets",
+    "title": "Portfolios, factors and regime uncertainty",
+    "level": "Frontier",
+    "minutes": 45,
+    "prerequisites": [
+      "quant-risk",
+      "quant-time-series",
+      "quant-inference"
+    ],
+    "summary": "Understand diversification and optimization, then learn why estimation error and changing regimes dominate elegant formulas.",
+    "sections": [
+      {
+        "title": "Diversification depends on joint behavior",
+        "body": "Portfolio return is wᵀr and variance is wᵀΣw, where Σ is the covariance matrix. Two assets with equal 20% volatility and equal weights have portfolio variance 0.25×0.04+0.25×0.04+2×0.5×0.5×ρ×0.04. At correlation zero, volatility is about 14.14%; at correlation one, it remains 20%. Owning two tickers does not ensure diversification if their risks move together.\n\nCovariance is estimated, not revealed. Crisis relationships can differ from ordinary periods, and liquidity may deteriorate across positions simultaneously. Correlation also does not capture all dependence, especially joint tail losses. Diversify by underlying exposures and economic mechanisms, not merely asset labels. Several funds can duplicate the same stocks; several strategies can all be short volatility without saying so in their names."
+      },
+      {
+        "title": "Optimization amplifies uncertain inputs",
+        "body": "Mean–variance optimization chooses weights to balance expected return and variance under constraints. In an unconstrained stylized problem, weights relate to Σ⁻¹μ; errors in tiny expected-return differences can generate extreme positions. An optimizer does exactly what its inputs ask, including exploiting estimation noise. Constraints, shrinkage and simple benchmark portfolios often improve robustness even when they sacrifice apparent in-sample optimality.\n\nSuppose expected returns for two similar assets are estimated as 8% and 9% with large uncertainty. Treating the one-percentage-point difference as known can concentrate the portfolio in the second asset. A sensitivity analysis changes inputs within plausible ranges and checks whether weights swing dramatically. Turnover penalties, exposure caps and transaction costs belong inside or alongside the decision process. A mathematically optimal but untradeable portfolio is not a useful result."
+      },
+      {
+        "title": "Factors separate exposure from apparent skill",
+        "body": "A regression rstrategy−rf=α+βmarket(rmarket−rf)+other factor exposures+ε asks how much return is explained by chosen risk exposures. Positive raw returns during a rising market need not imply alpha. Alpha itself is conditional on the model, period, implementation and costs; omitted factors can change its interpretation. Factor definitions require point-in-time construction and appropriate geography.\n\nCross-sectional momentum ranks assets relative to peers, while time-series momentum compares an asset with its own past return. These are different policies. Published evidence on one universe and horizon is not a universal instruction to buy recent winners. Momentum can suffer severe drawdowns in some environments. Read both the mechanism paper and work on failure regimes, then reproduce a small reference result before adapting it."
+      },
+      {
+        "title": "Regimes are uncertain states, not perfect labels",
+        "body": "A regime model might classify periods as high or low volatility, trending or ranging, or risk-on and risk-off. If labels are assigned using the full future path, they cannot support a causal live strategy. A valid online model estimates a state distribution from information available so far. Switching policies based on a noisy state estimate can add turnover and selection bias.\n\nFor a simple two-state example, suppose a signal has expected net payoff +₹20 in state A and −₹15 in state B. With a 60% probability of A, expected payoff is 0.6×20−0.4×15=₹6. If that state probability is miscalibrated and really 40%, expectation becomes −₹1. State uncertainty is economically meaningful. Evaluate the entire detection-and-action pipeline, not an oracle that knows the state beforehand."
+      },
+      {
+        "title": "From one position to an allocation system",
+        "body": "KINT10d’s current hypothetical one-position constraint simplifies simultaneous exposure but not selection, turnover or tail risk. Before adding strategies, study their joint net-return paths, shared data dependencies and failure modes. A common broker outage can correlate operational risk even when market signals differ. Allocate capital based on validated evidence and robust constraints, not each strategy’s best historical Sharpe.\n\nBuild an equal-weight baseline, a volatility-scaled alternative and a constrained optimizer on development data. Compare out-of-sample turnover, concentration, drawdown and uncertainty. Stress covariance and expected-return estimates. Preserve a benchmark and record all allocation trials. Interview mastery requires explaining why diversification works, when it fails, why constraints can improve realized results, and why the best portfolio on historical inputs may be the least reliable choice going forward."
+      }
+    ],
+    "exercise": {
+      "prompt": "Two equally weighted assets each have 10% volatility and correlation 0.5. Compute portfolio volatility.",
+      "solution": "Variance=0.25×0.01+0.25×0.01+2×0.5×0.5×0.5×0.01=0.0075. Volatility=√0.0075≈8.66%. This calculation assumes the stated covariance is appropriate for the horizon."
+    },
+    "interview": {
+      "question": "Why can a constrained optimizer outperform an unconstrained one out of sample?",
+      "answer": "Constraints can regularize uncertain inputs and prevent extreme positions driven by estimation error. They may reduce theoretical in-sample optimality while improving stability, turnover and realized risk. This remains an empirical question."
+    },
+    "quiz": {
+      "question": "A regime classifier built using the complete future path is suitable for:",
+      "options": [
+        "Direct live deployment without changes",
+        "Descriptive analysis, with an explicit warning that it is not causal",
+        "Guaranteed market timing",
+        "Avoiding transaction costs"
+      ],
+      "correct": 1,
+      "explanation": "Future-informed regime labels can describe history but cannot directly define a causal live policy."
+    },
+    "sources": [
+      {
+        "title": "Markowitz — foundations of portfolio theory",
+        "url": "https://www.nobelprize.org/uploads/2018/06/markowitz-lecture.pdf"
+      },
+      {
+        "title": "Kenneth French — factor definitions and research data",
+        "url": "https://mba.tuck.dartmouth.edu/pages/faculty/Ken.French/data_library.html"
+      },
+      {
+        "title": "Daniel & Moskowitz — Momentum Crashes",
+        "url": "https://www.nber.org/papers/w20439"
+      }
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "errors": [],
+  "checks": [
+    "signed-in save",
+    "reload persistence",
+    "separate-device readback",
+    "stale-write conflict409",
+    "cross-origin403",
+    "malformed review400",
+    "anonymous401",
+    "mobile no overflow",
+    "parameter memory arithmetic",
+    "gradient update",
+    "bond present value",
+    "22 papers",
+    "calendar event with alarm"
+  ]
+}

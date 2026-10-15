@@ -1,0 +1,41 @@
+name: Verify Academy
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run test:content
+      - run: npm run build
+      - run: npm run db:local
+      - run: npx playwright install --with-deps chromium
+      - name: Browser tests
+        shell: bash
+        run: |
+          npm run dev -- --hostname 127.0.0.1 > /tmp/academy-preview.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 60); do
+            if curl --silent --fail http://127.0.0.1:5173/ > /dev/null; then break; fi
+            sleep 1
+          done
+          npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: academy-browser-checks
+          path: |
+            qa/local-report.json
+            qa/*.png
+          if-no-files-found: ignore

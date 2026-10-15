@@ -1,0 +1,233 @@
+[
+  {
+    "id": "ai-paper-resnet",
+    "title": "Deep Residual Learning for Image Recognition",
+    "year": 2015,
+    "authors": "Kaiming He et al.",
+    "area": "AI / architectures",
+    "url": "https://arxiv.org/abs/1512.03385",
+    "why": "A historical anchor for learning residual transformations and understanding deep-network optimization.",
+    "prerequisites": [
+      "Linear algebra",
+      "Backpropagation"
+    ],
+    "readFor": "Find the residual-block definition and compare the training behaviour of plain and residual networks.",
+    "limits": "Library note checked against the primary abstract and bibliographic record; this is not an independent reproduction. Image-recognition results do not validate a financial application.",
+    "exercise": "Implement a tiny plain and residual network on the same small dataset; record training curves and seeds."
+  },
+  {
+    "id": "ai-paper-attention",
+    "title": "Attention Is All You Need",
+    "year": 2017,
+    "authors": "Ashish Vaswani et al.",
+    "area": "AI / transformers",
+    "url": "https://arxiv.org/abs/1706.03762",
+    "why": "The primary architecture paper behind the Transformer learning path.",
+    "prerequisites": [
+      "Matrix multiplication",
+      "Softmax",
+      "Sequence modelling"
+    ],
+    "readFor": "Trace attention inputs and outputs, masks, position information, and the experimental comparison.",
+    "limits": "Primary abstract and metadata verified. The original translation setting differs from later decoder-only assistants; do not attribute every modern design choice to this paper.",
+    "exercise": "Reproduce a masked attention calculation with three tokens and verify the future-token isolation invariant."
+  },
+  {
+    "id": "ai-paper-bert",
+    "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+    "year": 2018,
+    "authors": "Jacob Devlin et al.",
+    "area": "AI / pretraining",
+    "url": "https://arxiv.org/abs/1810.04805",
+    "why": "Compare bidirectional representation pretraining with causal language modelling.",
+    "prerequisites": [
+      "Transformers",
+      "Training versus inference"
+    ],
+    "readFor": "Identify the pretraining objectives and how downstream adaptation is evaluated.",
+    "limits": "Primary abstract and bibliographic record verified; benchmark claims are author-reported. Bidirectionality does not imply permission to use future information in a trading prediction.",
+    "exercise": "Explain which token positions an encoder may access and why a causal forecasting task needs a different information boundary."
+  },
+  {
+    "id": "ai-paper-gpt3",
+    "title": "Language Models are Few-Shot Learners",
+    "year": 2020,
+    "authors": "Tom B. Brown et al.",
+    "area": "AI / in-context learning",
+    "url": "https://arxiv.org/abs/2005.14165",
+    "why": "A clear source for separating demonstrations in a prompt from task-specific weight updates.",
+    "prerequisites": [
+      "Autoregressive modelling",
+      "Evaluation design"
+    ],
+    "readFor": "Compare zero-shot, one-shot, and few-shot evaluation, including methodological limitations.",
+    "limits": "Primary abstract verified. Performance claims refer to the paper’s models and tasks; the library has not reproduced them or audited its full training corpus.",
+    "exercise": "Design a fixed-budget comparison of zero-shot and few-shot prompts on a sealed extraction set."
+  },
+  {
+    "id": "ai-paper-scaling",
+    "title": "Scaling Laws for Neural Language Models",
+    "year": 2020,
+    "authors": "Jared Kaplan et al.",
+    "area": "AI / scaling",
+    "url": "https://arxiv.org/abs/2001.08361",
+    "why": "Introduces an empirical way to relate language-model loss to model, data, and compute budgets.",
+    "prerequisites": [
+      "Logarithms",
+      "Regression",
+      "Training loss"
+    ],
+    "readFor": "Inspect the variables, fitted ranges, and assumptions behind resource-allocation conclusions.",
+    "limits": "Primary abstract verified. Empirical fits are conditional on the measured setup, not universal laws or an AGI forecast.",
+    "exercise": "Plot a hypothetical power law on linear and log axes; explain why extrapolation beyond measured ranges is risky."
+  },
+  {
+    "id": "ai-paper-chinchilla",
+    "title": "Training Compute-Optimal Large Language Models",
+    "year": 2022,
+    "authors": "Jordan Hoffmann et al.",
+    "area": "AI / scaling",
+    "url": "https://arxiv.org/abs/2203.15556",
+    "why": "A useful contrast with earlier scaling recommendations: resource allocation changes conclusions.",
+    "prerequisites": [
+      "Scaling laws",
+      "Token budgets"
+    ],
+    "readFor": "Compare how model size and training-token count are varied under a compute constraint.",
+    "limits": "Primary abstract verified. Do not turn a reported recipe into a universal optimal token ratio for all architectures, datasets, or inference budgets.",
+    "exercise": "For a fixed illustrative ND product, compare several parameter/token allocations and state what empirical data would choose among them."
+  },
+  {
+    "id": "ai-paper-instruct",
+    "title": "Training language models to follow instructions with human feedback",
+    "year": 2022,
+    "authors": "Long Ouyang et al.",
+    "area": "AI / post-training",
+    "url": "https://arxiv.org/abs/2203.02155",
+    "why": "A historical reference for demonstrations, preference rankings, and assistant-oriented post-training.",
+    "prerequisites": [
+      "Supervised learning",
+      "Preference evaluation"
+    ],
+    "readFor": "Trace which dataset supplies each learning signal and how human preference is measured.",
+    "limits": "Primary abstract verified. Human preference is not identical to factual truth; the authors also report remaining mistakes. No independent reproduction is claimed here.",
+    "exercise": "Create separate rubrics for helpfulness, factual support, and valid tool use on the same five answers."
+  },
+  {
+    "id": "ai-paper-dpo",
+    "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+    "year": 2023,
+    "authors": "Rafael Rafailov et al.",
+    "area": "AI / preferences",
+    "url": "https://arxiv.org/abs/2305.18290",
+    "why": "An alternative perspective on learning from preferred and rejected responses.",
+    "prerequisites": [
+      "Log probabilities",
+      "Supervised tuning",
+      "Preference pairs"
+    ],
+    "readFor": "Read the objective, reference-policy role, assumptions, and comparison protocol.",
+    "limits": "Primary record verified. This library is a reading guide, not a derivation audit or proof that DPO dominates every RL-based approach.",
+    "exercise": "Write a preference-pair dataset with an ambiguous example and explain how annotation uncertainty affects training."
+  },
+  {
+    "id": "ai-paper-lora",
+    "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+    "year": 2021,
+    "authors": "Edward J. Hu et al.",
+    "area": "AI / efficient adaptation",
+    "url": "https://arxiv.org/abs/2106.09685",
+    "why": "Provides the low-rank update idea used in parameter-efficient adaptation.",
+    "prerequisites": [
+      "Matrix dimensions",
+      "Rank",
+      "Gradient descent"
+    ],
+    "readFor": "Identify frozen and trained tensors, rank choices, and the memory/performance comparison.",
+    "limits": "Primary abstract and record verified. Parameter savings do not imply elimination of base-weight or activation memory. Task-specific quality still requires testing.",
+    "exercise": "Calculate adapter counts for three matrix shapes and ranks; compare with base counts."
+  },
+  {
+    "id": "ai-paper-qlora",
+    "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+    "year": 2023,
+    "authors": "Tim Dettmers et al.",
+    "area": "AI / efficient adaptation",
+    "url": "https://arxiv.org/abs/2305.14314",
+    "why": "Connects quantized base weights with adapter learning and explicit memory constraints.",
+    "prerequisites": [
+      "LoRA",
+      "Numerical precision",
+      "Memory accounting"
+    ],
+    "readFor": "Separate the paper’s quantization, memory-management, and adaptation components.",
+    "limits": "Primary abstract and bibliographic record verified. Reported hardware results depend on the exact configuration; this guide does not promise those results on your device.",
+    "exercise": "Build a budget table including weights, adapters, optimizer states, activations, and temporary buffers."
+  },
+  {
+    "id": "ai-paper-distill",
+    "title": "Distilling the Knowledge in a Neural Network",
+    "year": 2015,
+    "authors": "Geoffrey Hinton, Oriol Vinyals, and Jeff Dean",
+    "area": "AI / compression",
+    "url": "https://arxiv.org/abs/1503.02531",
+    "why": "A foundational reading for transferring behaviour from a teacher to a smaller student.",
+    "prerequisites": [
+      "Softmax",
+      "Cross-entropy"
+    ],
+    "readFor": "Compare hard target labels with information in teacher distributions.",
+    "limits": "Primary abstract and record verified. A student may inherit teacher errors; compression quality is task-dependent and requires a held-out evaluation.",
+    "exercise": "Compare two teacher probability vectors with the same top class and explain what information a hard label discards."
+  },
+  {
+    "id": "ai-paper-rag",
+    "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    "year": 2020,
+    "authors": "Patrick Lewis et al.",
+    "area": "AI / retrieval",
+    "url": "https://arxiv.org/abs/2005.11401",
+    "why": "A primary reference for combining parameterized generation with retrieved information.",
+    "prerequisites": [
+      "Embeddings",
+      "Retrieval",
+      "Sequence models"
+    ],
+    "readFor": "Separate retrieval performance from generated-answer performance and inspect the experimental tasks.",
+    "limits": "Primary abstract verified. A modern production RAG pipeline can differ substantially from this paper; retrieval does not automatically ensure truthful or current answers.",
+    "exercise": "Create five answerable and five unanswerable questions and score retrieval and supported answers separately."
+  },
+  {
+    "id": "ai-paper-agi-levels",
+    "title": "Levels of AGI for Operationalizing Progress on the Path to AGI",
+    "year": 2023,
+    "authors": "Meredith Ringel Morris et al.",
+    "area": "AGI / definitions",
+    "url": "https://arxiv.org/abs/2311.02462",
+    "why": "A framework for making broad intelligence claims more explicit and comparable.",
+    "prerequisites": [
+      "Evaluation validity",
+      "Capability versus autonomy"
+    ],
+    "readFor": "Examine how performance and generality are defined and where judgement remains necessary.",
+    "limits": "Primary record verified; title reflects the current arXiv record. This is a proposed conceptual framework, not proof that a particular system has achieved AGI.",
+    "exercise": "Classify a hypothetical highly capable but narrowly scoped tool and state which evidence your classification needs."
+  },
+  {
+    "id": "ai-paper-intelligence",
+    "title": "On the Measure of Intelligence",
+    "year": 2019,
+    "authors": "François Chollet",
+    "area": "AGI / measurement",
+    "url": "https://arxiv.org/abs/1911.01547",
+    "why": "Challenges the assumption that accumulated benchmark skill alone captures intelligence.",
+    "prerequisites": [
+      "Generalization",
+      "Learning efficiency",
+      "Benchmark design"
+    ],
+    "readFor": "Examine the roles of prior knowledge, experience, and skill acquisition in the proposed measurement view.",
+    "limits": "Primary abstract and metadata verified. The conceptual position is not a universally agreed definition, and this reading guide does not independently validate every proposed benchmark.",
+    "exercise": "Design two evaluations with identical final accuracy but different allowed training experience; explain why they may measure different abilities."
+  }
+]

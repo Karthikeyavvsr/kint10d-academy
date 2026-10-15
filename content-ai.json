@@ -1,0 +1,743 @@
+[
+  {
+    "id": "ai-01",
+    "track": "AI & intelligence",
+    "title": "From rules to learned functions: what AI actually is",
+    "level": "Foundations",
+    "minutes": 30,
+    "prerequisites": [],
+    "summary": "Separate artificial intelligence, machine learning, deep learning, and generative models; trace one prediction through data, an objective, parameters, and a decision.",
+    "sections": [
+      {
+        "title": "Start with a function, not a personality",
+        "body": "A program maps inputs to outputs. A hand-written rule might label a return positive when it exceeds zero. A learned model also maps inputs to outputs, but some numbers inside that mapping are selected using examples. In a linear model, prediction = w₁x₁ + w₂x₂ + b. The inputs x are features; w and b are parameters. Training chooses parameter values. Inference applies the chosen values to new inputs. Neither step requires a model to possess intentions, awareness, or a human-like explanation of its calculation.\n\nArtificial intelligence is the wider ambition of building systems that perform tasks associated with intelligence. Search algorithms and symbolic reasoning fit inside it without being neural networks. Machine learning is the part that improves a task-dependent model using data or experience. Deep learning uses compositions of learned transformations. Generative models describe or sample possible data, such as text or images. A trading system might contain all four kinds of components, while its most important protection is an ordinary deterministic limit check."
+      },
+      {
+        "title": "Specify the learning problem",
+        "body": "Every useful ML specification names a prediction time, available inputs, a target, a loss, an evaluation population, and a decision. Suppose a model estimates whether a research job will fail because its data is incomplete. The input may include the number of missing minutes and age of the latest candle; the target is a later audit outcome. That is supervised learning because training examples include targets. Clustering similar papers without labels is an unsupervised task. Predicting the next token supplies a target from the text itself and is usually called self-supervised learning. Reinforcement learning uses feedback about actions in an environment, including delayed consequences.\n\nThese labels describe where the learning signal comes from, not a ranking of intelligence. Self-supervised systems can use enormous amounts of data while supervised systems can work with small carefully labelled sets. Reinforcement learning can fail when its simulator rewards behaviour that the real world punishes. In finance, a model trained to predict an up move is not yet a strategy: position size, costs, eligibility, timing, and execution determine whether an action is useful."
+      },
+      {
+        "title": "Data, objective, algorithm, system",
+        "body": "The dataset is evidence, the objective describes what training rewards, the optimizer is the procedure that changes parameters, and the architecture restricts the functions available. Keep these separate. A larger architecture cannot repair labels computed using information unavailable at decision time. A better optimizer cannot make an inappropriate objective represent the user's needs. A clean model cannot repair a production pipeline that mixes rupees with paise.\n\nConsider a classifier trained on 100 examples, with 90 negatives. Always predicting negative gives 90% accuracy without identifying a single positive. This illustrates why “the AI is 90% accurate” is incomplete. You need the class balance, confusion matrix, decision threshold, consequences of mistakes, and the population sampled. A model estimating probability 0.6 is making a statistical forecast; it is not promising that the next case will succeed."
+      },
+      {
+        "title": "What learning looks like operationally",
+        "body": "A minimal training loop loads a batch, calculates predictions, compares them with targets, computes a gradient, changes parameters, and logs the result. A separate validation pass measures examples that do not contribute updates. When development finishes, a protected test evaluates the frozen system. Save the exact dataset identity, feature code, split definition, training configuration, random seed, dependencies, and model artifact. Reproducibility is a property of this complete package.\n\nFor KINT10d, first build a transparent baseline such as logistic regression and a no-skill comparator. Ask whether additional complexity changes a predeclared outcome on future-like data. This may lead to a neural network, or to the conclusion that the available data does not support the hypothesis. Both are legitimate research outcomes. Your first mastery test is to explain the entire path from a timestamped raw record to a scored decision without using the word “AI” as a substitute for a missing mechanism."
+      },
+      {
+        "title": "From example to specification",
+        "body": "Create a one-page model card for your completeness detector. Write the intended user, action, inputs available at decision time, target source, evaluation period, and excluded uses. Include a failure example: a dataset can have the correct row count while containing duplicated timestamps and missing different timestamps. A count-only feature would miss this. Then decide whether a learned model adds anything beyond explicit checks. This exercise teaches an important engineering skill: identifying when the simplest adequate solution is not machine learning. Explain your choice aloud, including the evidence that would make you reconsider it."
+      }
+    ],
+    "exercise": {
+      "prompt": "Describe a model that flags incomplete candle datasets. Name features, target, loss, split, and the action after a positive flag.",
+      "solution": "Use only information available at audit time: expected and observed counts, duplicates, missing timestamps, timezone consistency. The target is an independently reviewed completeness label. Use log loss for probability learning and measure missed defects plus false alarms on later datasets. A positive flag blocks qualification and requests review; it does not delete data. A deterministic completeness check is a necessary baseline."
+    },
+    "interview": {
+      "question": "What is the difference between training and inference?",
+      "answer": "Training estimates parameters from a learning objective and examples. Inference uses a chosen parameter state to compute an output for an input. The full application still needs validation, retrieval, permissions, and decision rules. A few examples in a prompt normally change the input context, not the stored model parameters."
+    },
+    "quiz": {
+      "question": "Which change necessarily constitutes parameter training?",
+      "options": [
+        "Adding a document to the prompt",
+        "Updating weights using loss gradients",
+        "Changing the displayed answer colour",
+        "Searching a database"
+      ],
+      "correct": 1,
+      "explanation": "Weight updates change the learned function. Prompting and retrieval can change outputs without modifying those weights."
+    },
+    "sources": [
+      {
+        "title": "Hugging Face: LLM course introduction",
+        "url": "https://huggingface.co/learn/llm-course/chapter1/1"
+      }
+    ]
+  },
+  {
+    "id": "ai-02",
+    "track": "AI & intelligence",
+    "title": "A neuron, a loss, and backpropagation by hand",
+    "level": "Mechanisms",
+    "minutes": 30,
+    "prerequisites": [
+      "ai-01"
+    ],
+    "summary": "Derive an actual gradient, understand computation graphs, and know what automatic differentiation does and does not establish.",
+    "sections": [
+      {
+        "title": "One neuron is a small calculation",
+        "body": "For a binary output, let z = wx + b and p = σ(z) = 1 / (1 + exp(−z)). The sigmoid maps any real score to a number between zero and one. A neuron is this kind of parameterized calculation, not a miniature biological brain. If x = 2, w = 0.5, and b = −1, then z = 0 and p = 0.5. A probability interpretation requires calibration evidence; the numeric range alone does not guarantee calibrated probabilities.\n\nFor target y in {0,1}, binary cross-entropy is L = −y log(p) − (1−y) log(1−p). When y = 1, predicting p = 0.9 gives loss about 0.105; predicting 0.1 gives about 2.303. A confident mistake receives a large penalty. Implement this through a numerically stable logits-based loss rather than manually taking logarithms of probabilities that may round to zero."
+      },
+      {
+        "title": "The chain rule creates the gradient",
+        "body": "Differentiate the graph in stages. The loss depends on p, p depends on z, and z depends on w. Multiplying these derivatives simplifies to ∂L/∂z = p − y. Therefore ∂L/∂w = (p − y)x and ∂L/∂b = p − y. With the values above and y = 1, the gradients are −1 and −0.5. A gradient-descent step with learning rate 0.1 gives w = 0.6 and b = −0.95. For the same example, z becomes 0.25 and p is about 0.562. The loss decreased; the model has moved toward the target.\n\nThis is one example and one update, not evidence of generalization. The gradient points toward the steepest local increase in loss under the chosen coordinate system; subtracting a sufficiently small multiple moves locally downhill. A huge step can overshoot. The learning rate is a hyperparameter, while the updated weights are parameters. Confusing the two makes experimental records hard to interpret."
+      },
+      {
+        "title": "Networks and reverse-mode differentiation",
+        "body": "A multilayer network composes vector transformations: h = ReLU(W₁x + b₁), then z = W₂h + b₂. ReLU returns max(0,a) element by element. Nonlinear activations matter because a stack of linear maps collapses to one linear map. Hidden units allow intermediate representations, although an individual unit need not correspond neatly to a human concept.\n\nBackpropagation applies the chain rule from the scalar loss back through this computation graph, reusing intermediate quantities. Reverse-mode automatic differentiation is efficient when many parameters contribute to a small number of outputs such as one loss. It is different from symbolic manipulation of a complete expression and different from approximating every derivative with finite differences. Frameworks record differentiable operations and their local derivative rules. A broken data pipeline or incorrect target remains broken even if every derivative is computed perfectly."
+      },
+      {
+        "title": "Diagnose before you scale",
+        "body": "Test gradients on a tiny differentiable model using the central difference [L(w+ε) − L(w−ε)]/(2ε). Choose ε carefully: too large gives truncation error, too small produces cancellation. Do not expect a smooth derivative exactly at a ReLU kink. Compare with automatic gradients in floating-point tolerances rather than demanding bit-identical decimals.\n\nThen make the model overfit a tiny clean batch. Failure suggests a bug, an unsuitable architecture, or an optimization problem. Success only confirms that the pipeline can fit those examples. Watch for detached tensors, accumulated gradients that were not cleared, wrong reduction from sum to mean, label shape mismatches, and accidental evaluation with training-only behaviour enabled. Gradient clipping limits unusually large gradient norms; it is not a substitute for fixing a corrupt loss. In a quant project, finite-difference testing of a toy neural model is a learning exercise. The important production experiment still uses sealed data and a meaningful baseline."
+      },
+      {
+        "title": "A second derivative and numerical scale",
+        "body": "For L(w) = (w−3)², the gradient is 2(w−3) and curvature is 2. An update gives the error recurrence e_next = (1−2η)e. Convergence requires |1−2η| < 1, so 0 < η < 1. At η = 0.5 the toy problem reaches its optimum in one step; at η = 1 it oscillates. This calculation is unusually simple because the loss is one quadratic with constant curvature. Neural networks have many directions with different curvature. Use the gradient lab to predict the sequence before animating it, and explain why one learning rate can be safe in one direction and unstable in another."
+      }
+    ],
+    "exercise": {
+      "prompt": "For x = 3, y = 0, w = 0, b = 0, compute one sigmoid cross-entropy gradient step at learning rate 0.2.",
+      "solution": "p = 0.5. The weight gradient is (0.5−0)×3 = 1.5 and bias gradient is 0.5. New w = −0.3 and b = −0.1. The new logit is −1 and probability is about 0.269. The single-example loss decreases from about 0.693 to 0.313."
+    },
+    "interview": {
+      "question": "Why do we need backpropagation if automatic differentiation exists?",
+      "answer": "Backpropagation is the reverse chain-rule computation that automatic differentiation implements for a neural-network graph. Understanding it helps diagnose disconnected graphs, scale errors, saturation, memory use, and incorrect objectives. Automatic derivatives guarantee neither correct data nor a useful model."
+    },
+    "quiz": {
+      "question": "A stack of affine layers without nonlinearities represents what?",
+      "options": [
+        "Any discontinuous function",
+        "One affine transformation",
+        "A calibrated probability by definition",
+        "An ensemble of trees"
+      ],
+      "correct": 1,
+      "explanation": "Composition of affine maps remains affine; additional depth alone does not add nonlinear expressiveness."
+    },
+    "sources": [
+      {
+        "title": "Deep Learning: feedforward networks",
+        "url": "https://www.deeplearningbook.org/contents/mlp.html"
+      },
+      {
+        "title": "Deep Learning: optimization",
+        "url": "https://www.deeplearningbook.org/contents/optimization.html"
+      }
+    ],
+    "lab": "gradient"
+  },
+  {
+    "id": "ai-03",
+    "track": "AI & intelligence",
+    "title": "Generalization, evaluation, and the cost of being wrong",
+    "level": "Practice",
+    "minutes": 30,
+    "prerequisites": [
+      "ai-02"
+    ],
+    "summary": "Connect a statistical metric to an operational decision and build evaluation that resists leakage, imbalance, and repeated tuning.",
+    "sections": [
+      {
+        "title": "Generalization is the real target",
+        "body": "A model can remember training labels and still fail on new examples. Training loss measures fit to observed examples; generalization concerns the population where the model will be used. The gap depends on sample size, complexity, data quality, the training procedure, and how different deployment is from training. More data does not help if the new records duplicate old records or reproduce the same bias.\n\nA development split should reflect the future task. Random splitting can be appropriate for genuinely exchangeable examples. It is often misleading for time series, repeated patients, duplicated documents, or multiple records from one instrument and date. Split the independent units and respect time. Fit scaling, missing-value imputation, feature selection, and calibration using only their permitted development data. A preprocessing step can leak future information without ever seeing the target column."
+      },
+      {
+        "title": "Read a confusion matrix as consequences",
+        "body": "Suppose 1,000 cases contain 20 true defects. A detector flags 30 cases, including 15 true defects. True positives are 15, false positives 15, false negatives 5, and true negatives 965. Precision is 15/30 = 0.5, recall is 15/20 = 0.75, and accuracy is 980/1000 = 0.98. An always-negative detector also achieves 0.98 accuracy. The useful question is whether finding fifteen defects justifies fifteen reviews and five missed defects.\n\nA threshold trades recall against false positives. Choose it using a declared cost or capacity constraint on validation data. ROC AUC summarizes ranking across thresholds but can obscure practical precision when positives are rare. Precision-recall analysis is often more informative in that case. Neither area statistic tells you whether probability 0.8 occurs correctly about eight times in ten; that is a calibration question."
+      },
+      {
+        "title": "Probability quality and decisions",
+        "body": "Log loss punishes confident errors; the Brier score averages (p−y)². A reliability diagram compares predicted probability bins with observed frequencies. Use enough data and uncertainty estimates: a bin with three examples is not a reliable calibration conclusion. Calibration can change as populations change. A calibrated model can still have little ranking power, and a strong ranking model can be badly calibrated.\n\nFor a simplified decision paying G when correct and losing L when wrong, with deterministic cost c per action, expected net value is pG − (1−p)L − c. The break-even threshold is (L+c)/(G+L). With G = 100, L = 50, and c = 5, it is 55/150 ≈ 0.367. This algebra assumes fixed outcomes and a reliable p. Real execution, gaps, correlated losses, and uncertain cost violate those assumptions. A classifier metric cannot silently replace a trading evaluation."
+      },
+      {
+        "title": "Research hygiene and an error budget",
+        "body": "Use training data for parameter fitting, validation for development decisions, and a protected test for a final estimate of the frozen procedure. If you inspect the test repeatedly and change the system, it has become development data. Record all variants, including failures. Selection among many models produces optimistic winners even when each individual experiment looks reasonable.\n\nReport uncertainty with methods that respect dependence. Bootstrapping independent rows from a strongly dependent time series understates uncertainty; grouped or block designs may be more appropriate. Audit subgroups and difficult cases, not just the aggregate. Keep a failure ledger: wrong data, wrong target, weak generalization, latency, permission failure, and user-harm consequences. Establish deployment monitoring and a stop condition before rollout. For KINT10d, distinguish prediction validity, simulated economic value, execution feasibility, and live capital risk as separate gates. Passing an ML quiz or software test cannot unlock a claim of market edge."
+      },
+      {
+        "title": "Threshold selection is a development decision",
+        "body": "Imagine two thresholds: A catches 18 of 20 defects but creates 180 false alarms; B catches 15 and creates 15. If review capacity is only 40 cases, A may be operationally unusable despite higher recall. Specify the cost of a missed defect and the review budget before choosing. If you choose the threshold after looking at the final test outcomes, the reported result incorporates selection. Keep threshold choice in validation, then evaluate the whole frozen pipeline once. In an interview, distinguish a model score, a calibrated probability, a chosen threshold, and the final action; these are four different objects."
+      }
+    ],
+    "exercise": {
+      "prompt": "A test set has been consulted after each of 40 experiments. Can you call the best score an unbiased final test? Design a repair.",
+      "solution": "No. Its information guided selection. Treat it as development evidence, retain the full trial ledger, freeze the procedure, and obtain a genuinely untouched future or held-out evaluation with a predeclared metric. Do not merely rename the old split. Report that earlier estimates were exploratory."
+    },
+    "interview": {
+      "question": "Can a model have high accuracy and be useless?",
+      "answer": "Yes: a dominant-class predictor can have high accuracy while missing all important rare events. I would inspect class balance, precision, recall, calibration, decision costs, and an appropriate baseline on future-like data. I would also verify that the evaluation did not leak information."
+    },
+    "quiz": {
+      "question": "Where should a standard scaler learn its mean and variance?",
+      "options": [
+        "Entire dataset before splitting",
+        "Training partition, then apply unchanged to held-out data",
+        "Test partition only",
+        "Whichever partition is largest"
+      ],
+      "correct": 1,
+      "explanation": "Fitting preprocessing on the full dataset lets information from evaluation data enter development."
+    },
+    "sources": [
+      {
+        "title": "scikit-learn: metrics and scoring",
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html"
+      }
+    ]
+  },
+  {
+    "id": "ai-04",
+    "track": "AI & intelligence",
+    "title": "How model training evolved: a map of changing bottlenecks",
+    "level": "Foundations",
+    "minutes": 30,
+    "prerequisites": [
+      "ai-03"
+    ],
+    "summary": "Understand training history as changes in representations, data, compute, and objectives rather than a list of model names.",
+    "sections": [
+      {
+        "title": "Early systems and representations",
+        "body": "Early AI included explicit search, logic, and hand-written knowledge. A symbolic system makes its rules visible, but acquiring and maintaining all relevant rules can be expensive. Early learned classifiers adjusted relatively small sets of weights. A single linear decision boundary cannot solve every classification problem; nonlinear combinations or suitable features change what can be represented. This is an expressiveness issue, distinct from whether an optimizer can find useful parameters.\n\nIn classical machine learning, much effort went into engineering features: counts, ratios, frequencies, domain indicators, and transformations. Linear models, kernels, trees, and ensembles remain valuable. Their continued usefulness is not a failure to adopt modern AI. Tabular data, limited labels, strict latency, and interpretability can favour them. A research agent should compare methods under the same data and measurement rules instead of assuming newer means better."
+      },
+      {
+        "title": "Deep learning changed feature construction",
+        "body": "Multilayer networks learn intermediate transformations jointly with the final prediction. Convolutional networks encode a useful bias for local spatial structure and shared patterns. Recurrent networks maintain a state across sequence steps. Each architecture makes some relationships easier to express and others harder. Learning features does not eliminate engineering; it moves engineering into architecture, datasets, objectives, numerical stability, and the surrounding system.\n\nThe growth of deep learning depended on larger datasets, accelerator hardware, optimized numerical libraries, and trainable architectures. Residual connections provide routes around learned transformations and make very deep networks easier to optimize in important settings. The ResNet paper is a useful historical case of an architectural change addressing a training difficulty. Its image benchmarks are not evidence that residual networks generate profitable trading signals."
+      },
+      {
+        "title": "Pretraining changes what gets reused",
+        "body": "Instead of starting each task with random parameters, pretraining builds a reusable representation on a broad dataset. Fine-tuning adjusts it for a narrower task. In language, masked-token objectives train prediction from surrounding context; autoregressive objectives train prediction of the next token from preceding context. They are related but impose different information access and usage patterns.\n\nThe Transformer introduced attention-centred sequence processing; later language-model systems used variations of that architecture at much larger scales. BERT is a historical example of bidirectional pretraining followed by task adaptation. GPT-3 is an example of studying tasks specified through instructions and demonstrations in context without task-specific parameter updates. Reading these papers together prevents confusing in-context adaptation with gradient-based fine-tuning. The distinction remains essential when you estimate costs or handle private data."
+      },
+      {
+        "title": "Modern training is a pipeline",
+        "body": "A contemporary language-model project may include broad pretraining, continued pretraining on selected data, supervised instruction tuning, preference optimization, task-specific reinforcement learning, and deployment evaluation. Not every model uses every stage, and the precise recipes of proprietary models are often unavailable. Avoid inventing a universal current recipe. Some tasks also use extra inference-time computation: generating alternatives, checking answers, using tools, or searching. That spends compute during use rather than changing the pretrained weights.\n\nAcross eras, bottlenecks shift. When compute grows, data quality and measurement become more important. When benchmark performance improves, contamination and test validity become harder questions. When systems act through tools, permissions and recovery become central. For your own learning, reproduce a small supervised model, a tiny language model, and a retrieval application. Keep the same discipline for all three: a clean objective, a baseline, a bounded budget, and a held-out evaluation. This teaches continuity underneath changing terminology."
+      },
+      {
+        "title": "Read history through controlled comparisons",
+        "body": "Make a timeline with one representative paper per transition, but do not treat the timeline as a causal proof. A later result can change architecture, data, training budget, and evaluation together. To isolate an architectural contribution you need an ablation or comparison that controls competing explanations. Ask what remained constant and what changed. Then reproduce a deliberately small comparison yourself: the same labelled dataset, the same split, and a linear model versus a shallow network. If the network loses, investigate variance, optimization, and sample size before concluding that deep learning is universally worse."
+      }
+    ],
+    "exercise": {
+      "prompt": "Build a timeline using four columns: learning signal, reusable artifact, compute bottleneck, and failure mode. Include a linear classifier, CNN, pretrained transformer, and tool-using agent.",
+      "solution": "A linear classifier learns from labelled features and reuses weights; feature quality is often crucial. A CNN learns spatial representations, with accelerator training and distribution shift as concerns. A pretrained transformer learns broad sequence representations, with data/compute and contamination concerns. A tool-using agent reuses a model plus orchestration; tool latency, authorization, and compounding action errors become major concerns. An agent need not train weights during use."
+    },
+    "interview": {
+      "question": "What changed between feature engineering and representation learning?",
+      "answer": "Representation learning lets the training objective adjust intermediate transformations rather than relying only on fixed human-designed features. It does not remove choices about data, architecture, target, validation, or deployment. The correct comparison is task-specific and must include simple baselines."
+    },
+    "quiz": {
+      "question": "Few-shot examples in a normal prompt typically change which component?",
+      "options": [
+        "The model vocabulary permanently",
+        "The context for inference",
+        "Every stored weight",
+        "The optimizer state"
+      ],
+      "correct": 1,
+      "explanation": "In-context learning uses provided examples as input; it usually performs no parameter update."
+    },
+    "sources": [
+      {
+        "title": "ResNet",
+        "url": "https://arxiv.org/abs/1512.03385"
+      },
+      {
+        "title": "BERT",
+        "url": "https://arxiv.org/abs/1810.04805"
+      },
+      {
+        "title": "GPT-3",
+        "url": "https://arxiv.org/abs/2005.14165"
+      }
+    ]
+  },
+  {
+    "id": "ai-05",
+    "track": "AI & intelligence",
+    "title": "Transformers: tokens, attention, and a complete forward pass",
+    "level": "Mechanisms",
+    "minutes": 30,
+    "prerequisites": [
+      "ai-04"
+    ],
+    "summary": "Trace a decoder from text to logits and explain causal masking, positional information, attention complexity, and generation.",
+    "sections": [
+      {
+        "title": "Text becomes vectors",
+        "body": "A tokenizer maps text into integer token identifiers. Tokens may be words, fragments, punctuation, or byte-derived units, depending on the tokenizer. Token count is not word count, and different languages or formats can have different token efficiency. A vocabulary of V tokens and embedding width d uses a V×d lookup table. Looking up a token selects a learned vector. This vector is not a dictionary definition; its usefulness comes from how training shapes the entire network.\n\nA sequence also needs information about order. Without a position-sensitive mechanism, ordinary self-attention treats a permutation in a way that loses crucial ordering distinctions. Architectures introduce positional information in different ways. Do not assume that a long supported context implies reliable use of every detail within that context. Retrieval quality, distractors, task structure, and evaluation still matter."
+      },
+      {
+        "title": "Attention as learned routing",
+        "body": "For input matrix X with one row per token, learned projections produce Q = XWq, K = XWk, and V = XWv. Queries compare with keys using dot products. Scaled dot-product attention is softmax(QKᵀ/√dₖ + mask)V. The softmax operates across candidate source positions for each query. Its weights are nonnegative and sum to one. Multiplication by V forms a weighted mixture of value vectors.\n\nThe query, key, and value names are a retrieval analogy, not a claim that attention is a database search. They are learned vector transformations. Multiple heads permit several routing patterns in parallel, followed by an output projection. Attention weights can help inspect behaviour, but a bright cell in an attention plot is not by itself a faithful causal explanation of the final answer. Downstream transformations and alternative pathways also matter."
+      },
+      {
+        "title": "Why the mask and residual path matter",
+        "body": "A causal language model predicting the next token must not inspect later target tokens. A triangular mask assigns forbidden positions effectively negative-infinite scores before softmax, giving them zero weight. During training, many next-token predictions can be evaluated in parallel with this mask. During generation, the next token depends on tokens already generated, so ordinary autoregressive decoding proceeds sequentially.\n\nA Transformer block combines attention, a position-wise feedforward transformation, normalization, and residual connections. The feedforward part changes each token representation using shared learned transformations. Normalization and residual structure help optimization and signal flow. Specific orderings vary between architectures. After several blocks, an output projection produces one logit per vocabulary entry. Softmax converts logits into a token distribution. Choosing the highest logit, sampling, changing temperature, and truncating candidate sets are decoding choices; they do not retrain the model."
+      },
+      {
+        "title": "Costs and failure modes",
+        "body": "Naive full attention materializes a sequence-length-by-sequence-length score matrix, creating quadratic memory and arithmetic components in sequence length. Efficient kernels can avoid storing all scores, and alternative architectures change the calculation. Consequently “attention is quadratic” is a useful first warning but not a complete hardware forecast. During decoding, a key-value cache saves past projections, reducing repeated work while consuming memory proportional to cached sequence length for a fixed architecture.\n\nBuild a toy demonstration with three tokens and two-dimensional query/key vectors. Print scores, masked scores, softmax weights, and mixed values. Change one vector and predict which attention weight should rise before running it. Then test that future-token changes cannot alter earlier predictions under the causal mask. That is a meaningful implementation invariant. In the research agent, a transformer can summarize papers or propose code; its architecture does not verify market facts, resolve data rights, or establish an edge. Those require external evidence and explicit checks."
+      },
+      {
+        "title": "Dimensions expose hidden mistakes",
+        "body": "Let X have shape 3×4 and each query, key, and value projection map width 4 to width 2. Q, K, and V each have shape 3×2. QKᵀ has shape 3×3, and multiplying its row-normalized weights by V gives shape 3×2. Write these dimensions before coding. A mistaken transpose can produce a valid-looking calculation with a different meaning. Verify that every attention row sums to one after masking and that forbidden positions have zero weight. Then compare the manual output with an implementation using the same tiny matrices and numerical tolerance."
+      }
+    ],
+    "exercise": {
+      "prompt": "For one query, scores are [0, 0, 0] and the final position is masked. What are the attention weights? What if the first allowed score becomes ln(3)?",
+      "solution": "After masking, the weights are [0.5, 0.5, 0]. With scores [ln(3),0,−∞], exponentials are [3,1,0], so the weights are [0.75,0.25,0]. A masked value cannot contribute to the mixture."
+    },
+    "interview": {
+      "question": "Why can causal language-model training parallelize positions but generation is sequential?",
+      "answer": "During training the reference sequence is already available; a causal mask ensures each position uses only its permitted prefix while losses are computed together. During ordinary generation the future token is unknown until selected, so the next prefix depends on the previous output."
+    },
+    "quiz": {
+      "question": "What does the causal mask prevent?",
+      "options": [
+        "All attention between tokens",
+        "Access to future target positions",
+        "Gradient calculation",
+        "The use of positional information"
+      ],
+      "correct": 1,
+      "explanation": "It prevents target leakage from later positions while preserving permitted prefix attention."
+    },
+    "sources": [
+      {
+        "title": "Original Transformer paper",
+        "url": "https://arxiv.org/abs/1706.03762"
+      },
+      {
+        "title": "Dive into Deep Learning: Transformer",
+        "url": "https://d2l.ai/chapter_attention-mechanisms-and-transformers/transformer.html"
+      }
+    ],
+    "lab": "attention"
+  },
+  {
+    "id": "ai-06",
+    "track": "AI & intelligence",
+    "title": "What 10B and 113B parameters mean: a memory and compute budget",
+    "level": "Mechanisms",
+    "minutes": 30,
+    "prerequisites": [
+      "ai-05"
+    ],
+    "summary": "Count weights, estimate storage, separate inference from training memory, and distinguish total from active parameters.",
+    "sections": [
+      {
+        "title": "A parameter is a learned number",
+        "body": "The label 10B usually means approximately ten billion learned scalar parameters. It does not mean ten billion facts, neurons, words, or lines of code. A dense layer with a inputs and b outputs contains ab weights and commonly b biases. A 3-input, 4-output layer therefore has 12 weights and 4 biases. A stack can have far more parameters than visible units because every connection contributes a number.\n\nAn embedding table with vocabulary 50,000 and width 4,096 has 204,800,000 parameters. A single 4,096×4,096 projection has 16,777,216 parameters before bias. Repeated projections and feedforward layers across many blocks explain how a language model reaches billions. Weight tying can reuse a matrix, so count unique stored tensors rather than counting every use of a shared matrix twice."
+      },
+      {
+        "title": "Weight storage is the first floor",
+        "body": "If each parameter is stored in two bytes, 10 billion parameters require 20 billion bytes: 20 decimal GB, or about 18.63 GiB. A 113B model requires 226 decimal GB, about 210.48 GiB, for those weights alone. Ideal four-bit storage uses half a byte per parameter: 5 GB for 10B and 56.5 GB for 113B. Real quantized formats need metadata such as scales, grouping information, and sometimes higher-precision tensors, so the ideal arithmetic understates actual storage.\n\nDistinguish storage on disk, resident memory, and peak working memory. Loading may temporarily create additional copies. Inference also needs activations, the key-value cache, temporary buffers, runtime overhead, and any other models or application state. A laptop with 24 GB of memory is not guaranteed to run a 20 GB weight file safely. Unified memory changes where data lives but does not eliminate memory requirements."
+      },
+      {
+        "title": "Training needs more than weights",
+        "body": "Training retains information needed for derivatives and the optimizer. A simplified mixed-precision Adam accounting might include 2 bytes for weights, 2 for gradients, 4 for a master weight copy, and 8 for two optimizer moments: 16 bytes per parameter before activations and workspaces. Under those assumptions, 10B implies 160 GB and 113B implies 1,808 GB. Actual implementations vary; this is a planning example, not a universal formula.\n\nActivation checkpointing recomputes some forward values to reduce stored activations at the cost of extra compute. Sharding distributes parameters, gradients, or optimizer states across devices. Tensor and pipeline parallelism divide operations or layers. Data parallelism replicates model computation across different minibatches. Communication and synchronization can become the bottleneck, so dividing a memory estimate by device count is not enough to predict training speed."
+      },
+      {
+        "title": "Size is not a quality guarantee",
+        "body": "Dense models typically use most of their weights for each token. Mixture-of-experts models route tokens through selected expert components, so total stored parameters can be much larger than active parameters per token. Shared layers and routing add complexity. Always ask whether a quoted size is total or active, whether weights are tied, and which precision is used. The total determines much of storage; active computation affects token cost, but routing and communication also matter.\n\nA rough dense-transformer pretraining estimate sometimes uses about 6ND floating-point operations for N parameters and D training tokens. It omits architecture-specific details and hardware inefficiency; use it only as a first-order comparison under similar conditions. Increasing both N and D by two roughly quadruples this estimate. A smaller carefully trained model can outperform a larger weakly trained one on a specific task. Evaluate quality, latency, memory, context needs, privacy, and licence together. For KINT10d, buying parameter count without a measured failure that it solves is poor engineering."
+      },
+      {
+        "title": "Budget the cache explicitly",
+        "body": "For a simplified decoder with L layers, S cached positions, H key/value heads, head width D, B sequences, and q bytes per stored element, KV-cache storage is approximately 2LSHDBq bytes. The factor two represents keys and values. Using L = 32, S = 4,096, H = 8, D = 128, B = 1, and q = 2 gives 536,870,912 bytes, or 0.5 GiB. This ignores allocator overhead and architecture-specific state. Doubling sequence count or context length doubles this estimate. Grouped-query attention can have fewer key/value heads than query heads, so use the actual architecture configuration."
+      }
+    ],
+    "exercise": {
+      "prompt": "Estimate ideal weight-only storage for 113B at FP32, FP16, INT8, and 4-bit. Explain why none is a full runtime budget.",
+      "solution": "FP32: 452 GB; FP16: 226 GB; INT8: 113 GB; ideal 4-bit: 56.5 GB, all decimal. Quantization metadata, unquantized tensors, KV cache, activations, buffers, runtime, and loading overhead add memory. Training adds gradients and optimizer state. File size is not peak memory."
+    },
+    "interview": {
+      "question": "Is a 113B model necessarily smarter than a 10B model?",
+      "answer": "No. Parameter count describes capacity and cost, not a universal capability ordering. Training data, objective, compute, architecture, post-training, quantization, and task distribution matter. I would compare the exact variants on a held-out task suite and operational constraints."
+    },
+    "quiz": {
+      "question": "A 10B FP16 model requires approximately how much weight-only storage?",
+      "options": [
+        "2 GB",
+        "10 GB",
+        "20 GB",
+        "160 GB"
+      ],
+      "correct": 2,
+      "explanation": "Ten billion parameters times two bytes equals twenty billion bytes. 160 GB is an example training-state estimate under additional assumptions."
+    },
+    "sources": [
+      {
+        "title": "Scaling Laws for Neural Language Models",
+        "url": "https://arxiv.org/abs/2001.08361"
+      },
+      {
+        "title": "Training Compute-Optimal Large Language Models",
+        "url": "https://arxiv.org/abs/2203.15556"
+      }
+    ],
+    "lab": "parameters"
+  },
+  {
+    "id": "ai-07",
+    "track": "AI & intelligence",
+    "title": "Pretraining: data mixtures, token loss, and scalable experiments",
+    "level": "Practice",
+    "minutes": 30,
+    "prerequisites": [
+      "ai-06"
+    ],
+    "summary": "Design a small language-model experiment and understand why data governance and compute accounting precede large training runs.",
+    "sections": [
+      {
+        "title": "The objective is simple; the dataset is not",
+        "body": "An autoregressive model assigns a probability to a sequence through a product of conditional probabilities: P(x₁,…,xₜ) = ∏ P(xᵢ | x₁,…,xᵢ₋₁). Training usually minimizes the average negative log probability of observed next tokens. Because probabilities multiply while log probabilities add, the loss can be accumulated stably. Perplexity is the exponential of average natural-log token loss. Compare perplexity only when tokenization, evaluation data, and loss conventions match.\n\nThe model is rewarded for predicting the training distribution. This is not identical to truthfulness, helpfulness, or profitability. Contradictory documents can all be realistic training examples. Copyright, privacy, consent, provenance, and permitted use must be established before collection. A public URL is not a universal licence to train. Preserve source identities and processing records so deletions and audits are possible."
+      },
+      {
+        "title": "Build the data recipe deliberately",
+        "body": "Collect, filter, deduplicate, normalize, tokenize, split, and package data. Exact duplicates are easy to detect with hashes; near-duplicates need a documented similarity procedure. Split before transformations that could share information across partitions. For code or papers, hold out related repositories or document families where necessary rather than letting nearly identical versions leak across splits.\n\nA data mixture specifies how much training comes from different domains. Sampling proportions affect what the model practices. High-quality small sources can be oversampled, but repetition increases memorization risk. Synthetic data is still data that needs validation; teacher errors can be reproduced at scale. Establish a contamination check against evaluation tasks. A benchmark score inflated by previously seen answers does not measure the intended generalization."
+      },
+      {
+        "title": "Budget and instrument the run",
+        "body": "Choose an architecture small enough to iterate. Define tokens per update, effective batch size, optimizer, learning-rate schedule, precision, maximum tokens, checkpoint policy, and stop conditions. Gradient accumulation allows several minibatches to approximate a larger batch while keeping activation memory lower. It changes optimizer-step frequency, so log both tokens and steps. Record loss by data source as well as aggregate loss; improvements on common material can hide degradation on a smaller domain.\n\nMonitor throughput, utilization, peak memory, gradient norms, invalid numeric values, and validation loss. Save enough state to resume faithfully: model weights, optimizer state, scheduler state, data-loader position or reproducible sampling state, and random generators. A checkpoint containing only weights may be sufficient for inference but not an equivalent continuation of training. Test recovery by interrupting a tiny run and comparing with an uninterrupted baseline within the intended reproducibility tolerance."
+      },
+      {
+        "title": "Learn from scaling without worshipping it",
+        "body": "Scaling studies examine how model size, data, and compute interact under measured conditions. Their fitted relationships are empirical, not laws guaranteeing every model family or domain. The Chinchilla study is valuable because it challenged a recipe that could leave large models undertrained relative to the available compute. Your practical lesson is to compare resource allocation, not to copy one universal token-to-parameter ratio.\n\nFor a personal learning project, train a tiny character-level or token-level model on a licensed corpus and compare it with a unigram or bigram baseline. Keep a completely held-out slice and inspect repetitive, memorized, and malformed outputs. If you cannot explain the data split and loss curve, making the model larger will hide mistakes behind expense. KINT10d usually needs a reliable application using an existing model before it needs a pretrained foundation model. Training from scratch is an educational experiment unless a specific measured requirement justifies it."
+      },
+      {
+        "title": "A reproducible tiny experiment",
+        "body": "Freeze a corpus version and split by document before tokenization. Train a unigram baseline, then a tiny causal model. Log total tokens processed, not just epochs, because filtering and packing affect how much content each epoch contains. Save validation loss at fixed token intervals. Choose the final checkpoint using the declared validation rule and evaluate the held-out set once. Record sample outputs for qualitative inspection, but do not select only entertaining generations. Also inspect exact training-text overlap and rare-token failures. The deliverable is a reproducible comparison and a candid error analysis, not merely a working text generator."
+      }
+    ],
+    "exercise": {
+      "prompt": "A run processed 100 million tokens in 20,000 updates. How many tokens per update? If you double gradient accumulation while holding minibatch and sequence length fixed, what must the log distinguish?",
+      "solution": "5,000 tokens per update. Doubling accumulation roughly doubles tokens per optimizer update; an equal number of updates now processes twice as many tokens. Compare runs by both tokens and compute, adjust schedules intentionally, and do not claim an equal training budget merely because update counts match."
+    },
+    "interview": {
+      "question": "What belongs in a resumable training checkpoint?",
+      "answer": "Weights, optimizer and scheduler state, training counters, random states, and enough data-order state to resume the intended sequence, together with configuration and data/code versions. Depending on the framework, scaler and distributed state may also be required. A successful restore must be tested."
+    },
+    "quiz": {
+      "question": "What does lower next-token loss directly demonstrate?",
+      "options": [
+        "Guaranteed factual truth",
+        "Better prediction on that evaluated token distribution",
+        "Profitable trading",
+        "Human-like understanding"
+      ],
+      "correct": 1,
+      "explanation": "The metric evaluates the specified prediction task. Broader capabilities need separate tests."
+    },
+    "sources": [
+      {
+        "title": "Compute-optimal training study",
+        "url": "https://arxiv.org/abs/2203.15556"
+      },
+      {
+        "title": "Scaling-laws study",
+        "url": "https://arxiv.org/abs/2001.08361"
+      }
+    ]
+  },
+  {
+    "id": "ai-08",
+    "track": "AI & intelligence",
+    "title": "Post-training: instructions, preferences, and reinforcement learning",
+    "level": "Mechanisms",
+    "minutes": 30,
+    "prerequisites": [
+      "ai-07"
+    ],
+    "summary": "Distinguish supervised tuning, reward modelling, policy optimization, and inference-time work; understand reward misspecification.",
+    "sections": [
+      {
+        "title": "A base model is not automatically an assistant",
+        "body": "A base language model is trained to predict text under its data distribution. It may continue an instruction rather than perform it. Supervised fine-tuning supplies demonstrations of desired responses and updates parameters to make those responses more likely. The dataset teaches behaviour, formats, and task conventions. Quality depends on what demonstrations cover and what shortcuts they encourage.\n\nIn an assistant dataset, a training pipeline may mask user or system tokens so the loss is applied to the intended answer positions. The exact convention must be documented. Mixing multi-turn conversations requires preserving roles and boundaries. A model can learn to imitate confident language without becoming more accurate. Include uncertainty, refusals when appropriate, source use, and valid tool interactions in evaluation instead of equating fluency with competence."
+      },
+      {
+        "title": "Preferences provide a different learning signal",
+        "body": "A preference dataset compares responses to the same prompt. A reward model can learn a score that ranks preferred answers above rejected answers. Policy optimization then adjusts the language model toward higher reward, often constrained relative to a reference policy. The original InstructGPT paper is an accessible historical example of combining demonstrations, comparisons, and reinforcement learning. Its results concern the authors' evaluation distribution; they are not a promise that preference tuning solves every reliability problem.\n\nDirect Preference Optimization provides another route from preference pairs to parameter updates without an explicit separately trained reward model in its standard formulation. The useful distinction is not “RL good, DPO bad” or vice versa. Examine assumptions, data coverage, optimization stability, compute, and downstream evaluations. Preference data can reflect annotator bias, style preference, incomplete expertise, or an ambiguous instruction. A high preference score is not the same as verified factual correctness."
+      },
+      {
+        "title": "Reinforcement learning and reward hacking",
+        "body": "In reinforcement learning, an agent observes a state or history, chooses an action, and receives reward from an environment. A policy describes action choices. A value estimate concerns expected future return under assumptions about the policy and environment. Discounting changes how delayed rewards are weighted. Credit assignment asks which earlier actions contributed to an eventual outcome.\n\nA verifier can provide a relatively concrete reward for some tasks, such as whether code passes carefully designed tests. But passing weak tests can reward a shortcut. In trading, simulator profit can be inflated by future leakage, unrealistic fills, omitted costs, or a broken accounting rule. An optimizer exploits the objective it receives, including mistakes in that objective. Before a complicated RL algorithm, validate the environment with hand-worked trajectories and adversarial cases. Keep the ability to stop and inspect a run."
+      },
+      {
+        "title": "What changes at inference time",
+        "body": "A system may improve a response by sampling alternatives, retrieving documents, running code, checking results, or spending more computation before answering. Those actions need not update model weights. Keep training-time improvements separate from inference-time procedures when comparing cost and capability. A slower system with more tools should not be compared with a single model call as if the budgets were equal.\n\nFor the research agent, begin with a controlled workflow: extract a claim, locate evidence, implement one test, execute it, and review discrepancies. Use deterministic checks for numerical facts and a human decision for consequential scope changes. If fine-tuning is considered, first gather a real error dataset and test whether better instructions, retrieval, or data validation solve the issue. Post-training is appropriate when a repeatable behavioural pattern needs learning and suitable examples exist; it is a poor first response to missing current market data."
+      },
+      {
+        "title": "A reward is a proxy you must audit",
+        "body": "Construct a toy summarization score that rewards including five keywords. A system can obtain the maximum score by listing those words without summarizing the document. Repair the evaluation with source support, coverage, contradiction checks, and human review. Now imagine a trading reward that uses final portfolio value but ignores bankruptcy during the path or impossible borrowing. The same proxy problem appears. Optimizing harder makes such defects more consequential. Before training, write several intentionally bad behaviours and confirm that the reward does not prefer them. Repeat this adversarial check when the environment or reward changes."
+      }
+    ],
+    "exercise": {
+      "prompt": "A preference-trained assistant gets higher ratings but invents more citations. What would you change?",
+      "solution": "Separate style/helpfulness ratings from citation validity. Build a held-out suite requiring source existence and claim support, include abstention when evidence is missing, inspect preference annotations for rewarding confident detail, and compare with retrieval plus deterministic citation checks. Do not accept the aggregate rating as the sole objective."
+    },
+    "interview": {
+      "question": "How is reinforcement learning different from supervised fine-tuning?",
+      "answer": "Supervised tuning learns from target demonstrations. RL adjusts behaviour using rewards for sampled actions or trajectories, potentially with delayed feedback. Both depend on the quality of their learning signal. Neither protects against an incorrectly specified task or evaluation leakage."
+    },
+    "quiz": {
+      "question": "Which is an example of reward hacking?",
+      "options": [
+        "The model reports uncertainty",
+        "A simulator strategy exploits an impossible fill rule to inflate profit",
+        "A test detects a bug",
+        "A training run saves checkpoints"
+      ],
+      "correct": 1,
+      "explanation": "The policy has optimized a defect in the reward environment rather than the intended real-world objective."
+    },
+    "sources": [
+      {
+        "title": "InstructGPT",
+        "url": "https://arxiv.org/abs/2203.02155"
+      },
+      {
+        "title": "Direct Preference Optimization",
+        "url": "https://arxiv.org/abs/2305.18290"
+      }
+    ]
+  },
+  {
+    "id": "ai-09",
+    "track": "AI & intelligence",
+    "title": "Small models: fine-tuning, LoRA, quantization, and distillation",
+    "level": "Practice",
+    "minutes": 30,
+    "prerequisites": [
+      "ai-08"
+    ],
+    "summary": "Choose a smaller model method by the constraint it addresses and build a fair before-and-after evaluation.",
+    "sections": [
+      {
+        "title": "Small is a system property",
+        "body": "A model may be called small relative to a frontier model while still being too large for your device. Specify parameter count, precision, context length, latency target, memory, and task. A narrow classifier can solve an extraction decision more cheaply than a general chat model. Distinguish learning a new model from adapting a pretrained model and from changing how existing weights are stored.\n\nFirst establish the smallest baseline that meets the task: rules, keyword matching, linear classification, a compact encoder, or a small generative model. Measure real errors. A model that answers well on easy examples but fails on missing evidence needs a more representative evaluation, not necessarily more parameters. For KINT10d, a small model could categorize papers or extract candidate fields while deterministic validation checks dates, identifiers, and arithmetic."
+      },
+      {
+        "title": "Low-rank adaptation",
+        "body": "Full fine-tuning updates all selected base weights. LoRA instead keeps a base matrix W fixed and learns an update represented as BA, where A has shape r×d_in and B has shape d_out×r. The update has rank at most r. A forward operation uses W plus a scaled BA update. For a 4,096×4,096 matrix and rank 8, the adapter has 8×4,096 + 4,096×8 = 65,536 parameters, compared with 16,777,216 base matrix parameters.\n\nThis reduces trainable parameter and optimizer-state requirements, but the base model must still participate in the forward pass and activations still consume memory. Adapter placement, rank, scaling, dropout, learning rate, and training data affect results. Saving an adapter requires retaining the exact compatible base-model identity. A small adapter file is not a standalone model. Combining or merging adapters should be evaluated rather than assumed to preserve behaviour."
+      },
+      {
+        "title": "Quantization changes numerical representation",
+        "body": "Quantization represents numbers with fewer bits, commonly using a scale and possibly a zero point for a group of values. A simple affine approximation is x ≈ scale × (q − zero_point). Rounding introduces error; outliers and group choices affect the tradeoff. Some operations remain in higher precision. Post-training quantization changes a trained artifact, while quantization-aware training incorporates simulated or actual quantization effects during adaptation.\n\nQLoRA combines a quantized frozen base with learned low-rank adapters under a particular efficient fine-tuning approach. Its paper is a method reference, not a guarantee that every model and sequence length fits a given laptop. Check the supported hardware, kernels, licence, memory peaks, and benchmark quality. “Four-bit model” describes a storage/computation choice, not a model with only four possible answers."
+      },
+      {
+        "title": "Distillation and a controlled experiment",
+        "body": "Distillation trains a student to reproduce information from a teacher. This may use class probability distributions, generated answers, intermediate representations, or task-specific targets. Soft distributions can expose which alternatives the teacher considers similar. A student can inherit both useful behaviour and systematic teacher mistakes. Verify that you have permission to use the teacher outputs for the intended training use.\n\nPrepare a fixed evaluation set before adaptation, including difficult and out-of-domain cases. Compare the base model, adapted model, and simple baseline with the same prompt, decoding policy, and task budget. Record latency and memory alongside task quality. Test for catastrophic forgetting on important general tasks. A useful exercise is to train an adapter on a small licensed extraction dataset, then evaluate exact field accuracy, unsupported-field fabrication, and abstention. Success is a measurable improvement under constraints, not merely a declining training loss or an impressive model filename."
+      },
+      {
+        "title": "Compression needs paired measurements",
+        "body": "Use the exact same held-out prompts before and after quantization. Record not only average quality but changed answers, unsupported claims, peak memory, first-token latency, and tokens per second under the same workload. A faster model that silently changes numeric extraction may be unacceptable for your use. Repeat a small set of runs to account for sampling variation and warm-up effects. For distillation, hold out source documents, not just generated answers from documents already seen in training. A student that memorizes a teacher-generated answer set has not demonstrated transferable performance."
+      }
+    ],
+    "exercise": {
+      "prompt": "Compute rank-16 LoRA parameter count for a 2,048×8,192 weight matrix. Compare with the base matrix.",
+      "solution": "The base has 16,777,216 parameters. LoRA has 16×8,192 + 2,048×16 = 163,840, about 0.977% of the base count. This comparison excludes biases and other matrices, and says nothing by itself about activations or total device memory."
+    },
+    "interview": {
+      "question": "When would you use RAG instead of fine-tuning?",
+      "answer": "Use retrieval when the problem is access to changing, attributable information. Consider fine-tuning for a stable behavioural or task pattern supported by examples. Both can be combined. Neither removes the need to evaluate retrieval, generation, and unsupported claims separately."
+    },
+    "quiz": {
+      "question": "Which statement about LoRA is correct?",
+      "options": [
+        "The base model is unnecessary during inference",
+        "It trains a low-rank update while keeping selected base weights fixed",
+        "It automatically fixes factual errors",
+        "It eliminates activation memory"
+      ],
+      "correct": 1,
+      "explanation": "The adapter is a learned update around a compatible base model; efficiency does not remove other memory or reliability concerns."
+    },
+    "sources": [
+      {
+        "title": "LoRA",
+        "url": "https://arxiv.org/abs/2106.09685"
+      },
+      {
+        "title": "QLoRA",
+        "url": "https://arxiv.org/abs/2305.14314"
+      },
+      {
+        "title": "Knowledge distillation",
+        "url": "https://arxiv.org/abs/1503.02531"
+      }
+    ]
+  },
+  {
+    "id": "ai-10",
+    "track": "AI & intelligence",
+    "title": "Prompting and retrieval: a verifiable knowledge workflow",
+    "level": "Practice",
+    "minutes": 30,
+    "prerequisites": [
+      "ai-09"
+    ],
+    "summary": "Design instructions as testable specifications and build retrieval with provenance, missing-evidence handling, and separate evaluation.",
+    "sections": [
+      {
+        "title": "A prompt is a specification",
+        "body": "A useful instruction states the task, audience, available evidence, constraints, required output, and what to do when information is missing. “Be an expert quant” supplies little operational detail. “Extract the data period, universe, label, validation design, costs, and limitations from this paper; attach an exact source location or mark missing” specifies observable behaviour. The latter can be tested.\n\nExamples help communicate ambiguous formats, but they can also introduce unintended patterns. Include an edge case with missing information and another with contradictory evidence. Separate quoted source material from instructions. A paper or webpage can contain imperative language; the application must treat it as evidence to inspect, not authority to change the task. Model-generated confidence and elaborate explanations are not verification. Ask for concise evidence and use independent checks where possible."
+      },
+      {
+        "title": "Retrieval is its own system",
+        "body": "A retrieval pipeline ingests documents, extracts text, preserves metadata, divides content into retrievable units, builds an index, retrieves candidates, optionally reranks them, and supplies selected evidence to generation. Chunk boundaries matter: a table header separated from its rows can change meaning. Keep document title, version, page or section location, licence, extraction method, and source URL. OCR output needs checks for minus signs, decimal points, subscripts, and equations.\n\nLexical search can match exact instrument identifiers or technical terms. Dense embeddings can retrieve semantically related phrasing. Hybrid retrieval combines signals. An embedding is a learned representation, not a proof of relevance. Similarity can retrieve a document that discusses the opposite claim. Reranking and metadata filters can help, but evaluate them on real questions with known relevant evidence."
+      },
+      {
+        "title": "Generation must stay accountable to evidence",
+        "body": "The generator receives retrieved context and constructs an answer. A citation is useful only if the source exists and supports the associated claim. Test citation existence, location accuracy, and entailment separately. A source can support the existence of a proposed method without proving that it outperforms in your market. A paper abstract usually does not supply enough detail to reproduce an experiment; label abstract-based notes accordingly.\n\nWhen evidence is absent, the response should say what is missing and avoid filling gaps with plausible details. When sources conflict, expose the conflict, dates, and scope. Current broker limits or regulations require current authoritative sources rather than a model's training memory. Keep a retrieval timestamp and source version. For a learning application, show links and explain prerequisites; do not mark a resource understood merely because its link was opened."
+      },
+      {
+        "title": "Measure before adding an agent",
+        "body": "Build an evaluation set with answerable, unanswerable, ambiguous, and adversarial questions. Measure retrieval recall at a fixed candidate count, relevant-context precision, supported-answer accuracy, and correct abstention. If the right passage was never retrieved, changing the final prose prompt cannot fully solve the problem. If the passage was retrieved but ignored, investigate instruction, context placement, or generation.\n\nFor KINT10d, start with a small paper library and a structured extraction form. Let a person compare the extracted claims with the source. Store corrected examples and repeated failures. Track the document version and the extraction configuration so future changes can be evaluated. A retrieval system does not need autonomous browsing, unrestricted tools, or continuous training to be useful. Add those only when a measured workflow requires them and their permissions and failure modes are understood."
+      },
+      {
+        "title": "An evidence table beats an impressive summary",
+        "body": "For a single paper, create rows for claim, source location, supporting text, missing detail, and reproduction status. Keep author-reported, independently checked, and reproduced as separate labels. A retrieved abstract can establish that the authors propose a method, but it may not reveal dataset exclusions or exact transaction costs. Mark those fields missing until you inspect the full source. Build one adversarial question whose answer is absent and test whether the system admits that absence. Then add the missing evidence and check whether the answer changes for the right reason, with the new source attached."
+      }
+    ],
+    "exercise": {
+      "prompt": "Write a prompt for extracting a backtest methodology without inventing missing details.",
+      "solution": "Use: “From the supplied document only, return universe, observation period, feature availability time, label horizon, split design, transaction costs, benchmark, and stated limitations. For each field include source page/section and a short supporting excerpt. If absent, write not specified. Separate authors’ claims from your interpretation. Do not infer an executable trading rule from a result table alone.” Evaluate its output against human-labelled examples."
+    },
+    "interview": {
+      "question": "How would you debug a RAG answer that is wrong?",
+      "answer": "Check whether the needed source was ingested correctly, whether the right chunk was retrieved, whether metadata filters or reranking removed it, whether context preserved its meaning, and whether generation followed the evidence. Measure each stage separately instead of treating all errors as prompt failures."
+    },
+    "quiz": {
+      "question": "A retrieved passage has high vector similarity. What follows?",
+      "options": [
+        "Its claim is true",
+        "It is potentially relevant and needs checking",
+        "The user authorized its instructions",
+        "The paper has been reproduced"
+      ],
+      "correct": 1,
+      "explanation": "Similarity is a retrieval signal, not truth, authorization, or experimental validation."
+    },
+    "sources": [
+      {
+        "title": "Retrieval-Augmented Generation paper",
+        "url": "https://arxiv.org/abs/2005.11401"
+      },
+      {
+        "title": "Hugging Face LLM course",
+        "url": "https://huggingface.co/learn/llm-course/chapter1/1"
+      }
+    ]
+  },
+  {
+    "id": "ai-11",
+    "track": "AI & intelligence",
+    "title": "Agents, tool use, and evaluations that catch real failures",
+    "level": "Practice",
+    "minutes": 30,
+    "prerequisites": [
+      "ai-10"
+    ],
+    "summary": "Turn a model into a bounded application with explicit state, permissions, recovery, and a meaningful evaluation suite.",
+    "sections": [
+      {
+        "title": "An agent is a system around a model",
+        "body": "A tool-using application lets a model request actions through defined interfaces. A workflow follows a mostly predetermined sequence; a more autonomous agent selects intermediate actions based on observations. Neither term guarantees intelligence or reliability. Identify the actual loop: observe state, propose an action, validate it, execute an authorized tool, record the result, and decide whether to continue.\n\nA tool definition is an interface contract. Inputs need types, constraints, and clear meaning. Outputs need status, data provenance, timestamps, and explicit errors. The application should distinguish a successful empty result from authentication failure, a timeout, or invalid input. Otherwise a model may interpret missing data as evidence. In a research system, a “job completed” state must mean an artifact passed its declared checks, not simply that a worker stopped."
+      },
+      {
+        "title": "Permissions belong outside generated text",
+        "body": "Enforce read and write permissions in code. A model saying it will be careful is not an access-control mechanism. Give the research collector only the data operations it needs. Keep trading order paths separate from educational or research workflows. Secrets should be supplied through an appropriate protected store, never embedded in prompts, logs, URLs, or study files.\n\nTreat retrieved pages and tool output as untrusted data. They may contain text asking the assistant to reveal secrets or alter instructions. Validate tool calls against the original user-authorized task. For consequential mutations, use concrete approval boundaries. Preserve audit records of what was proposed, approved, executed, and returned. Avoid logging sensitive payloads merely to make observability more detailed."
+      },
+      {
+        "title": "Recovery is part of correctness",
+        "body": "External requests fail. Use timeouts, bounded retries, backoff, and provider-specific rate limits. Retry only when safe. For a write operation, an idempotency key can prevent duplicate effects when a response is lost. A job queue needs states such as queued, claimed, running, completed, failed, and blocked, plus ownership or lease rules. A stale worker should not silently duplicate another worker's work.\n\nStore durable state before declaring a task completed. A checkpoint should let another process resume from a known boundary. Record useful progress separately from heartbeat activity. A dashboard that updates every minute can still show a system making no research progress. Expose the current blocker, last successful artifact, next eligible action, and retry policy. This directly addresses the difference between “the scheduled task ran” and “the task produced evidence.”"
+      },
+      {
+        "title": "Evaluate outcomes and dangerous transitions",
+        "body": "Build cases for normal work, missing files, stale data, malformed tool responses, authentication expiry, conflicting sources, prompt injection, and interrupted execution. Some checks are deterministic: valid schema, arithmetic, no unauthorized endpoint, no duplicate job. Other checks need a rubric and expert review. Model-as-judge scoring can help scale review but must be calibrated against human judgements and can share biases with the model being evaluated.\n\nCompare versions on a fixed suite before release, and add regressions for observed failures. Record cost, latency, tool calls, completion, and evidence quality. Do not improve a benchmark by removing hard cases. For KINT10d, a strong agent may correctly conclude that a dataset is unqualified and stop. Rewarding only completed experiments can encourage bypassing gates. The engineering objective is useful, authorized, reproducible research—not maximum tool activity or a guaranteed profitable conclusion."
+      },
+      {
+        "title": "Test the state machine, not only the happy path",
+        "body": "Draw a job transition graph and mark which transitions require a validated artifact. Inject failure immediately before and after each durable write. Restart the process and verify that completed work is neither lost nor counted twice. Test an expired lease, an authentication error, a rate-limit response, and a corrupt response body. A retry policy should explain which failures are transient and which require new evidence or user action. In an interview, explain why a process heartbeat, an HTTP success code, and a scientifically valid result are different levels of evidence."
+      }
+    ],
+    "exercise": {
+      "prompt": "A worker downloaded candles but crashed before marking the job complete. Design a safe retry.",
+      "solution": "Write the raw response to a content-addressed or uniquely keyed staging artifact; verify its schema and coverage; commit metadata atomically where possible. On retry, inspect the existing artifact and validation state, then finish or replace a failed staged artifact without duplicating qualified records. Use leases to prevent concurrent ownership and record the recovery event."
+    },
+    "interview": {
+      "question": "How do you know an agent is working?",
+      "answer": "I separate liveness from useful progress. Heartbeats show the process is alive; completed validated artifacts, state transitions, and resolved blockers show progress. I inspect traceable inputs, tool results, budgets, failures, and the next eligible action rather than counting messages or tool calls."
+    },
+    "quiz": {
+      "question": "Which protection should be implemented outside the model prompt?",
+      "options": [
+        "A friendly writing style",
+        "A preferred paragraph length",
+        "Authorization for a write tool",
+        "A suggested summary tone"
+      ],
+      "correct": 2,
+      "explanation": "Authorization must be enforced by application controls, regardless of what generated text requests."
+    },
+    "sources": [
+      {
+        "title": "Anthropic: Building effective agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents"
+      }
+    ]
+  },
+  {
+    "id": "ai-12",
+    "track": "AI & intelligence",
+    "title": "AGI, intelligence, and how to read frontier claims",
+    "level": "Frontier",
+    "minutes": 30,
+    "prerequisites": [
+      "ai-11"
+    ],
+    "summary": "Evaluate broad capability claims without conflating benchmark skill, autonomy, consciousness, or a prediction about the future.",
+    "sections": [
+      {
+        "title": "Define the claim before debating it",
+        "body": "Artificial general intelligence has no single universally accepted operational definition. Some discussions emphasize breadth across tasks, others learning efficiency, human-level performance, adaptability, or autonomous economic activity. Before agreeing that a system is or is not AGI, ask which definition, task distribution, comparison group, and resource budget are being used. Otherwise two people can appear to disagree while measuring different things.\n\nSeparate capability from autonomy. A highly capable model can operate in a tightly constrained workflow, while a weak model can be given broad permissions. Separate both from consciousness or subjective experience: competent behaviour on a task does not settle those philosophical and scientific questions. Parameter count, fluent language, and a single surprising demonstration are insufficient definitions of general intelligence."
+      },
+      {
+        "title": "Skill and the ability to learn",
+        "body": "A benchmark measures performance under its design. Strong scores can reflect transferable ability, practice on similar tasks, memorized content, tool support, or a mix. Ask what information the system had before evaluation and how much task-specific adaptation was allowed. Compare the entire evaluated system, including tools, prompts, retries, human assistance, and inference compute.\n\nChollet's On the Measure of Intelligence argues for thinking carefully about skill acquisition and prior knowledge rather than treating accumulated task skill as the whole story. The Levels of AGI paper offers a framework for describing performance and generality. These are conceptual contributions to how claims are framed, not experiments proving that AGI has arrived or a timetable for when it will. Read their definitions and limitations before quoting a headline."
+      },
+      {
+        "title": "Design an honest capability study",
+        "body": "Choose a set of unfamiliar tasks with clear scoring and multiple difficulty levels. Include tasks requiring composition, transfer, uncertainty handling, and recovery from a failed attempt. Prevent answer leakage and document the training-data uncertainty you cannot eliminate. Fix a budget: time, tokens, tool calls, demonstrations, or compute. A system given hundreds of trials should not be compared with a human given one attempt without saying so.\n\nInspect performance distributions rather than a single mean. A model may solve advanced examples while failing simple variants. Test sensitivity to irrelevant wording, reordered options, hidden assumptions, and adversarial evidence. Include calibration and abstention. Repeatedly designing tasks after seeing the model's responses can create a new form of test overfitting. Preserve a protected suite and periodically introduce independently designed tasks."
+      },
+      {
+        "title": "Use the frontier without depending on the hype",
+        "body": "For the learning system and research agent, translate broad intelligence claims into concrete requirements: can it extract a method faithfully, write a correct test, explain an uncertainty, recover a job, and refuse to invent an unsupported result? These are measurable and useful even if the AGI debate remains unresolved. Keep human understanding in the loop by requiring you to explain the mechanism and critique the result.\n\nFrontier research changes quickly. A study book should teach durable evaluation habits and label publication dates, versions, and evidence scope. When reading a new paper, write the central claim, assumptions, comparator, measured outcome, resource budget, and strongest limitation. Separate author-reported results from reproduced results. Do not generalize an improvement in coding or puzzles into a claim of trading profitability. Markets respond to participants, impose costs, and change; profitable prediction is a separate empirical problem. Depth means being able to state precisely what you know, demonstrate it, and identify the next experiment that could prove you wrong."
+      },
+      {
+        "title": "Turn a frontier headline into a research note",
+        "body": "Write one sentence describing the narrowest claim supported by the reported experiment. Then list the wider claims a reader might mistakenly infer. For example, a system solving unfamiliar puzzles under a defined budget supports a statement about those puzzles and that protocol; it does not directly establish consciousness, universal learning, or safe autonomous trading. Record the paper version and whether you read the abstract, methods, or full results. This habit makes your library useful months later: you can distinguish a lead worth investigating from evidence you have actually evaluated and reproduced."
+      }
+    ],
+    "exercise": {
+      "prompt": "A vendor claims AGI because its system beats an expert on one benchmark. Write five questions before accepting the conclusion.",
+      "solution": "What definition of AGI is used? How broad and unfamiliar is the task set? Was evaluation content present in training or development? What tools, retries, compute, and human help did each side receive? How do performance, uncertainty, and failure recovery vary across independent tasks? A single benchmark supports a narrow capability claim, not the entire conclusion."
+    },
+    "interview": {
+      "question": "What would convince you that a model generalizes?",
+      "answer": "Evidence across genuinely held-out tasks and settings, with transparent data exposure, fixed budgets, strong baselines, uncertainty reporting, and independent replication. I would distinguish task skill from learning efficiency and examine failure cases. No finite test proves universal competence."
+    },
+    "quiz": {
+      "question": "Which statement is best supported by a high benchmark score?",
+      "options": [
+        "The system is conscious",
+        "The system has unlimited general intelligence",
+        "The evaluated system performed well under that benchmark protocol",
+        "The system can reliably earn money trading"
+      ],
+      "correct": 2,
+      "explanation": "The scope of evidence is the evaluation protocol. Broader conclusions need additional definitions and experiments."
+    },
+    "sources": [
+      {
+        "title": "Levels of AGI",
+        "url": "https://arxiv.org/abs/2311.02462"
+      },
+      {
+        "title": "On the Measure of Intelligence",
+        "url": "https://arxiv.org/abs/1911.01547"
+      }
+    ]
+  }
+]
