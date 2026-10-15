@@ -17,6 +17,7 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm run test:content
+      - run: node --test native-sync/test.mjs
       - run: npm run build
       - run: npm run db:local
       - run: npx playwright install --with-deps chromium
@@ -39,3 +40,10 @@ jobs:
             qa/local-report.json
             qa/*.png
           if-no-files-found: ignore
+  native-core:
+    runs-on: macos-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: swift test --package-path native/Core
+      - run: xcodebuild -project native/KINT10dAcademy.xcodeproj -scheme AcademyMac -configuration Debug CODE_SIGNING_ALLOWED=NO build

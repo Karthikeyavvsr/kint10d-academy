@@ -1,0 +1,517 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00B33372D0C42576DA00CA4C /* ProgressAndTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695DC726FBEB755BE350688C /* ProgressAndTabs.swift */; };
+		00E3E259D7C2D67F5D7AD158 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77F1451825ED5D4762A27ECF /* Assets.xcassets */; };
+		03A3DD538E304D44F5F7A0B5 /* resources.json in Resources */ = {isa = PBXBuildFile; fileRef = BC5271C6263A643A55530668 /* resources.json */; };
+		0A040AA15E8DDAFA46FBAB36 /* resources.json in Resources */ = {isa = PBXBuildFile; fileRef = BC5271C6263A643A55530668 /* resources.json */; };
+		2C347AA8519885571AA11393 /* curriculum.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D16D2C5AD27D5ADAF19DA46 /* curriculum.json */; };
+		33B135563E7FD64E1E4F9EDE /* AcademyViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775664555590CE66300CC67B /* AcademyViews.swift */; };
+		53BD30573704EE361E6AF8BB /* AcademySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A69195F95C3ABF8DA7BDD6 /* AcademySettings.swift */; };
+		5C961114BF9A6A5037F5C423 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE4D352EE2AF25CC6D19140 /* CloudSync.swift */; };
+		696DB27F4A8FB0781F2B7CDE /* curriculum.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D16D2C5AD27D5ADAF19DA46 /* curriculum.json */; };
+		73625A3909A82CB12030AEE3 /* NativeLabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019308679248A34D93A8EF71 /* NativeLabs.swift */; };
+		74E43F47506E6B102202E649 /* AcademyCore in Frameworks */ = {isa = PBXBuildFile; productRef = F7481FF5EB3DBE943DBF5DD0 /* AcademyCore */; };
+		7B184C305DB3BB240453A840 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE4D352EE2AF25CC6D19140 /* CloudSync.swift */; };
+		83BD1C56ED42217518412E8C /* ProgressAndTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695DC726FBEB755BE350688C /* ProgressAndTabs.swift */; };
+		844AE3EAB6343AF5819CBA7E /* AcademySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A69195F95C3ABF8DA7BDD6 /* AcademySettings.swift */; };
+		B7E4D8D54756439F58011C8F /* NativeLabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019308679248A34D93A8EF71 /* NativeLabs.swift */; };
+		BD1866069594FE4C83DFC717 /* KINT10dAcademyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677749839876AC11FA76DF5 /* KINT10dAcademyApp.swift */; };
+		E54B8F42C58B559AF43DDE3F /* AcademyCore in Frameworks */ = {isa = PBXBuildFile; productRef = 43E47E733F13E198E8CA8B5F /* AcademyCore */; };
+		E62D2C918A57F08E571AC62E /* AcademyViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775664555590CE66300CC67B /* AcademyViews.swift */; };
+		E63C59B5E19EDD15019547E9 /* AcademyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEDF09AB743E0757BC24862 /* AcademyStore.swift */; };
+		E949D7FBC351BC2070CD6D42 /* KINT10dAcademyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677749839876AC11FA76DF5 /* KINT10dAcademyApp.swift */; };
+		EC1BB9DF0DF246FDC4DCABAB /* papers.json in Resources */ = {isa = PBXBuildFile; fileRef = D44E9E07ADA7285A3092F079 /* papers.json */; };
+		EF40E030B4E3C4FBC23F2B1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77F1451825ED5D4762A27ECF /* Assets.xcassets */; };
+		F3E8626A8B222F2A6D943414 /* AcademyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEDF09AB743E0757BC24862 /* AcademyStore.swift */; };
+		F93520E849AFB0C5780A1EDC /* papers.json in Resources */ = {isa = PBXBuildFile; fileRef = D44E9E07ADA7285A3092F079 /* papers.json */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		019308679248A34D93A8EF71 /* NativeLabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeLabs.swift; sourceTree = "<group>"; };
+		2A7BF1CCA6228B218B197F67 /* Core */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Core; path = Core; sourceTree = SOURCE_ROOT; };
+		41A69195F95C3ABF8DA7BDD6 /* AcademySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademySettings.swift; sourceTree = "<group>"; };
+		4D16D2C5AD27D5ADAF19DA46 /* curriculum.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = curriculum.json; sourceTree = "<group>"; };
+		4DD1F016C25E93B9C1E08D71 /* AcademyiOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = AcademyiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5677749839876AC11FA76DF5 /* KINT10dAcademyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KINT10dAcademyApp.swift; sourceTree = "<group>"; };
+		695DC726FBEB755BE350688C /* ProgressAndTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressAndTabs.swift; sourceTree = "<group>"; };
+		775664555590CE66300CC67B /* AcademyViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyViews.swift; sourceTree = "<group>"; };
+		77F1451825ED5D4762A27ECF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AFEDF09AB743E0757BC24862 /* AcademyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyStore.swift; sourceTree = "<group>"; };
+		B25FCD1BBADD955D9E2D0EDD /* AcademyMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcademyMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC5271C6263A643A55530668 /* resources.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = resources.json; sourceTree = "<group>"; };
+		D44E9E07ADA7285A3092F079 /* papers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = papers.json; sourceTree = "<group>"; };
+		EBE4D352EE2AF25CC6D19140 /* CloudSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSync.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BA6091547DB6B04578535DB9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74E43F47506E6B102202E649 /* AcademyCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE121B5143F5A31A08F89579 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E54B8F42C58B559AF43DDE3F /* AcademyCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		10E82D9157664E23814F2E37 = {
+			isa = PBXGroup;
+			children = (
+				622764A3BDC84EA6E4A6965A /* App */,
+				C2FAE837EA241240395B9ABA /* Packages */,
+				DA6A7FC6BE640ED3A085DAF7 /* Resources */,
+				72AC772C397AC407AABFED41 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		622764A3BDC84EA6E4A6965A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				41A69195F95C3ABF8DA7BDD6 /* AcademySettings.swift */,
+				AFEDF09AB743E0757BC24862 /* AcademyStore.swift */,
+				775664555590CE66300CC67B /* AcademyViews.swift */,
+				EBE4D352EE2AF25CC6D19140 /* CloudSync.swift */,
+				5677749839876AC11FA76DF5 /* KINT10dAcademyApp.swift */,
+				019308679248A34D93A8EF71 /* NativeLabs.swift */,
+				695DC726FBEB755BE350688C /* ProgressAndTabs.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		72AC772C397AC407AABFED41 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4DD1F016C25E93B9C1E08D71 /* AcademyiOS.app */,
+				B25FCD1BBADD955D9E2D0EDD /* AcademyMac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C2FAE837EA241240395B9ABA /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				2A7BF1CCA6228B218B197F67 /* Core */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		DA6A7FC6BE640ED3A085DAF7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				77F1451825ED5D4762A27ECF /* Assets.xcassets */,
+				4D16D2C5AD27D5ADAF19DA46 /* curriculum.json */,
+				D44E9E07ADA7285A3092F079 /* papers.json */,
+				BC5271C6263A643A55530668 /* resources.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		63F8E4FAD111C9B87DCB776B /* AcademyMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 661CA54FB2C3E7334272205A /* Build configuration list for PBXNativeTarget "AcademyMac" */;
+			buildPhases = (
+				72EC711DD63682A644B36F43 /* Sources */,
+				E7B181B8A2C31692122B4B46 /* Resources */,
+				FE121B5143F5A31A08F89579 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AcademyMac;
+			packageProductDependencies = (
+				43E47E733F13E198E8CA8B5F /* AcademyCore */,
+			);
+			productName = AcademyMac;
+			productReference = B25FCD1BBADD955D9E2D0EDD /* AcademyMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+		857DD98B335F18BEF74AB1FB /* AcademyiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CAB7EEE3E9980B6E3F3EB68 /* Build configuration list for PBXNativeTarget "AcademyiOS" */;
+			buildPhases = (
+				8FE6636336DB291F0BF5890B /* Sources */,
+				0750D4534F2216E8D54676BC /* Resources */,
+				BA6091547DB6B04578535DB9 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AcademyiOS;
+			packageProductDependencies = (
+				F7481FF5EB3DBE943DBF5DD0 /* AcademyCore */,
+			);
+			productName = AcademyiOS;
+			productReference = 4DD1F016C25E93B9C1E08D71 /* AcademyiOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		119BFA5326D568A0464D8FD2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					63F8E4FAD111C9B87DCB776B = {
+						ProvisioningStyle = Automatic;
+					};
+					857DD98B335F18BEF74AB1FB = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 5078F2177E571796E5975B30 /* Build configuration list for PBXProject "KINT10dAcademy" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 10E82D9157664E23814F2E37;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				9F3E3A6392F0A4CB34AE7FF2 /* XCLocalSwiftPackageReference "Core" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 72AC772C397AC407AABFED41 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				63F8E4FAD111C9B87DCB776B /* AcademyMac */,
+				857DD98B335F18BEF74AB1FB /* AcademyiOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0750D4534F2216E8D54676BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00E3E259D7C2D67F5D7AD158 /* Assets.xcassets in Resources */,
+				2C347AA8519885571AA11393 /* curriculum.json in Resources */,
+				EC1BB9DF0DF246FDC4DCABAB /* papers.json in Resources */,
+				03A3DD538E304D44F5F7A0B5 /* resources.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7B181B8A2C31692122B4B46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF40E030B4E3C4FBC23F2B1C /* Assets.xcassets in Resources */,
+				696DB27F4A8FB0781F2B7CDE /* curriculum.json in Resources */,
+				F93520E849AFB0C5780A1EDC /* papers.json in Resources */,
+				0A040AA15E8DDAFA46FBAB36 /* resources.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		72EC711DD63682A644B36F43 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53BD30573704EE361E6AF8BB /* AcademySettings.swift in Sources */,
+				E63C59B5E19EDD15019547E9 /* AcademyStore.swift in Sources */,
+				E62D2C918A57F08E571AC62E /* AcademyViews.swift in Sources */,
+				7B184C305DB3BB240453A840 /* CloudSync.swift in Sources */,
+				BD1866069594FE4C83DFC717 /* KINT10dAcademyApp.swift in Sources */,
+				B7E4D8D54756439F58011C8F /* NativeLabs.swift in Sources */,
+				00B33372D0C42576DA00CA4C /* ProgressAndTabs.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8FE6636336DB291F0BF5890B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				844AE3EAB6343AF5819CBA7E /* AcademySettings.swift in Sources */,
+				F3E8626A8B222F2A6D943414 /* AcademyStore.swift in Sources */,
+				33B135563E7FD64E1E4F9EDE /* AcademyViews.swift in Sources */,
+				5C961114BF9A6A5037F5C423 /* CloudSync.swift in Sources */,
+				E949D7FBC351BC2070CD6D42 /* KINT10dAcademyApp.swift in Sources */,
+				73625A3909A82CB12030AEE3 /* NativeLabs.swift in Sources */,
+				83BD1C56ED42217518412E8C /* ProgressAndTabs.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		311F17C7226DA8C4AE6C2BD1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "KINT10d Academy";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		68B3F3FEC456B707B2A37A9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIFileSharingEnabled = NO;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.kint10d.academy.mobile;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A9F689E90E1DD5BE9B68B8CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "KINT10d Academy";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		BB57049225133CDA7F20795D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIFileSharingEnabled = NO;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.kint10d.academy.mobile;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CDBC7F0EF2BFAF6A0DF2C311 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AcademyMac.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.kint10d.academy.mac;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		EBE25843F7E99645CC1EC6B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AcademyMac.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.kint10d.academy.mac;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2CAB7EEE3E9980B6E3F3EB68 /* Build configuration list for PBXNativeTarget "AcademyiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB57049225133CDA7F20795D /* Debug */,
+				68B3F3FEC456B707B2A37A9C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5078F2177E571796E5975B30 /* Build configuration list for PBXProject "KINT10dAcademy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9F689E90E1DD5BE9B68B8CD /* Debug */,
+				311F17C7226DA8C4AE6C2BD1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		661CA54FB2C3E7334272205A /* Build configuration list for PBXNativeTarget "AcademyMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EBE25843F7E99645CC1EC6B8 /* Debug */,
+				CDBC7F0EF2BFAF6A0DF2C311 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		9F3E3A6392F0A4CB34AE7FF2 /* XCLocalSwiftPackageReference "Core" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Core;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		43E47E733F13E198E8CA8B5F /* AcademyCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AcademyCore;
+		};
+		F7481FF5EB3DBE943DBF5DD0 /* AcademyCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AcademyCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 119BFA5326D568A0464D8FD2 /* Project object */;
+}

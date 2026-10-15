@@ -62,3 +62,9 @@ qa/*.ics
 qa/local-report.json
 playwright-report/
 test-results/
+
+# Native sync data and local pairing material
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.pairing.json

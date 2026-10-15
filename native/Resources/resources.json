@@ -1,0 +1,772 @@
+[
+  {
+    "id": "R01",
+    "title": "Harvard CS50 Python",
+    "url": "https://cs50.harvard.edu/python/",
+    "format": "Course and videos",
+    "level": "Beginner",
+    "access": "Free course; optional paid credentials",
+    "verification": "Opened",
+    "study_focus": "Functions through file handling and tests; complete exercises."
+  },
+  {
+    "id": "R02",
+    "title": "Harvard CS50 SQL",
+    "url": "https://cs50.harvard.edu/sql/",
+    "format": "Course and videos",
+    "level": "Beginner",
+    "access": "Free course; optional paid credentials",
+    "verification": "Opened",
+    "study_focus": "Querying, schema design, joins, indexes and transactions."
+  },
+  {
+    "id": "R03",
+    "title": "MIT Missing Semester",
+    "url": "https://missing.csail.mit.edu/",
+    "format": "Course and videos",
+    "level": "Beginner",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Shell, development tools, debugging and version control."
+  },
+  {
+    "id": "R04",
+    "title": "Pro Git",
+    "url": "https://git-scm.com/book/en/v2",
+    "format": "Online book",
+    "level": "Beginner",
+    "access": "Free online",
+    "verification": "Opened",
+    "study_focus": "Read Getting Started, Git Basics and Git Branching first."
+  },
+  {
+    "id": "R05",
+    "title": "Python for Data Analysis by Wes McKinney",
+    "url": "https://wesmckinney.com/book/",
+    "format": "Online book",
+    "level": "Intermediate",
+    "access": "Free online; print optional",
+    "verification": "Opened",
+    "study_focus": "Read NumPy, pandas, data cleaning, joins and time series selectively."
+  },
+  {
+    "id": "R06",
+    "title": "An Introduction to Statistical Learning",
+    "url": "https://www.statlearning.com/",
+    "format": "Book and course links",
+    "level": "Intermediate",
+    "access": "Free author-hosted PDFs; print optional",
+    "verification": "Opened",
+    "study_focus": "Choose Python edition; regression, classification, resampling and regularization."
+  },
+  {
+    "id": "R07",
+    "title": "Forecasting Principles and Practice",
+    "url": "https://otexts.com/fpp3/",
+    "format": "Online book",
+    "level": "Intermediate",
+    "access": "Free online; examples use R",
+    "verification": "Opened",
+    "study_focus": "Time plots, benchmark forecasts, residuals and rolling evaluation."
+  },
+  {
+    "id": "R08",
+    "title": "Zerodha Varsity",
+    "url": "https://zerodha.com/varsity/",
+    "format": "Indian-market modules and video links",
+    "level": "Beginner",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Introduction, fundamental analysis, futures, options, risk and trading systems; verify current rules elsewhere."
+  },
+  {
+    "id": "R09",
+    "title": "3Blue1Brown Linear Algebra",
+    "url": "https://www.3blue1brown.com/?topic=linear-algebra",
+    "format": "Visual lessons and videos",
+    "level": "Beginner",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Vectors, matrix transformations, dot products and eigenvectors."
+  },
+  {
+    "id": "R10",
+    "title": "StatQuest video index",
+    "url": "https://statquest.org/video_index.html",
+    "format": "Curated YouTube index",
+    "level": "Beginner to intermediate",
+    "access": "Free videos; optional paid books",
+    "verification": "Opened",
+    "study_focus": "Use the named lesson sequences in this book instead of watching everything."
+  },
+  {
+    "id": "R11",
+    "title": "Python official tutorial",
+    "url": "https://docs.python.org/3/tutorial/",
+    "format": "Documentation",
+    "level": "Intermediate",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Reference after basic programming; exceptions, modules, classes and environments."
+  },
+  {
+    "id": "R12",
+    "title": "pytest getting started",
+    "url": "https://docs.pytest.org/en/stable/getting-started.html",
+    "format": "Documentation",
+    "level": "Beginner to intermediate",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Assertions, fixtures, temporary files and test discovery."
+  },
+  {
+    "id": "R13",
+    "title": "Hypothesis documentation",
+    "url": "https://hypothesis.readthedocs.io/en/latest/",
+    "format": "Documentation",
+    "level": "Intermediate",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Generate edge cases and test invariants."
+  },
+  {
+    "id": "R14",
+    "title": "MDN Learn Web Development",
+    "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+    "format": "Curriculum",
+    "level": "Beginner",
+    "access": "Free core material; external courses may charge",
+    "verification": "Opened",
+    "study_focus": "Semantic HTML, CSS, JavaScript and forms."
+  },
+  {
+    "id": "R15",
+    "title": "FastAPI tutorial",
+    "url": "https://fastapi.tiangolo.com/tutorial/",
+    "format": "Documentation",
+    "level": "Intermediate",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Request models, validation, dependencies and errors."
+  },
+  {
+    "id": "R16",
+    "title": "Docker Get Started",
+    "url": "https://docs.docker.com/get-started/",
+    "format": "Documentation",
+    "level": "Intermediate",
+    "access": "Free docs; product licensing and hosting vary",
+    "verification": "Opened",
+    "study_focus": "Images, containers, volumes and reproducible environments."
+  },
+  {
+    "id": "R17",
+    "title": "Google SRE books",
+    "url": "https://sre.google/books/",
+    "format": "Online books",
+    "level": "Intermediate to advanced",
+    "access": "Free online",
+    "verification": "Opened",
+    "study_focus": "Monitoring, service objectives, incidents and overload control."
+  },
+  {
+    "id": "R18",
+    "title": "OpenTelemetry observability primer",
+    "url": "https://opentelemetry.io/docs/concepts/observability-primer/",
+    "format": "Documentation",
+    "level": "Intermediate",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Logs, metrics and traces; instrumentation concepts."
+  },
+  {
+    "id": "R19",
+    "title": "OWASP Top 10 for LLM Applications",
+    "url": "https://owasp.org/projects/top-10-for-large-language-model-applications",
+    "format": "Security reference",
+    "level": "Intermediate",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Prompt injection, data exposure and excessive permissions."
+  },
+  {
+    "id": "R20",
+    "title": "OWASP Secrets Management",
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+    "format": "Security reference",
+    "level": "Intermediate",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Secret lifecycle, access control, auditing and rotation."
+  },
+  {
+    "id": "R21",
+    "title": "Seeing Theory by Brown University",
+    "url": "https://seeing-theory.brown.edu/",
+    "format": "Interactive lessons",
+    "level": "Beginner",
+    "access": "Free; archived educational site",
+    "verification": "Opened",
+    "study_focus": "Visual probability, expectation, distributions and inference."
+  },
+  {
+    "id": "R22",
+    "title": "Harvard Statistics 110",
+    "url": "https://stat110.hsites.harvard.edu/",
+    "format": "Course and YouTube links",
+    "level": "Intermediate",
+    "access": "Free lectures and online book",
+    "verification": "Opened",
+    "study_focus": "Conditional probability, random variables, expectation and limit laws."
+  },
+  {
+    "id": "R23",
+    "title": "Mathematics for Machine Learning",
+    "url": "https://mml-book.github.io/",
+    "format": "Author-hosted book",
+    "level": "Intermediate",
+    "access": "Free PDF; print optional",
+    "verification": "Opened",
+    "study_focus": "Linear algebra, calculus, probability and optimization."
+  },
+  {
+    "id": "R24",
+    "title": "scikit-learn common pitfalls",
+    "url": "https://scikit-learn.org/stable/common_pitfalls.html",
+    "format": "Documentation",
+    "level": "Intermediate",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Data leakage, pipelines and reproducibility."
+  },
+  {
+    "id": "R25",
+    "title": "scikit-learn cross-validation",
+    "url": "https://scikit-learn.org/stable/modules/cross_validation.html",
+    "format": "Documentation",
+    "level": "Intermediate",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Compare split schemes; study time-series evaluation caveats."
+  },
+  {
+    "id": "R26",
+    "title": "Practical Deep Learning for Coders",
+    "url": "https://course.fast.ai/",
+    "format": "Video course",
+    "level": "Intermediate",
+    "access": "Free lessons; compute may cost",
+    "verification": "Opened",
+    "study_focus": "Practical model training after Python; not a beginner coding course."
+  },
+  {
+    "id": "R27",
+    "title": "Hugging Face LLM Course",
+    "url": "https://huggingface.co/learn/llm-course/chapter1/1",
+    "format": "Course",
+    "level": "Intermediate",
+    "access": "Free lessons; compute may cost",
+    "verification": "Opened",
+    "study_focus": "Tokenization, transformers, datasets and fine-tuning concepts."
+  },
+  {
+    "id": "R28",
+    "title": "Karpathy Neural Networks Zero to Hero",
+    "url": "https://karpathy.ai/zero-to-hero.html",
+    "format": "Video course",
+    "level": "Intermediate to advanced",
+    "access": "Free videos; compute may cost",
+    "verification": "Opened",
+    "study_focus": "Build small networks and then a small language model."
+  },
+  {
+    "id": "R29",
+    "title": "Full Stack Deep Learning",
+    "url": "https://fullstackdeeplearning.com/",
+    "format": "Courses and videos",
+    "level": "Intermediate to advanced",
+    "access": "Free public course material; other offerings vary",
+    "verification": "Opened",
+    "study_focus": "Data, deployment, product design and ML system evaluation."
+  },
+  {
+    "id": "R30",
+    "title": "MLflow documentation",
+    "url": "https://mlflow.org/docs/latest/ml/",
+    "format": "Documentation",
+    "level": "Intermediate",
+    "access": "Free open-source docs; hosted services vary",
+    "verification": "Opened",
+    "study_focus": "Experiment tracking and reproducible artifact records."
+  },
+  {
+    "id": "R31",
+    "title": "OpenAlex help and API reference",
+    "url": "https://help.openalex.org/",
+    "format": "Research discovery documentation",
+    "level": "Intermediate",
+    "access": "Public docs; API access and quotas must be checked",
+    "verification": "Opened",
+    "study_focus": "Discover papers and citation links; metadata is not evidence quality."
+  },
+  {
+    "id": "R32",
+    "title": "Zotero quick start",
+    "url": "https://www.zotero.org/support/quick_start_guide",
+    "format": "Documentation",
+    "level": "Beginner",
+    "access": "Free app; extra hosted storage may cost",
+    "verification": "Opened",
+    "study_focus": "Capture references, notes, tags, PDFs and citations."
+  },
+  {
+    "id": "R33",
+    "title": "Docling documentation",
+    "url": "https://docling-project.github.io/docling/",
+    "format": "Document parsing documentation",
+    "level": "Intermediate",
+    "access": "Open-source tooling; compute may cost",
+    "verification": "Opened",
+    "study_focus": "Parse document structure and preserve page-level provenance."
+  },
+  {
+    "id": "R34",
+    "title": "Baidu Unlimited OCR model card",
+    "url": "https://huggingface.co/baidu/Unlimited-OCR",
+    "format": "Model card",
+    "level": "Advanced",
+    "access": "Card labels MIT; inspect all code and dependencies; compute costs vary",
+    "verification": "Opened",
+    "study_focus": "Optional OCR candidate, not a complete research agent; benchmark before adoption."
+  },
+  {
+    "id": "R35",
+    "title": "Anthropic Building Effective Agents",
+    "url": "https://www.anthropic.com/engineering/building-effective-agents",
+    "format": "Engineering article",
+    "level": "Intermediate",
+    "access": "Free article; model usage costs vary",
+    "verification": "Opened",
+    "study_focus": "Workflows, agent patterns and starting with simple designs."
+  },
+  {
+    "id": "R36",
+    "title": "Model Context Protocol introduction",
+    "url": "https://modelcontextprotocol.io/docs/getting-started/intro",
+    "format": "Specification introduction",
+    "level": "Intermediate",
+    "access": "Free docs",
+    "verification": "Opened",
+    "study_focus": "Client-server tool integration; protocol is not authorization."
+  },
+  {
+    "id": "R37",
+    "title": "QuantConnect reality modeling",
+    "url": "https://www.quantconnect.com/docs/v2/writing-algorithms/reality-modeling/key-concepts",
+    "format": "Engine documentation",
+    "level": "Intermediate",
+    "access": "Free docs; platform services may cost",
+    "verification": "Opened",
+    "study_focus": "Fees, fills, slippage and brokerage assumptions; do not assume Indian-market fidelity."
+  },
+  {
+    "id": "R38",
+    "title": "NumPy absolute basics",
+    "url": "https://numpy.org/doc/stable/user/absolute_beginners.html",
+    "format": "Tutorial",
+    "level": "Beginner",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Arrays, dimensions, indexing and vectorized calculations."
+  },
+  {
+    "id": "R39",
+    "title": "PostgreSQL tutorial",
+    "url": "https://www.postgresql.org/docs/current/tutorial.html",
+    "format": "Documentation",
+    "level": "Intermediate",
+    "access": "Free docs and open-source database",
+    "verification": "Opened",
+    "study_focus": "Relational database fundamentals and transactions."
+  },
+  {
+    "id": "R40",
+    "title": "Apache Arrow Parquet guide",
+    "url": "https://arrow.apache.org/docs/python/parquet.html",
+    "format": "Documentation",
+    "level": "Intermediate",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Columnar files, partitioning and schema handling."
+  },
+  {
+    "id": "R41",
+    "title": "NISM Securities Markets Foundation curriculum",
+    "url": "https://www.nism.ac.in/curriculum-securities-markets-foundation/",
+    "format": "Official curriculum",
+    "level": "Beginner",
+    "access": "Free curriculum; exam and some material may require registration or payment",
+    "verification": "Search verified",
+    "study_focus": "Use as Indian-market knowledge checklist; not a claim of certification."
+  },
+  {
+    "id": "R42",
+    "title": "NISM Equity Derivatives Series VIII",
+    "url": "https://www.nism.ac.in/nism-series-viii-equity-derivatives/",
+    "format": "Official certification information",
+    "level": "Intermediate",
+    "access": "Public information; certification has separate requirements and fees",
+    "verification": "Search verified",
+    "study_focus": "Locate current workbook and syllabus through NISM."
+  },
+  {
+    "id": "R43",
+    "title": "NSE derivatives contract specifications",
+    "url": "https://www.nseindia.com/static/products-services/equity-derivatives-contract-specifications",
+    "format": "Official reference",
+    "level": "Intermediate",
+    "access": "Public reference; data redistribution terms separate",
+    "verification": "Opened",
+    "study_focus": "Current contract identifiers, expiries and contract rules; keep dated copies."
+  },
+  {
+    "id": "R44",
+    "title": "NSE closing auction session",
+    "url": "https://www.nseindia.com/static/products-services/closing-auction-session",
+    "format": "Official reference",
+    "level": "Intermediate",
+    "access": "Public reference",
+    "verification": "Opened",
+    "study_focus": "Session phases and eligibility; do not assume one fixed bar count."
+  },
+  {
+    "id": "R45",
+    "title": "Breeze API reference",
+    "url": "https://api.icicidirect.com/breezeapi/documents/index.html",
+    "format": "Official API documentation",
+    "level": "Intermediate",
+    "access": "Public docs; account access and terms apply",
+    "verification": "Opened",
+    "study_focus": "Authentication, market data schemas and streaming; verify current restrictions."
+  },
+  {
+    "id": "R46",
+    "title": "Breeze API rate limit FAQ",
+    "url": "https://www.icicidirect.com/faqs/fno/what-is-the-rate-limit-for-breeze-api",
+    "format": "Official FAQ",
+    "level": "Beginner",
+    "access": "Public reference",
+    "verification": "Opened",
+    "study_focus": "Published 100 calls per minute and 5000 per day at review; local budgets can be lower."
+  },
+  {
+    "id": "R47",
+    "title": "The Deflated Sharpe Ratio",
+    "url": "https://www.davidhbailey.com/dhbpapers/deflated-sharpe.pdf",
+    "format": "Author-hosted research paper",
+    "level": "Advanced",
+    "access": "Free preprint",
+    "verification": "Opened",
+    "study_focus": "Selection bias and nonnormality; read after inference and Sharpe limitations."
+  },
+  {
+    "id": "R48",
+    "title": "The Probability of Backtest Overfitting",
+    "url": "https://escholarship.org/uc/item/4w1110bb",
+    "format": "Research repository",
+    "level": "Advanced",
+    "access": "Open repository record",
+    "verification": "Opened",
+    "study_focus": "Study the method and assumptions; not a guarantee of future returns."
+  },
+  {
+    "id": "R49",
+    "title": "NPTEL Financial Derivatives and Risk Management",
+    "url": "https://nptel.ac.in/courses/110107128",
+    "format": "IIT Roorkee course and videos",
+    "level": "Intermediate",
+    "access": "Public learning material; certification and enrollment conditions vary",
+    "verification": "Opened",
+    "study_focus": "Forwards, futures, options and risk management."
+  },
+  {
+    "id": "R50",
+    "title": "Yale Financial Markets 2008",
+    "url": "https://oyc.yale.edu/economics/econ-252-08",
+    "format": "University video course",
+    "level": "Beginner to intermediate",
+    "access": "Free lectures",
+    "verification": "Opened",
+    "study_focus": "Institutions, risk, insurance and finance; historical US context, not current Indian rules."
+  },
+  {
+    "id": "R51",
+    "title": "CME Option Greeks",
+    "url": "https://www.cmegroup.com/education/courses/option-greeks",
+    "format": "Exchange education",
+    "level": "Intermediate",
+    "access": "Public course page; access may require account",
+    "verification": "Opened",
+    "study_focus": "Price sensitivities; apply Indian contract rules separately."
+  },
+  {
+    "id": "R52",
+    "title": "MIT Introduction to Algorithms",
+    "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+    "format": "Course and videos",
+    "level": "Intermediate",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Data structures, complexity, sorting and search; selected lessons first."
+  },
+  {
+    "id": "R53",
+    "title": "MDN HTTP overview",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview",
+    "format": "Documentation",
+    "level": "Beginner",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Requests, responses, headers and client-server communication."
+  },
+  {
+    "id": "R54",
+    "title": "GitHub Actions introduction",
+    "url": "https://docs.github.com/en/actions/get-started/understand-github-actions",
+    "format": "Documentation",
+    "level": "Intermediate",
+    "access": "Free docs; hosted usage quotas vary",
+    "verification": "Opened",
+    "study_focus": "Automated checks, workflows and runners."
+  },
+  {
+    "id": "R55",
+    "title": "W3C accessibility tutorials",
+    "url": "https://www.w3.org/WAI/tutorials/",
+    "format": "Standards tutorials",
+    "level": "Beginner to intermediate",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Labels, tables, keyboard access and readable interfaces."
+  },
+  {
+    "id": "R56",
+    "title": "Causal Inference and Machine Learning",
+    "url": "https://www.causalmlbook.com/",
+    "format": "Online book",
+    "level": "Advanced",
+    "access": "Public online book",
+    "verification": "Opened",
+    "study_focus": "Confounding and causal identification; optional specialization."
+  },
+  {
+    "id": "R57",
+    "title": "Attention Is All You Need",
+    "url": "https://arxiv.org/abs/1706.03762",
+    "format": "Original research paper",
+    "level": "Advanced",
+    "access": "Free preprint",
+    "verification": "Opened",
+    "study_focus": "Transformer architecture; reproduce a small educational component."
+  },
+  {
+    "id": "R58",
+    "title": "Retrieval Augmented Generation for Knowledge Intensive NLP Tasks",
+    "url": "https://arxiv.org/abs/2005.11401",
+    "format": "Original research paper",
+    "level": "Advanced",
+    "access": "Free preprint",
+    "verification": "Opened",
+    "study_focus": "Retrieval plus generation; compare original method with modern implementations."
+  },
+  {
+    "id": "R59",
+    "title": "OpenAI prompting guide",
+    "url": "https://developers.openai.com/api/docs/guides/prompting",
+    "format": "Official documentation",
+    "level": "Beginner to intermediate",
+    "access": "Free docs; API usage billed separately",
+    "verification": "Opened",
+    "study_focus": "Explicit instructions, context and prompt iteration; recheck examples as APIs change."
+  },
+  {
+    "id": "R60",
+    "title": "OpenAI evaluation best practices",
+    "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+    "format": "Official documentation",
+    "level": "Intermediate",
+    "access": "Free docs; API usage billed separately",
+    "verification": "Opened",
+    "study_focus": "Task-specific evaluations and regression checks."
+  },
+  {
+    "id": "R61",
+    "title": "OpenAI function calling",
+    "url": "https://developers.openai.com/api/docs/guides/function-calling",
+    "format": "Official documentation",
+    "level": "Intermediate",
+    "access": "Free docs; API usage billed separately",
+    "verification": "Opened",
+    "study_focus": "Tool schemas and application-side execution."
+  },
+  {
+    "id": "R62",
+    "title": "OpenAI structured outputs",
+    "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+    "format": "Official documentation",
+    "level": "Intermediate",
+    "access": "Free docs; API usage billed separately",
+    "verification": "Opened",
+    "study_focus": "Schema-constrained outputs; semantic correctness still needs validation."
+  },
+  {
+    "id": "R63",
+    "title": "SEBI retail algorithmic trading circular February 2025",
+    "url": "https://www.sebi.gov.in/legal/circulars/feb-2025/safer-participation-of-retail-investors-in-algorithmic-trading_91614.html",
+    "format": "Regulatory source",
+    "level": "Intermediate",
+    "access": "Public",
+    "verification": "Opened",
+    "study_focus": "Read together with amendments and broker implementation; not current compliance advice on its own."
+  },
+  {
+    "id": "R64",
+    "title": "SEBI implementation timeline circular September 2025",
+    "url": "https://www.sebi.gov.in/legal/circulars/sep-2025/extension-of-timeline-for-implementation-of-sebi-circular-dated-february-04-2025-on-safer-participation-of-retail-investors-in-algorithmic-trading-_96979.html",
+    "format": "Regulatory source",
+    "level": "Intermediate",
+    "access": "Public",
+    "verification": "Search verified",
+    "study_focus": "Example of why effective dates and later amendments matter; check newer circulars before deployment."
+  },
+  {
+    "id": "R65",
+    "title": "NSE equity trading system",
+    "url": "https://www.nseindia.com/static/products-services/equity-market-trading-system",
+    "format": "Official reference",
+    "level": "Beginner",
+    "access": "Public",
+    "verification": "Search verified",
+    "study_focus": "Order-driven market and price-time priority."
+  },
+  {
+    "id": "R66",
+    "title": "NSE pre-open session",
+    "url": "https://www.nseindia.com/static/products-services/equity-market-pre-open",
+    "format": "Official reference",
+    "level": "Beginner",
+    "access": "Public",
+    "verification": "Search verified",
+    "study_focus": "Auction indications, equilibrium pricing and matching."
+  },
+  {
+    "id": "R67",
+    "title": "CS50 Python full video",
+    "url": "https://www.youtube.com/watch?v=nLRL_NcnK-4",
+    "format": "YouTube course",
+    "level": "Beginner",
+    "access": "Free",
+    "verification": "Opened via official course",
+    "study_focus": "Use with problem sets; divide the long video into lessons."
+  },
+  {
+    "id": "R68",
+    "title": "3Blue1Brown Large Language Models Explained Briefly",
+    "url": "https://www.youtube.com/watch?v=LPZh9BOjkQs",
+    "format": "YouTube video",
+    "level": "Beginner",
+    "access": "Free",
+    "verification": "Search verified",
+    "study_focus": "First intuition before transformer mathematics."
+  },
+  {
+    "id": "R69",
+    "title": "StatQuest p values",
+    "url": "https://www.youtube.com/watch?v=vemZtEM63GY",
+    "format": "YouTube video",
+    "level": "Beginner",
+    "access": "Free",
+    "verification": "Opened via creator index",
+    "study_focus": "Learn what a p-value does and does not mean."
+  },
+  {
+    "id": "R70",
+    "title": "StatQuest Cross Validation",
+    "url": "https://www.youtube.com/watch?v=fSytzGwwBVw",
+    "format": "YouTube video",
+    "level": "Beginner to intermediate",
+    "access": "Free",
+    "verification": "Opened via creator index",
+    "study_focus": "Learn generic evaluation first; use chronological finance splits later."
+  },
+  {
+    "id": "R71",
+    "title": "StatQuest p hacking",
+    "url": "https://www.youtube.com/watch?v=HDCOUXE3HMM",
+    "format": "YouTube video",
+    "level": "Intermediate",
+    "access": "Free",
+    "verification": "Opened via creator index",
+    "study_focus": "See why repeated searching changes interpretation."
+  },
+  {
+    "id": "R72",
+    "title": "Karpathy Lets Build GPT",
+    "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+    "format": "YouTube coding lecture",
+    "level": "Advanced",
+    "access": "Free; compute may cost",
+    "verification": "Opened via creator course",
+    "study_focus": "Watch after neural networks and tensors; build a small educational model."
+  },
+  {
+    "id": "R73",
+    "title": "StatQuest Ridge L2 Regression",
+    "url": "https://www.youtube.com/watch?v=Q81RR3yKn30",
+    "format": "YouTube video",
+    "level": "Intermediate",
+    "access": "Free",
+    "verification": "Opened via creator index",
+    "study_focus": "Regularization intuition before penalized logistic regression."
+  },
+  {
+    "id": "R74",
+    "title": "DeepLearning AI Prompt Engineering for Developers",
+    "url": "https://www.deeplearning.ai/courses/chatgpt-prompt-eng",
+    "format": "Short video course",
+    "level": "Beginner with Python",
+    "access": "Provider search listing says limited-time free access; verify before enrollment",
+    "verification": "Search only; direct fetch unavailable",
+    "study_focus": "Optional guided introduction; use current API documentation for code compatibility."
+  },
+  {
+    "id": "R75",
+    "title": "3Blue1Brown Neural Networks",
+    "url": "https://www.3blue1brown.com/lessons/neural-networks/",
+    "format": "Visual lesson with video",
+    "level": "Beginner",
+    "access": "Free",
+    "verification": "Opened",
+    "study_focus": "Weights, layers and why learning differs from hand-coded rules."
+  },
+  {
+    "id": "R76",
+    "title": "Harvard CS50 Computer Science",
+    "url": "https://cs50.harvard.edu/x/",
+    "format": "Course and videos",
+    "level": "Beginner to intermediate",
+    "access": "Free course; optional paid credentials",
+    "verification": "Opened",
+    "study_focus": "CS foundations; selected algorithms and memory lessons after Python."
+  },
+  {
+    "id": "R77",
+    "title": "Harvard CS50 Artificial Intelligence",
+    "url": "https://cs50.harvard.edu/ai/",
+    "format": "Course and videos",
+    "level": "Intermediate",
+    "access": "Free course; optional paid credentials",
+    "verification": "Opened",
+    "study_focus": "Search, knowledge, uncertainty and learning; Python prerequisites apply."
+  }
+]

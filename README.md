@@ -130,3 +130,7 @@ The project was designed and iterated with AI assistance. Its value as a portfol
 ## License
 
 Original code and original curriculum are [MIT licensed](LICENSE). Retained third-party components keep their notices: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Linked papers and courses are not relicensed or redistributed.
+
+## Native Apple application
+
+The [SwiftUI app](native/README.md) supports iPhone, iPad and Mac with offline lessons, native visual labs, reading progress, pace estimates, themes, notes and opt-in reminders. The [private sync backend](native-sync/README.md) runs on Railway for the owner; deployment instructions are included for other users. Native and web account sessions are separate; progress can be transferred through JSON export/import.
