@@ -13,28 +13,66 @@
 		0A040AA15E8DDAFA46FBAB36 /* resources.json in Resources */ = {isa = PBXBuildFile; fileRef = BC5271C6263A643A55530668 /* resources.json */; };
 		2C347AA8519885571AA11393 /* curriculum.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D16D2C5AD27D5ADAF19DA46 /* curriculum.json */; };
 		33B135563E7FD64E1E4F9EDE /* AcademyViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775664555590CE66300CC67B /* AcademyViews.swift */; };
+		37D2507562AA658A204006C5 /* MikoSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219DE47D814EAC8D76AEA443 /* MikoSprite.swift */; };
+		4D82CBF9E23805EFC7D175FA /* MikoCompanion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D44302372ABBCC33DB9D063 /* MikoCompanion.swift */; };
 		53BD30573704EE361E6AF8BB /* AcademySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A69195F95C3ABF8DA7BDD6 /* AcademySettings.swift */; };
 		5C961114BF9A6A5037F5C423 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE4D352EE2AF25CC6D19140 /* CloudSync.swift */; };
+		5E232C09C00471E03B7AF9B0 /* MikoAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E28C71D3CA425F64F8B2C43 /* MikoAtlas.png */; };
+		66648FFEA23E0E5CE63DD09E /* MikoActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C2B4DEEE1547501DAF4EF1 /* MikoActivityAttributes.swift */; };
 		696DB27F4A8FB0781F2B7CDE /* curriculum.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D16D2C5AD27D5ADAF19DA46 /* curriculum.json */; };
 		73625A3909A82CB12030AEE3 /* NativeLabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019308679248A34D93A8EF71 /* NativeLabs.swift */; };
 		74E43F47506E6B102202E649 /* AcademyCore in Frameworks */ = {isa = PBXBuildFile; productRef = F7481FF5EB3DBE943DBF5DD0 /* AcademyCore */; };
 		7B184C305DB3BB240453A840 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE4D352EE2AF25CC6D19140 /* CloudSync.swift */; };
+		7C05CB36612D2FF02C4A8430 /* MikoSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219DE47D814EAC8D76AEA443 /* MikoSprite.swift */; };
 		83BD1C56ED42217518412E8C /* ProgressAndTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695DC726FBEB755BE350688C /* ProgressAndTabs.swift */; };
 		844AE3EAB6343AF5819CBA7E /* AcademySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A69195F95C3ABF8DA7BDD6 /* AcademySettings.swift */; };
+		922F73231157FFD189C1202C /* MikoActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C2B4DEEE1547501DAF4EF1 /* MikoActivityAttributes.swift */; };
+		9864EAAD6A3DBBBDE4FF31A9 /* MikoAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E28C71D3CA425F64F8B2C43 /* MikoAtlas.png */; };
 		B7E4D8D54756439F58011C8F /* NativeLabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019308679248A34D93A8EF71 /* NativeLabs.swift */; };
+		BB052B0D9AF00ABF5D55C65C /* MikoSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219DE47D814EAC8D76AEA443 /* MikoSprite.swift */; };
 		BD1866069594FE4C83DFC717 /* KINT10dAcademyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677749839876AC11FA76DF5 /* KINT10dAcademyApp.swift */; };
+		C0EEE133BD310E1FD29D66D9 /* MikoActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C2B4DEEE1547501DAF4EF1 /* MikoActivityAttributes.swift */; };
+		DBDED9E2049346C8CADEE667 /* MikoCompanion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D44302372ABBCC33DB9D063 /* MikoCompanion.swift */; };
 		E54B8F42C58B559AF43DDE3F /* AcademyCore in Frameworks */ = {isa = PBXBuildFile; productRef = 43E47E733F13E198E8CA8B5F /* AcademyCore */; };
 		E62D2C918A57F08E571AC62E /* AcademyViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775664555590CE66300CC67B /* AcademyViews.swift */; };
 		E63C59B5E19EDD15019547E9 /* AcademyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEDF09AB743E0757BC24862 /* AcademyStore.swift */; };
 		E949D7FBC351BC2070CD6D42 /* KINT10dAcademyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677749839876AC11FA76DF5 /* KINT10dAcademyApp.swift */; };
 		EC1BB9DF0DF246FDC4DCABAB /* papers.json in Resources */ = {isa = PBXBuildFile; fileRef = D44E9E07ADA7285A3092F079 /* papers.json */; };
+		ED1784CDBA811CDDB12094BE /* MikoAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E28C71D3CA425F64F8B2C43 /* MikoAtlas.png */; };
+		EE70DB63C6196F049B461CA7 /* MikoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D160867608076CA77CB9E1 /* MikoWidget.swift */; };
 		EF40E030B4E3C4FBC23F2B1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77F1451825ED5D4762A27ECF /* Assets.xcassets */; };
 		F3E8626A8B222F2A6D943414 /* AcademyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEDF09AB743E0757BC24862 /* AcademyStore.swift */; };
+		F87B7FBE30E84C562082F13B /* MikoWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A200BE3DF26E16FA8BB8FBBD /* MikoWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F93520E849AFB0C5780A1EDC /* papers.json in Resources */ = {isa = PBXBuildFile; fileRef = D44E9E07ADA7285A3092F079 /* papers.json */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BD150005747EE9048D3B3B32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 119BFA5326D568A0464D8FD2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 12C96640112BB3DECF3A0C7E;
+			remoteInfo = MikoWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		680423A482D333D3AF2325FD /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F87B7FBE30E84C562082F13B /* MikoWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		019308679248A34D93A8EF71 /* NativeLabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeLabs.swift; sourceTree = "<group>"; };
+		219DE47D814EAC8D76AEA443 /* MikoSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MikoSprite.swift; sourceTree = "<group>"; };
 		2A7BF1CCA6228B218B197F67 /* Core */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Core; path = Core; sourceTree = SOURCE_ROOT; };
 		41A69195F95C3ABF8DA7BDD6 /* AcademySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademySettings.swift; sourceTree = "<group>"; };
 		4D16D2C5AD27D5ADAF19DA46 /* curriculum.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = curriculum.json; sourceTree = "<group>"; };
@@ -43,9 +81,14 @@
 		695DC726FBEB755BE350688C /* ProgressAndTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressAndTabs.swift; sourceTree = "<group>"; };
 		775664555590CE66300CC67B /* AcademyViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyViews.swift; sourceTree = "<group>"; };
 		77F1451825ED5D4762A27ECF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7E28C71D3CA425F64F8B2C43 /* MikoAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MikoAtlas.png; sourceTree = "<group>"; };
+		9D44302372ABBCC33DB9D063 /* MikoCompanion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MikoCompanion.swift; sourceTree = "<group>"; };
+		A200BE3DF26E16FA8BB8FBBD /* MikoWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = MikoWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFEDF09AB743E0757BC24862 /* AcademyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyStore.swift; sourceTree = "<group>"; };
 		B25FCD1BBADD955D9E2D0EDD /* AcademyMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcademyMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3C2B4DEEE1547501DAF4EF1 /* MikoActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MikoActivityAttributes.swift; sourceTree = "<group>"; };
 		BC5271C6263A643A55530668 /* resources.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = resources.json; sourceTree = "<group>"; };
+		C6D160867608076CA77CB9E1 /* MikoWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MikoWidget.swift; sourceTree = "<group>"; };
 		D44E9E07ADA7285A3092F079 /* papers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = papers.json; sourceTree = "<group>"; };
 		EBE4D352EE2AF25CC6D19140 /* CloudSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSync.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,12 +113,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040AA4F929550D82954EA845 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B3C2B4DEEE1547501DAF4EF1 /* MikoActivityAttributes.swift */,
+				219DE47D814EAC8D76AEA443 /* MikoSprite.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		10E82D9157664E23814F2E37 = {
 			isa = PBXGroup;
 			children = (
 				622764A3BDC84EA6E4A6965A /* App */,
+				67A177667C218F403A03DD91 /* MikoWidget */,
 				C2FAE837EA241240395B9ABA /* Packages */,
 				DA6A7FC6BE640ED3A085DAF7 /* Resources */,
+				040AA4F929550D82954EA845 /* Shared */,
 				72AC772C397AC407AABFED41 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,10 +142,19 @@
 				775664555590CE66300CC67B /* AcademyViews.swift */,
 				EBE4D352EE2AF25CC6D19140 /* CloudSync.swift */,
 				5677749839876AC11FA76DF5 /* KINT10dAcademyApp.swift */,
+				9D44302372ABBCC33DB9D063 /* MikoCompanion.swift */,
 				019308679248A34D93A8EF71 /* NativeLabs.swift */,
 				695DC726FBEB755BE350688C /* ProgressAndTabs.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		67A177667C218F403A03DD91 /* MikoWidget */ = {
+			isa = PBXGroup;
+			children = (
+				C6D160867608076CA77CB9E1 /* MikoWidget.swift */,
+			);
+			path = MikoWidget;
 			sourceTree = "<group>";
 		};
 		72AC772C397AC407AABFED41 /* Products */ = {
@@ -99,6 +162,7 @@
 			children = (
 				4DD1F016C25E93B9C1E08D71 /* AcademyiOS.app */,
 				B25FCD1BBADD955D9E2D0EDD /* AcademyMac.app */,
+				A200BE3DF26E16FA8BB8FBBD /* MikoWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,6 +180,7 @@
 			children = (
 				77F1451825ED5D4762A27ECF /* Assets.xcassets */,
 				4D16D2C5AD27D5ADAF19DA46 /* curriculum.json */,
+				7E28C71D3CA425F64F8B2C43 /* MikoAtlas.png */,
 				D44E9E07ADA7285A3092F079 /* papers.json */,
 				BC5271C6263A643A55530668 /* resources.json */,
 			);
@@ -125,6 +190,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		12C96640112BB3DECF3A0C7E /* MikoWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20E01317B57BDB5CB208CB3A /* Build configuration list for PBXNativeTarget "MikoWidget" */;
+			buildPhases = (
+				BD9DCBFD83FA09A74B6A8B6F /* Sources */,
+				DB3734C746A3FA0DEEB93CF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MikoWidget;
+			packageProductDependencies = (
+			);
+			productName = MikoWidget;
+			productReference = A200BE3DF26E16FA8BB8FBBD /* MikoWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		63F8E4FAD111C9B87DCB776B /* AcademyMac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 661CA54FB2C3E7334272205A /* Build configuration list for PBXNativeTarget "AcademyMac" */;
@@ -152,10 +235,12 @@
 				8FE6636336DB291F0BF5890B /* Sources */,
 				0750D4534F2216E8D54676BC /* Resources */,
 				BA6091547DB6B04578535DB9 /* Frameworks */,
+				680423A482D333D3AF2325FD /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AFB65901933D11DE9AD1B1FA /* PBXTargetDependency */,
 			);
 			name = AcademyiOS;
 			packageProductDependencies = (
@@ -174,6 +259,9 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					12C96640112BB3DECF3A0C7E = {
+						ProvisioningStyle = Automatic;
+					};
 					63F8E4FAD111C9B87DCB776B = {
 						ProvisioningStyle = Automatic;
 					};
@@ -201,6 +289,7 @@
 			targets = (
 				63F8E4FAD111C9B87DCB776B /* AcademyMac */,
 				857DD98B335F18BEF74AB1FB /* AcademyiOS */,
+				12C96640112BB3DECF3A0C7E /* MikoWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -211,9 +300,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E3E259D7C2D67F5D7AD158 /* Assets.xcassets in Resources */,
+				9864EAAD6A3DBBBDE4FF31A9 /* MikoAtlas.png in Resources */,
 				2C347AA8519885571AA11393 /* curriculum.json in Resources */,
 				EC1BB9DF0DF246FDC4DCABAB /* papers.json in Resources */,
 				03A3DD538E304D44F5F7A0B5 /* resources.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB3734C746A3FA0DEEB93CF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E232C09C00471E03B7AF9B0 /* MikoAtlas.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF40E030B4E3C4FBC23F2B1C /* Assets.xcassets in Resources */,
+				ED1784CDBA811CDDB12094BE /* MikoAtlas.png in Resources */,
 				696DB27F4A8FB0781F2B7CDE /* curriculum.json in Resources */,
 				F93520E849AFB0C5780A1EDC /* papers.json in Resources */,
 				0A040AA15E8DDAFA46FBAB36 /* resources.json in Resources */,
@@ -240,6 +339,9 @@
 				E62D2C918A57F08E571AC62E /* AcademyViews.swift in Sources */,
 				7B184C305DB3BB240453A840 /* CloudSync.swift in Sources */,
 				BD1866069594FE4C83DFC717 /* KINT10dAcademyApp.swift in Sources */,
+				922F73231157FFD189C1202C /* MikoActivityAttributes.swift in Sources */,
+				DBDED9E2049346C8CADEE667 /* MikoCompanion.swift in Sources */,
+				BB052B0D9AF00ABF5D55C65C /* MikoSprite.swift in Sources */,
 				B7E4D8D54756439F58011C8F /* NativeLabs.swift in Sources */,
 				00B33372D0C42576DA00CA4C /* ProgressAndTabs.swift in Sources */,
 			);
@@ -254,14 +356,53 @@
 				33B135563E7FD64E1E4F9EDE /* AcademyViews.swift in Sources */,
 				5C961114BF9A6A5037F5C423 /* CloudSync.swift in Sources */,
 				E949D7FBC351BC2070CD6D42 /* KINT10dAcademyApp.swift in Sources */,
+				C0EEE133BD310E1FD29D66D9 /* MikoActivityAttributes.swift in Sources */,
+				4D82CBF9E23805EFC7D175FA /* MikoCompanion.swift in Sources */,
+				37D2507562AA658A204006C5 /* MikoSprite.swift in Sources */,
 				73625A3909A82CB12030AEE3 /* NativeLabs.swift in Sources */,
 				83BD1C56ED42217518412E8C /* ProgressAndTabs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BD9DCBFD83FA09A74B6A8B6F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66648FFEA23E0E5CE63DD09E /* MikoActivityAttributes.swift in Sources */,
+				7C05CB36612D2FF02C4A8430 /* MikoSprite.swift in Sources */,
+				EE70DB63C6196F049B461CA7 /* MikoWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		AFB65901933D11DE9AD1B1FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 12C96640112BB3DECF3A0C7E /* MikoWidget */;
+			targetProxy = BD150005747EE9048D3B3B32 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		1AB07A678D8B5C89E150E998 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				INFOPLIST_FILE = "Generated/MikoWidget-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Miko;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.kint10d.academy.mobile.miko;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		311F17C7226DA8C4AE6C2BD1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -297,7 +438,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -328,6 +469,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Generated/iOS-Info.plist";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIFileSharingEnabled = NO;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -340,6 +483,24 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
+		};
+		6BCED0EF2079CA17E2C00ED4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				INFOPLIST_FILE = "Generated/MikoWidget-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Miko;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.kint10d.academy.mobile.miko;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		A9F689E90E1DD5BE9B68B8CD /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -376,7 +537,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -414,6 +575,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Generated/iOS-Info.plist";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIFileSharingEnabled = NO;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -466,6 +629,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		20E01317B57BDB5CB208CB3A /* Build configuration list for PBXNativeTarget "MikoWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6BCED0EF2079CA17E2C00ED4 /* Debug */,
+				1AB07A678D8B5C89E150E998 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		2CAB7EEE3E9980B6E3F3EB68 /* Build configuration list for PBXNativeTarget "AcademyiOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

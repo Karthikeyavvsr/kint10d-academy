@@ -2,6 +2,8 @@ import SwiftUI
 import UniformTypeIdentifiers
 struct AcademySettings:View {
     @EnvironmentObject var store:AcademyStore
+    @EnvironmentObject var miko:MikoSession
+    @AppStorage("academy.miko.visible") private var mikoVisible = true
     @AppStorage("academy.appearance") var appearance="system"
     @AppStorage("academy.dailyMinutes") var dailyMinutes=30
     @State var cloudURL=""
@@ -18,6 +20,19 @@ struct AcademySettings:View {
                 Picker("Appearance",selection:$appearance){Text("System").tag("system");Text("Light").tag("light");Text("Dark").tag("dark")}.pickerStyle(.segmented)
                 Text("Text follows system Dynamic Type. Reader A− / A+ adds a personal adjustment. VoiceOver, Bold Text and Reduce Motion use native controls.").font(.caption).foregroundStyle(.secondary)
                 Text("Opaque reading surfaces keep glass away from long paragraphs. System navigation uses the material appropriate to your OS.").font(.caption).foregroundStyle(.secondary)
+            }
+            Section("Miko, your companion") {
+                Toggle("Show tiny Miko", isOn: $mikoVisible)
+                Text("Miko walks along a small ledge and peeks over it with glasses during lessons. Reduce Motion keeps Miko still.").font(.caption).foregroundStyle(.secondary)
+                #if os(iOS)
+                if miko.running {
+                    Button("End companion session") { miko.stop() }
+                } else {
+                    Button("Start companion session") { miko.start() }
+                }
+                Text(miko.message).font(.caption).foregroundStyle(.secondary)
+                Text("On supported iPhones, Miko appears in the Dynamic Island; on iPad, on the Lock Screen. Sessions become stale after one hour. iOS controls visibility and may retain the card after force-quitting; end the session here to dismiss it. No other-app activity is monitored.").font(.caption).foregroundStyle(.secondary)
+                #endif
             }
             Section("Your plan"){
                 Stepper("\(dailyMinutes) reading minutes per day",value:$dailyMinutes,in:10...120,step:5)
@@ -61,7 +76,7 @@ struct AcademySettings:View {
             Section("About"){
                 Text("Native SwiftUI · iPhone, iPad and Mac")
                 Text("Bundled lessons and labs work offline; external papers and videos need a connection. Website account sync is not connected to this native build.").font(.caption).foregroundStyle(.secondary)
-                Text("Screen Time monitoring and Dynamic Island characters are deferred. This app does not inspect other-app activity.").font(.caption).foregroundStyle(.secondary)
+                Text("Miko does not inspect other-app activity or Screen Time.").font(.caption).foregroundStyle(.secondary)
                 Link("Public source",destination:URL(string:"https://github.com/Karthikeyavvsr/kint10d-academy")!)
             }
         }.formStyle(.grouped).task{await store.reminderStatus()}

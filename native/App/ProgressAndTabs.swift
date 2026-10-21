@@ -37,13 +37,22 @@ struct LearningProgressCard:View {
 }
 #if os(iOS)
 struct NativeTabs:View {
+    @State private var selected = 0
     var body:some View {
-        TabView {
-            NativeTab(screen:.today).tabItem{Label("Today",systemImage:"sun.horizon")}
-            NativeTab(screen:.curriculum).tabItem{Label("Learn",systemImage:"books.vertical")}
-            NavigationStack{ExploreView().navigationTitle("Explore")}.tabItem{Label("Explore",systemImage:"sparkle.magnifyingglass")}
-            NativeTab(screen:.notebook).tabItem{Label("Notes",systemImage:"note.text")}
-            NativeTab(screen:.settings).tabItem{Label("Settings",systemImage:"gearshape")}
+        TabView(selection: $selected) {
+            NativeTab(screen:.today).tabItem{Label("Today",systemImage:"sun.horizon")}.tag(0)
+            NativeTab(screen:.curriculum).tabItem{Label("Learn",systemImage:"books.vertical")}.tag(1)
+            NavigationStack{ExploreView().navigationTitle("Explore")}.modifier(MikoDock()).tabItem{Label("Explore",systemImage:"sparkle.magnifyingglass")}.tag(2)
+            NativeTab(screen:.notebook).tabItem{Label("Notes",systemImage:"note.text")}.tag(3)
+            NativeTab(screen:.settings).tabItem{Label("Settings",systemImage:"gearshape")}.tag(4)
+        }.onAppear {
+            #if DEBUG
+            if ProcessInfo.processInfo.arguments.contains("--miko-preview-settings") { selected = 4 }
+            #endif
+        }.onOpenURL { url in
+            guard url.scheme == "academy", url.host == "resume" else { return }
+            selected = 0
+            NotificationCenter.default.post(name: .init("academy.resume"), object: nil)
         }
     }
 }
@@ -62,7 +71,17 @@ struct NativeTab:View {
                 }
             }.navigationTitle(screen.rawValue)
                 .navigationDestination(for:Lesson.self){LessonReader(lesson:$0)}
-                .safeAreaInset(edge:.bottom){Text(store.status).font(.caption2).foregroundStyle(.secondary).lineLimit(2).frame(maxWidth:.infinity).padding(6).background(.regularMaterial)}
+        }
+                .safeAreaInset(edge:.bottom){VStack(spacing:0){MikoLedge(reading: !path.isEmpty);Text(store.status).font(.caption2).foregroundStyle(.secondary).lineLimit(2).frame(maxWidth:.infinity).padding(6).background(.regularMaterial)}}
+        .onAppear {
+            #if DEBUG
+            if screen == .today, ProcessInfo.processInfo.arguments.contains("--miko-preview-reading"), path.isEmpty, let first = store.lessons.first { path = [first] }
+            #endif
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .init("academy.resume"))) { _ in
+            guard screen == .today, let bookmark = store.bookmark,
+                  let lesson = store.lessons.first(where: { $0.id == bookmark.lesson }) else { return }
+            path = [lesson]
         }
     }
 }

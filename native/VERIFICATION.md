@@ -19,3 +19,15 @@
 - iCloud shared-folder propagation across devices if that optional path is used.
 
 A successful compile is not a claim that these remaining checks passed. The backend is deployed with authenticated read/write checks; physical multi-device pairing remains to be tested. No physical device was modified.
+
+## Miko candidate — 2026-10-21
+
+- Recovered native source and Git history from the preserved iCloud copy into a local checkout outside Desktop/Documents syncing.
+- Xcode 27.1 iOS simulator Debug build: passed.
+- macOS Release build: passed (before the subsequent shared image thumbnail adjustment; repeat for final candidate).
+- AcademyCore: 12 tests passed, including motion bounds, reading frames and static Reduce Motion behaviour.
+- iPhone Release build and embedded extension: passed. `codesign --verify --deep --strict` passed.
+- Reading layout screenshot: tiny glasses-and-paws companion visible above the ledge, separate from the text surface.
+- Existing iOS 18.6 simulator Live Activity: blank, including a temporary text-only control. Full companion source restored after that experiment. This does not establish a device pass or prove a simulator-only fault.
+- Physical iPhone installation, Island rendering, tap-to-resume and session end remain release gates. This is an installation candidate, not an App Store production release.
+- Personal Team provisioning remains time-limited. Check profile expiry when installing; never distribute this private signed bundle publicly.

@@ -233,7 +233,7 @@ struct LessonReader:View {
             }
             .onDisappear{saveNote()}
             .onChange(of:phase){_,phase in if phase != .active{saveNote()}}
-        }.navigationTitle(lesson.title)
+        }.navigationTitle(lesson.title).preference(key: MikoReadingKey.self, value: true)
     }
     private func saveNote(){
         guard loaded,note != originalNote else{return}
