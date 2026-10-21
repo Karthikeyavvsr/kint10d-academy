@@ -12,6 +12,7 @@
 		03A3DD538E304D44F5F7A0B5 /* resources.json in Resources */ = {isa = PBXBuildFile; fileRef = BC5271C6263A643A55530668 /* resources.json */; };
 		0A040AA15E8DDAFA46FBAB36 /* resources.json in Resources */ = {isa = PBXBuildFile; fileRef = BC5271C6263A643A55530668 /* resources.json */; };
 		2C347AA8519885571AA11393 /* curriculum.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D16D2C5AD27D5ADAF19DA46 /* curriculum.json */; };
+		32C68D27F46B1D7741605EB0 /* ResourceReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA902BB54EA0087F9A8640 /* ResourceReader.swift */; };
 		33B135563E7FD64E1E4F9EDE /* AcademyViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775664555590CE66300CC67B /* AcademyViews.swift */; };
 		37D2507562AA658A204006C5 /* MikoSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219DE47D814EAC8D76AEA443 /* MikoSprite.swift */; };
 		4D82CBF9E23805EFC7D175FA /* MikoCompanion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D44302372ABBCC33DB9D063 /* MikoCompanion.swift */; };
@@ -33,6 +34,7 @@
 		BB052B0D9AF00ABF5D55C65C /* MikoSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219DE47D814EAC8D76AEA443 /* MikoSprite.swift */; };
 		BD1866069594FE4C83DFC717 /* KINT10dAcademyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677749839876AC11FA76DF5 /* KINT10dAcademyApp.swift */; };
 		C0EEE133BD310E1FD29D66D9 /* MikoActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C2B4DEEE1547501DAF4EF1 /* MikoActivityAttributes.swift */; };
+		CC24F04BD50C1EE34643134C /* ResourceReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA902BB54EA0087F9A8640 /* ResourceReader.swift */; };
 		DBDED9E2049346C8CADEE667 /* MikoCompanion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D44302372ABBCC33DB9D063 /* MikoCompanion.swift */; };
 		E1310FDE5B30A453AEA519DB /* MikoIdleAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 890B6530B240A7B55776FDBA /* MikoIdleAtlas.png */; };
 		E54B8F42C58B559AF43DDE3F /* AcademyCore in Frameworks */ = {isa = PBXBuildFile; productRef = 43E47E733F13E198E8CA8B5F /* AcademyCore */; };
@@ -85,6 +87,7 @@
 		77F1451825ED5D4762A27ECF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E28C71D3CA425F64F8B2C43 /* MikoAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MikoAtlas.png; sourceTree = "<group>"; };
 		890B6530B240A7B55776FDBA /* MikoIdleAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MikoIdleAtlas.png; sourceTree = "<group>"; };
+		9CCA902BB54EA0087F9A8640 /* ResourceReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceReader.swift; sourceTree = "<group>"; };
 		9D44302372ABBCC33DB9D063 /* MikoCompanion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MikoCompanion.swift; sourceTree = "<group>"; };
 		A200BE3DF26E16FA8BB8FBBD /* MikoWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = MikoWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFEDF09AB743E0757BC24862 /* AcademyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyStore.swift; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 				9D44302372ABBCC33DB9D063 /* MikoCompanion.swift */,
 				019308679248A34D93A8EF71 /* NativeLabs.swift */,
 				695DC726FBEB755BE350688C /* ProgressAndTabs.swift */,
+				9CCA902BB54EA0087F9A8640 /* ResourceReader.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -350,6 +354,7 @@
 				BB052B0D9AF00ABF5D55C65C /* MikoSprite.swift in Sources */,
 				B7E4D8D54756439F58011C8F /* NativeLabs.swift in Sources */,
 				00B33372D0C42576DA00CA4C /* ProgressAndTabs.swift in Sources */,
+				CC24F04BD50C1EE34643134C /* ResourceReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +372,7 @@
 				37D2507562AA658A204006C5 /* MikoSprite.swift in Sources */,
 				73625A3909A82CB12030AEE3 /* NativeLabs.swift in Sources */,
 				83BD1C56ED42217518412E8C /* ProgressAndTabs.swift in Sources */,
+				32C68D27F46B1D7741605EB0 /* ResourceReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -43,3 +43,11 @@ A successful compile is not a claim that these remaining checks passed. The back
 - iOS simulator build passed; reading screenshot inspected for a single navigation capsule, glasses pose at its upper edge and a backdrop separating text from the companion.
 - macOS Release build passed after the shared asset and Settings changes.
 - Revised signed Release installed over the existing app on the physical iPhone 17 Pro and launched successfully on 21 October. Deep signature verification passed. Visual acceptance of the revised dock and behaviours remains pending; earlier Island acceptance applies to the previous candidate.
+
+## Reading continuity candidate — 21 October
+
+- Added bookmark save confirmation, completed-bookmark selection fix, next-chapter controls, explicit Settings input styling, and small-step/recall prompts.
+- Added an in-app resource reader with per-resource page and supported YouTube checkpoints. Read `READING-EXPERIENCE.md` for tracking limits and evidence sources.
+- 16 core tests passed. Five mock-player checks passed; these are not live third-party playback tests.
+- iPhone simulator and Mac Release builds passed; bookmark control layout inspected in the simulator.
+- Phone signing is awaiting local Keychain approval. Final signed build, installation and physical acceptance remain pending. Real course playback/playlist resume and cross-device resource resume have not yet been verified.

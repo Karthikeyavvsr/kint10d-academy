@@ -57,6 +57,10 @@ struct ProgressDocument: FileDocument {
     }
     func value(_ key:String) -> String { records[key]?.value ?? "" }
     func decoded<T:Decodable>(_ type:T.Type,key:String) -> T? { try? JSONDecoder().decode(type,from:Data(value(key).utf8)) }
+    var continueLesson: Lesson? {
+        let id=LearningNavigation.continueID(orderedIDs:lessons.map(\.id),completed:Set(lessons.filter{value("lesson:"+$0.id)=="read"}.map(\.id)),bookmark:bookmark?.lesson)
+        return lessons.first{$0.id==id}
+    }
     var readCount: Int { lessons.filter{value("lesson:"+$0.id)=="read"}.count }
     var dueLessons: [Lesson] { lessons.filter { (decoded(Recall.self,key:"review:"+$0.id)?.due ?? .infinity) <= Date().timeIntervalSince1970*1000 } }
     var bookmark: Bookmark? { decoded(Bookmark.self,key:"bookmark:last") }

@@ -120,8 +120,7 @@ struct NativeTab:View {
             #endif
         }
         .onReceive(NotificationCenter.default.publisher(for: .init("academy.resume"))) { _ in
-            guard screen == .today, let bookmark = store.bookmark,
-                  let lesson = store.lessons.first(where: { $0.id == bookmark.lesson }) else { return }
+            guard screen == .today, let lesson = store.continueLesson else { return }
             path = [lesson]
         }
     }

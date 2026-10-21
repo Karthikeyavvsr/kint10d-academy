@@ -41,7 +41,7 @@ struct AcademySettings:View {
             }
             Section("Study reminders on this device"){
                 DatePicker("Time",selection:$reminder,displayedComponents:.hourAndMinute)
-                Button("Enable daily reminder"){Task{await store.scheduleReminder(at:reminder)}}
+                Button("Enable daily reminder"){Task{await store.scheduleReminder(at:reminder)}}.buttonStyle(.borderedProminent)
                 Button("Turn off daily reminder"){Task{await store.disableReminder()}}
                 Text(store.notificationStatus).font(.caption).foregroundStyle(.secondary)
                 Text("Nothing is scheduled until you enable it and allow notifications. Focus and system settings can silence alerts. Configure each device separately.").font(.caption).foregroundStyle(.secondary)
@@ -56,12 +56,24 @@ struct AcademySettings:View {
                     Button("Sync now"){Task{await store.syncCloud()}}
                     Button("Disconnect this device"){store.disconnectCloud()}
                 }else{
-                    TextField("HTTPS sync server",text:$cloudURL).textContentType(.URL)
-                    SecureField("Private pairing key",text:$pairingKey)
+                    VStack(alignment:.leading,spacing:8) {
+                        Label("Sync server address",systemImage:"network").font(.headline)
+                        TextField("https://your-server",text:$cloudURL).textContentType(.URL)
+                            .textFieldStyle(.plain).padding(12).background(Color.academyPaper,in:RoundedRectangle(cornerRadius:10))
+                            .overlay(RoundedRectangle(cornerRadius:10).stroke(Color.academyAccent.opacity(0.6)))
+                        Text("Enter the server address used on your other device.").font(.caption).foregroundStyle(.secondary)
+                    }.padding(.vertical,6)
+                    VStack(alignment:.leading,spacing:8) {
+                        Label("Private pairing key",systemImage:"key").font(.headline)
+                        SecureField("Paste your private key",text:$pairingKey)
+                            .textFieldStyle(.plain).padding(12).background(Color.academyPaper,in:RoundedRectangle(cornerRadius:10))
+                            .overlay(RoundedRectangle(cornerRadius:10).stroke(Color.academyAccent.opacity(0.6)))
+                        Text("Stored securely in this device’s Keychain.").font(.caption).foregroundStyle(.secondary)
+                    }.padding(.vertical,6)
                     Button(connecting ? "Connecting…":"Connect this device"){
                         connecting=true
                         Task{await store.connectCloud(endpoint:cloudURL,token:pairingKey);connecting=false;if store.cloudConnected{pairingKey=""}}
-                    }.disabled(connecting)
+                    }.buttonStyle(.borderedProminent).disabled(connecting || cloudURL.trimmingCharacters(in:.whitespacesAndNewlines).isEmpty || pairingKey.isEmpty)
                 }
                 Text(store.cloudStatus).font(.caption).foregroundStyle(.secondary)
                 Text("Use the same private server and pairing key on your devices. The key stays in this device’s Keychain. Newer record timestamps win; keep device clocks automatic. Sync runs on edits and when you return to the app.").font(.caption).foregroundStyle(.secondary)
