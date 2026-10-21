@@ -29,5 +29,17 @@ A successful compile is not a claim that these remaining checks passed. The back
 - iPhone Release build and embedded extension: passed. `codesign --verify --deep --strict` passed.
 - Reading layout screenshot: tiny glasses-and-paws companion visible above the ledge, separate from the text surface.
 - Existing iOS 18.6 simulator Live Activity: blank, including a temporary text-only control. Full companion source restored after that experiment. This does not establish a device pass or prove a simulator-only fault.
-- Physical iPhone installation, Island rendering, tap-to-resume and session end remain release gates. This is an installation candidate, not an App Store production release.
+- Physical iPhone 17 Pro (iOS 27.0.1): signed Release update installed over the existing app by USB and launched successfully on 21 October. No uninstall was performed.
+- Physical iPhone acceptance reported by the owner on 21 October: Miko appears in the Dynamic Island and tapping it opens Academy. These two checks passed; exact reading-location restoration was not asserted.
+- Session end, elapsed break timer and Lock Screen presentation still require physical acceptance. This remains a development-signed candidate, not an App Store production release.
 - Personal Team provisioning remains time-limited. Check profile expiry when installing; never distribute this private signed bundle publicly.
+
+## Floating dock and expressive poses — 21 October
+
+- Removed detached companion/status strips in favor of one shared floating capsule; connection status moved to Settings.
+- Added seated looking, blink and paw-grooming sprite poses, gentle idle movement and a tap-to-greet response.
+- Updated Island expressions follow reading/break state using short content transitions; continuous background animation is not implemented.
+- 13 AcademyCore tests passed, including idle pose selection, travel bounds and Reduce Motion.
+- iOS simulator build passed; reading screenshot inspected for a single navigation capsule, glasses pose at its upper edge and a backdrop separating text from the companion.
+- macOS Release build passed after the shared asset and Settings changes.
+- Revised physical installation and visual acceptance pending; earlier hardware acceptance applies to the previous candidate only.

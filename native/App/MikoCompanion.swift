@@ -25,23 +25,31 @@ struct MikoLedge: View {
     @Environment(\.scenePhase) private var phase
     @State private var epoch = Date()
     @State private var onScreen = false
+    @State private var greetingUntil = Date.distantPast
     var body: some View {
         if visible {
             TimelineView(.animation(minimumInterval: reading ? 1.0 / 12 : 1.0 / 30, paused: reduceMotion || phase != .active || !onScreen)) { context in
                 GeometryReader { geometry in
                     let elapsed = max(0, context.date.timeIntervalSince(epoch))
                     let motion = MikoMotion.sample(elapsed: elapsed, reading: reading, reduceMotion: reduceMotion)
-                    let width = max(0, min(geometry.size.width - 68, 230))
+                    let width = max(0, geometry.size.width - 68)
                     ZStack(alignment: .bottomLeading) {
-                        MikoSprite(frame: motion.frame)
+                        MikoSprite(frame: context.date < greetingUntil ? 19 : motion.frame)
                             .frame(width: reading ? 49 : 56, height: reading ? 44 : 48)
                             .scaleEffect(x: motion.facesLeft ? -1 : 1, y: 1)
-                            .offset(x: 12 + motion.progress * width, y: reading ? 0 : 3)
-                        Rectangle().fill(.regularMaterial).frame(height: 5)
-                        Rectangle().fill(.gray.opacity(0.2)).frame(height: 1).offset(y: -4)
+                            .rotationEffect(.degrees(context.date < greetingUntil && !reduceMotion ? sin(elapsed * 4) * 7 : motion.tilt), anchor: .bottom)
+                            .scaleEffect(x: 1, y: motion.breath, anchor: .bottom)
+                            .contentShape(Rectangle())
+                            .onTapGesture { greetingUntil = Date().addingTimeInterval(2.5) }
+                            .accessibilityHidden(false)
+                            .accessibilityLabel("Say hello to Miko")
+                            .accessibilityAddTraits(.isButton)
+                            .accessibilityAction { greetingUntil = Date().addingTimeInterval(2.5) }
+                            .offset(x: 12 + motion.progress * width, y: reading ? 5 : 3)
+
                     }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading).clipped()
                 }
-            }.frame(height: 43).background(Color.academyPaper).allowsHitTesting(false).accessibilityHidden(true)
+            }.frame(height: 43)
                 .onAppear { onScreen = true; epoch = Date() }
                 .onDisappear { onScreen = false }
         }

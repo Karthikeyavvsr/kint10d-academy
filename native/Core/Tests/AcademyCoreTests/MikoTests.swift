@@ -13,11 +13,18 @@ final class MikoTests: XCTestCase {
         for time in stride(from: 0.0, through: 100.0, by: 0.03) {
             let state = MikoMotion.sample(elapsed: time, reading: false, reduceMotion: false)
             XCTAssertTrue((0...1).contains(state.progress))
-            XCTAssertTrue((0..<8).contains(state.frame))
+            XCTAssertTrue((0..<8).contains(state.frame) || (12..<20).contains(state.frame))
+            XCTAssertTrue((-5...5).contains(state.tilt))
+            XCTAssertTrue((0.97...1.03).contains(state.breath))
         }
         XCTAssertEqual(MikoMotion.sample(elapsed: 10, reading: false, reduceMotion: false).progress, 1)
         XCTAssertEqual(MikoMotion.sample(elapsed: 24, reading: false, reduceMotion: false).progress, 0)
         XCTAssertTrue(MikoMotion.sample(elapsed: 20, reading: false, reduceMotion: false).facesLeft)
+    }
+    func testIdleIncludesLookingAndGrooming() {
+        XCTAssertEqual(MikoMotion.sample(elapsed: 11, reading: false, reduceMotion: false).frame, 13)
+        XCTAssertEqual(MikoMotion.sample(elapsed: 25, reading: false, reduceMotion: false).frame, 17)
+        XCTAssertEqual(MikoMotion.sample(elapsed: 25, reading: false, reduceMotion: false).progress, 0)
     }
     func testReaderNeverWalksAndOnlyUsesGlassesFrames() {
         for time in stride(from: 0.0, through: 14, by: 0.05) {

@@ -38,14 +38,19 @@ struct LearningProgressCard:View {
 #if os(iOS)
 struct NativeTabs:View {
     @State private var selected = 0
+    @State private var reading = false
     var body:some View {
         TabView(selection: $selected) {
             NativeTab(screen:.today).tabItem{Label("Today",systemImage:"sun.horizon")}.tag(0)
             NativeTab(screen:.curriculum).tabItem{Label("Learn",systemImage:"books.vertical")}.tag(1)
-            NavigationStack{ExploreView().navigationTitle("Explore")}.modifier(MikoDock()).tabItem{Label("Explore",systemImage:"sparkle.magnifyingglass")}.tag(2)
+            NavigationStack{ExploreView().navigationTitle("Explore")}.toolbar(.hidden, for: .tabBar).tabItem{Label("Explore",systemImage:"sparkle.magnifyingglass")}.tag(2)
             NativeTab(screen:.notebook).tabItem{Label("Notes",systemImage:"note.text")}.tag(3)
             NativeTab(screen:.settings).tabItem{Label("Settings",systemImage:"gearshape")}.tag(4)
-        }.onAppear {
+        }
+        .toolbar(.hidden, for: .tabBar)
+        .safeAreaInset(edge: .bottom, spacing: 0) { AcademyFloatingDock(selected: $selected, reading: reading) }
+        .onPreferenceChange(MikoReadingKey.self) { reading = $0 }
+        .onAppear {
             #if DEBUG
             if ProcessInfo.processInfo.arguments.contains("--miko-preview-settings") { selected = 4 }
             #endif
@@ -54,6 +59,42 @@ struct NativeTabs:View {
             selected = 0
             NotificationCenter.default.post(name: .init("academy.resume"), object: nil)
         }
+    }
+}
+/// One shared floating dock: the companion's feet meet the capsule edge.
+struct AcademyFloatingDock: View {
+    @Binding var selected: Int
+    var reading: Bool
+    @EnvironmentObject var store: AcademyStore
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    private let titles = ["Today", "Learn", "Explore", "Notes", "Settings"]
+    private let icons = ["sun.horizon", "books.vertical", "sparkle.magnifyingglass", "note.text", "gearshape"]
+    var body: some View {
+        VStack(spacing: 0) {
+            MikoLedge(reading: reading).padding(.horizontal, 20)
+            HStack(spacing: 2) {
+                ForEach(0..<5) { index in
+                    Button { selected = index } label: {
+                        VStack(spacing: 4) {
+                            Image(systemName: icons[index]).font(.system(size: 20, weight: .medium))
+                            Text(titles[index]).font(.caption2).lineLimit(1).minimumScaleFactor(0.8)
+                        }.frame(maxWidth: .infinity).frame(minHeight: 52)
+                            .foregroundStyle(selected == index ? Color.academyAccent : Color.primary)
+                            .background { if selected == index { Capsule().fill(Color.primary.opacity(0.08)) } }
+                            .contentShape(Capsule())
+                    }.buttonStyle(.plain)
+                        .accessibilityAddTraits(selected == index ? .isSelected : [])
+                }
+            }.padding(6)
+                .background { if reduceTransparency { Capsule().fill(Color.academyPaper) } else { Capsule().fill(.regularMaterial) } }
+                .overlay(Capsule().strokeBorder(.primary.opacity(0.12), lineWidth: 0.5))
+                .shadow(color: .black.opacity(0.12), radius: 12, y: 4)
+        }.frame(maxWidth: 560).padding(.horizontal, 18).padding(.bottom, 4)
+            .frame(maxWidth: .infinity)
+            .background {
+                LinearGradient(stops: [.init(color: Color.academyPaper.opacity(0), location: 0), .init(color: Color.academyPaper, location: 0.22), .init(color: Color.academyPaper, location: 1)], startPoint: .top, endPoint: .bottom)
+                    .padding(.top, -14).ignoresSafeArea(edges: .bottom)
+            }
     }
 }
 struct NativeTab:View {
@@ -72,7 +113,7 @@ struct NativeTab:View {
             }.navigationTitle(screen.rawValue)
                 .navigationDestination(for:Lesson.self){LessonReader(lesson:$0)}
         }
-                .safeAreaInset(edge:.bottom){VStack(spacing:0){MikoLedge(reading: !path.isEmpty);Text(store.status).font(.caption2).foregroundStyle(.secondary).lineLimit(2).frame(maxWidth:.infinity).padding(6).background(.regularMaterial)}}
+        .toolbar(.hidden, for: .tabBar)
         .onAppear {
             #if DEBUG
             if screen == .today, ProcessInfo.processInfo.arguments.contains("--miko-preview-reading"), path.isEmpty, let first = store.lessons.first { path = [first] }

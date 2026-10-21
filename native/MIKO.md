@@ -35,3 +35,10 @@ See `qa/miko-*.log` for local build results (ignored by Git). Debug-only launch 
 - https://developer.apple.com/documentation/activitykit/displaying-live-data-with-live-activities
 - https://developer.apple.com/documentation/widgetkit/dynamicisland
 - https://developer.apple.com/videos/play/wwdc2023/10194/
+
+
+## Companion refinement — 21 October
+
+The shared floating capsule replaces the detached ledge/status strip. Sync status is available in Settings. Miko pauses to sit, look around, blink and groom a paw; tapping gives a short greeting. Reading keeps the glasses pose. Reduce Motion disables continuous motion. The Island uses state-driven reading/break expressions and short transitions, not a perpetual animation loop.
+
+`Resources/MikoIdleAtlas.png` was generated with the built-in image-generation tool using the original atlas as the identity reference. Prompt: create a transparent 4-by-2 equal-cell atlas of the same grey-white blue-eyed husky, consistently scaled and seated: forward, look left, blink, look right, raise paw, lick paw, tongue tucked while grooming, paw lowered smiling; no text, lines, background or props. Generated poses are illustrative sprite animation, not a physically simulated or rigged 3D animal.

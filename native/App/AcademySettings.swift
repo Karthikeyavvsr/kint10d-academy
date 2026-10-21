@@ -21,9 +21,10 @@ struct AcademySettings:View {
                 Text("Text follows system Dynamic Type. Reader A− / A+ adds a personal adjustment. VoiceOver, Bold Text and Reduce Motion use native controls.").font(.caption).foregroundStyle(.secondary)
                 Text("Opaque reading surfaces keep glass away from long paragraphs. System navigation uses the material appropriate to your OS.").font(.caption).foregroundStyle(.secondary)
             }
+            Section("Connection") { Text(store.status).font(.caption).foregroundStyle(.secondary) }
             Section("Miko, your companion") {
                 Toggle("Show tiny Miko", isOn: $mikoVisible)
-                Text("Miko walks along a small ledge and peeks over it with glasses during lessons. Reduce Motion keeps Miko still.").font(.caption).foregroundStyle(.secondary)
+                Text("Miko explores the floating navigation bar, pauses to look around, and wears glasses during lessons. Tap Miko to say hello. Reduce Motion keeps Miko still.").font(.caption).foregroundStyle(.secondary)
                 #if os(iOS)
                 if miko.running {
                     Button("End companion session") { miko.stop() }

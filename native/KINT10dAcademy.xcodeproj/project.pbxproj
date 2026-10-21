@@ -17,6 +17,7 @@
 		4D82CBF9E23805EFC7D175FA /* MikoCompanion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D44302372ABBCC33DB9D063 /* MikoCompanion.swift */; };
 		53BD30573704EE361E6AF8BB /* AcademySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A69195F95C3ABF8DA7BDD6 /* AcademySettings.swift */; };
 		5C961114BF9A6A5037F5C423 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE4D352EE2AF25CC6D19140 /* CloudSync.swift */; };
+		5D44B1177B9DC8C030CCE299 /* MikoIdleAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 890B6530B240A7B55776FDBA /* MikoIdleAtlas.png */; };
 		5E232C09C00471E03B7AF9B0 /* MikoAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E28C71D3CA425F64F8B2C43 /* MikoAtlas.png */; };
 		66648FFEA23E0E5CE63DD09E /* MikoActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C2B4DEEE1547501DAF4EF1 /* MikoActivityAttributes.swift */; };
 		696DB27F4A8FB0781F2B7CDE /* curriculum.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D16D2C5AD27D5ADAF19DA46 /* curriculum.json */; };
@@ -33,6 +34,7 @@
 		BD1866069594FE4C83DFC717 /* KINT10dAcademyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677749839876AC11FA76DF5 /* KINT10dAcademyApp.swift */; };
 		C0EEE133BD310E1FD29D66D9 /* MikoActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C2B4DEEE1547501DAF4EF1 /* MikoActivityAttributes.swift */; };
 		DBDED9E2049346C8CADEE667 /* MikoCompanion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D44302372ABBCC33DB9D063 /* MikoCompanion.swift */; };
+		E1310FDE5B30A453AEA519DB /* MikoIdleAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 890B6530B240A7B55776FDBA /* MikoIdleAtlas.png */; };
 		E54B8F42C58B559AF43DDE3F /* AcademyCore in Frameworks */ = {isa = PBXBuildFile; productRef = 43E47E733F13E198E8CA8B5F /* AcademyCore */; };
 		E62D2C918A57F08E571AC62E /* AcademyViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775664555590CE66300CC67B /* AcademyViews.swift */; };
 		E63C59B5E19EDD15019547E9 /* AcademyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEDF09AB743E0757BC24862 /* AcademyStore.swift */; };
@@ -82,6 +84,7 @@
 		775664555590CE66300CC67B /* AcademyViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyViews.swift; sourceTree = "<group>"; };
 		77F1451825ED5D4762A27ECF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E28C71D3CA425F64F8B2C43 /* MikoAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MikoAtlas.png; sourceTree = "<group>"; };
+		890B6530B240A7B55776FDBA /* MikoIdleAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MikoIdleAtlas.png; sourceTree = "<group>"; };
 		9D44302372ABBCC33DB9D063 /* MikoCompanion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MikoCompanion.swift; sourceTree = "<group>"; };
 		A200BE3DF26E16FA8BB8FBBD /* MikoWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = MikoWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFEDF09AB743E0757BC24862 /* AcademyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyStore.swift; sourceTree = "<group>"; };
@@ -181,6 +184,7 @@
 				77F1451825ED5D4762A27ECF /* Assets.xcassets */,
 				4D16D2C5AD27D5ADAF19DA46 /* curriculum.json */,
 				7E28C71D3CA425F64F8B2C43 /* MikoAtlas.png */,
+				890B6530B240A7B55776FDBA /* MikoIdleAtlas.png */,
 				D44E9E07ADA7285A3092F079 /* papers.json */,
 				BC5271C6263A643A55530668 /* resources.json */,
 			);
@@ -301,6 +305,7 @@
 			files = (
 				00E3E259D7C2D67F5D7AD158 /* Assets.xcassets in Resources */,
 				9864EAAD6A3DBBBDE4FF31A9 /* MikoAtlas.png in Resources */,
+				E1310FDE5B30A453AEA519DB /* MikoIdleAtlas.png in Resources */,
 				2C347AA8519885571AA11393 /* curriculum.json in Resources */,
 				EC1BB9DF0DF246FDC4DCABAB /* papers.json in Resources */,
 				03A3DD538E304D44F5F7A0B5 /* resources.json in Resources */,
@@ -321,6 +326,7 @@
 			files = (
 				EF40E030B4E3C4FBC23F2B1C /* Assets.xcassets in Resources */,
 				ED1784CDBA811CDDB12094BE /* MikoAtlas.png in Resources */,
+				5D44B1177B9DC8C030CCE299 /* MikoIdleAtlas.png in Resources */,
 				696DB27F4A8FB0781F2B7CDE /* curriculum.json in Resources */,
 				F93520E849AFB0C5780A1EDC /* papers.json in Resources */,
 				0A040AA15E8DDAFA46FBAB36 /* resources.json in Resources */,

@@ -7,15 +7,16 @@ import AppKit
 
 /// Fixed atlas: 4 columns × 3 rows. Frames are cropped once, never on each animation tick.
 enum MikoAtlas {
-    static let frames: [Image] = {
-        guard let url = Bundle.main.url(forResource: "MikoAtlas", withExtension: "png") else { return [] }
+    static let frames: [Image] = load("MikoAtlas", rows: 3) + load("MikoIdleAtlas", rows: 2)
+    private static func load(_ name: String, rows: Int) -> [Image] {
+        guard let url = Bundle.main.url(forResource: name, withExtension: "png") else { return [] }
         #if os(iOS)
         guard let source = UIImage(contentsOfFile: url.path)?.cgImage else { return [] }
         #else
         guard let source = NSImage(contentsOf: url)?.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return [] }
         #endif
-        return (0..<12).compactMap { index in
-            let width = source.width / 4, height = source.height / 3
+        return (0..<(4 * rows)).compactMap { index in
+            let width = source.width / 4, height = source.height / rows
             guard let crop = source.cropping(to: CGRect(x: (index % 4) * width, y: (index / 4) * height, width: width, height: height)) else { return nil }
             // ActivityKit validates intrinsic image size, not just the SwiftUI frame.
             // 72px at 3× is a 24pt portrait even in the minimal Island layout.
@@ -27,7 +28,7 @@ enum MikoAtlas {
             guard let thumbnail = bitmap.makeImage() else { return nil }
             return Image(decorative: thumbnail, scale: 3)
         }
-    }()
+    }
 }
 
 struct MikoSprite: View {
