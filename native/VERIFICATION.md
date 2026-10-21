@@ -24,7 +24,7 @@ A successful compile is not a claim that these remaining checks passed. The back
 
 - Recovered native source and Git history from the preserved iCloud copy into a local checkout outside Desktop/Documents syncing.
 - Xcode 27.1 iOS simulator Debug build: passed.
-- macOS Release build: passed (before the subsequent shared image thumbnail adjustment; repeat for final candidate).
+- macOS Release build: passed again after the shared image thumbnail adjustment.
 - AcademyCore: 12 tests passed, including motion bounds, reading frames and static Reduce Motion behaviour.
 - iPhone Release build and embedded extension: passed. `codesign --verify --deep --strict` passed.
 - Reading layout screenshot: tiny glasses-and-paws companion visible above the ledge, separate from the text surface.
