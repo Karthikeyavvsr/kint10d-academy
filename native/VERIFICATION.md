@@ -42,4 +42,4 @@ A successful compile is not a claim that these remaining checks passed. The back
 - 13 AcademyCore tests passed, including idle pose selection, travel bounds and Reduce Motion.
 - iOS simulator build passed; reading screenshot inspected for a single navigation capsule, glasses pose at its upper edge and a backdrop separating text from the companion.
 - macOS Release build passed after the shared asset and Settings changes.
-- Revised physical installation and visual acceptance pending; earlier hardware acceptance applies to the previous candidate only.
+- Revised signed Release installed over the existing app on the physical iPhone 17 Pro and launched successfully on 21 October. Deep signature verification passed. Visual acceptance of the revised dock and behaviours remains pending; earlier Island acceptance applies to the previous candidate.
