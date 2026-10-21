@@ -50,4 +50,4 @@ A successful compile is not a claim that these remaining checks passed. The back
 - Added an in-app resource reader with per-resource page and supported YouTube checkpoints. Read `READING-EXPERIENCE.md` for tracking limits and evidence sources.
 - 16 core tests passed. Five mock-player checks passed; these are not live third-party playback tests.
 - iPhone simulator and Mac Release builds passed; bookmark control layout inspected in the simulator.
-- Phone signing is awaiting local Keychain approval. Final signed build, installation and physical acceptance remain pending. Real course playback/playlist resume and cross-device resource resume have not yet been verified.
+- Final iPhone Release build and deep signature verification passed. Updated app installed over the existing app on the physical iPhone 17 Pro on 21 October. Real course playback/playlist resume, UI acceptance and cross-device resource resume still require hands-on verification.
