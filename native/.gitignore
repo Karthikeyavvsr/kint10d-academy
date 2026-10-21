@@ -5,3 +5,5 @@ DerivedData/
 *.xcuserstate
 qa/*.png
 qa/*.log
+
+qa/

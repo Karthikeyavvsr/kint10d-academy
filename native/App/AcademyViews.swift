@@ -82,7 +82,7 @@ struct AcademyCard<Content:View>:View {
 struct TodayView:View {
     @EnvironmentObject var store:AcademyStore
     let open:(Lesson)->Void
-    var next:Lesson? {store.lessons.first{$0.id==store.bookmark?.lesson} ?? store.lessons.first{store.value("lesson:"+$0.id) != "read"} ?? store.lessons.first}
+    var next:Lesson? {store.continueLesson}
     var body:some View {
         ScrollView {
             VStack(alignment:.leading,spacing:24) {
@@ -94,6 +94,25 @@ struct TodayView:View {
                         Text("Read the mechanism. Work the example. Explain it without notes.").font(.subheadline).foregroundStyle(.white.opacity(0.8))
                         Button{open(next)}label:{Label("Continue learning",systemImage:"arrow.right")}.buttonStyle(.borderedProminent).tint(Color(red:0.80,green:0.90,blue:0.65)).foregroundStyle(Color.academyGreen)
                     }.padding(28).frame(maxWidth:.infinity,alignment:.leading).background(Color.academyGreen,in:RoundedRectangle(cornerRadius:18)).foregroundStyle(.white)
+                }
+                if next == nil && !store.lessons.isEmpty {
+                    AcademyCard {
+                        Label("First reading pass complete",systemImage:"checkmark.seal").font(.headline)
+                        Text("Keep building and use the reviews below to check what you can recall.")
+                    }
+                }
+                if let resume = store.resourceResume {
+                    AcademyCard {
+                        Text("Continue your resource").font(.headline)
+                        Text(resume.title)
+                        Text(resume.positionDescription).font(.caption).foregroundStyle(.secondary)
+                        ResourceLink(title: "Resume resource", address: resume.source, resourceTitle: resume.title)
+                    }
+                }
+                AcademyCard {
+                    Text("One small step today").font(.headline)
+                    Text("Choose one section. After reading, look away and explain one idea in your own words. Stop there if that is enough for today.")
+                    Text("Returning matters more than keeping a streak.").font(.caption).foregroundStyle(.secondary)
                 }
                 LearningProgressCard()
                 LazyVGrid(columns:[GridItem(.adaptive(minimum:130))],alignment:.leading,spacing:16){
@@ -159,6 +178,10 @@ struct LessonReader:View {
     @Environment(\.scenePhase) private var phase
     @State private var choice:Int?
     @State private var loaded=false
+    @State private var savedSection: Int?
+    @State private var showNext=false
+    @State private var recallMessage=""
+    private var nextLesson: Lesson? { guard let index=store.lessons.firstIndex(where:{$0.id==lesson.id}), index+1<store.lessons.count else{return nil};return store.lessons[index+1] }
     @ScaledMetric(relativeTo:.body) private var baseSize=19.0
     @AppStorage("academy.readerScale") private var readerScale=1.0
     var body:some View {
@@ -180,7 +203,14 @@ struct LessonReader:View {
                     ForEach(Array(lesson.sections.enumerated()),id:\.offset){i,section in
                         VStack(alignment:.leading,spacing:16){
                             Text(section.title).font(.system(.title2,design:.serif))
-                            Button{store.set("bookmark:last",object:Bookmark(lesson:lesson.id,section:i))}label:{Label("Save my place",systemImage:"bookmark")}.font(.caption).buttonStyle(.borderless)
+                            Button {
+                                let before=store.records["bookmark:last"]?.revision
+                                store.set("bookmark:last",object:Bookmark(lesson:lesson.id,section:i))
+                                if store.records["bookmark:last"]?.revision != before { savedSection=i }
+                            } label: {
+                                Label(store.bookmark?.lesson==lesson.id && store.bookmark?.section==i ? "Place saved · resume here" : "Save my place", systemImage:store.bookmark?.lesson==lesson.id && store.bookmark?.section==i ? "bookmark.fill" : "bookmark")
+                            }.font(.caption).buttonStyle(.bordered)
+                            if savedSection==i { Text("Saved on this device. Continue learning returns to this section until you mark the chapter read.").font(.caption).foregroundStyle(.secondary) }
                             Text(section.body).font(.system(size:baseSize*readerScale,design:.serif)).lineSpacing(6).textSelection(.enabled).fixedSize(horizontal:false,vertical:true)
                         }.id(i)
                     }
@@ -210,18 +240,35 @@ struct LessonReader:View {
                     AcademyCard {
                         Text("Could you explain it without notes?").font(.headline)
                         Text("Close the answers. Speak for two minutes and solve a fresh example.").foregroundStyle(.secondary)
-                        Button("Not yet · review tomorrow"){store.recall(lesson,success:false)}.buttonStyle(.bordered)
-                        Button("Yes · schedule spaced review"){store.recall(lesson,success:true)}.buttonStyle(.borderedProminent)
+                        Button("Not yet · review tomorrow"){store.recall(lesson,success:false);recallMessage="Review scheduled for tomorrow."}.buttonStyle(.bordered)
+                        Button("Yes · schedule spaced review"){store.recall(lesson,success:true);recallMessage="Your next spaced review is scheduled."}.buttonStyle(.borderedProminent)
                     }
+                    if !recallMessage.isEmpty { Text(recallMessage).font(.caption).foregroundStyle(.secondary) }
                     AcademyCard {
                         Text("Your working notes").font(.title3)
                         TextEditor(text:$note).frame(minHeight:180).font(.body).overlay(RoundedRectangle(cornerRadius:4).stroke(.gray.opacity(0.2))).accessibilityLabel("Lesson notes")
                         Button("Save notes"){saveNote()}.buttonStyle(.borderedProminent)
-                        Text("Notes also save on leaving this lesson. Check the status bar for errors.").font(.caption).foregroundStyle(.secondary)
+                        Text("Notes also save on leaving this lesson. Any save error appears in an alert.").font(.caption).foregroundStyle(.secondary)
                     }
                     AcademyCard {
                         Text("Go deeper at the source").font(.title3)
-                        ForEach(lesson.sources,id:\.url){s in if let url=URL(string:s.url){Link(s.title+" ↗",destination:url)}}
+                        ForEach(lesson.sources,id:\.url){s in ResourceLink(title:s.title,address:s.url)}
+                    }
+                    AcademyCard {
+                        Text("Finish this chapter").font(.title2)
+                        Text("Take a moment to recall one idea and one way you could use it. Linked courses can take longer; chapter progress and resource progress are separate.").foregroundStyle(.secondary)
+                        if let nextLesson {
+                            Text("Up next: "+nextLesson.title).font(.headline)
+                            Button("Mark chapter read & continue") {
+                                saveNote()
+                                store.set("lesson:"+lesson.id,"read")
+                                if store.value("lesson:"+lesson.id)=="read" { showNext=true }
+                            }.buttonStyle(.borderedProminent)
+                            NavigationLink("Next chapter without marking read") { LessonReader(lesson:nextLesson) }
+                        } else {
+                            Button("Mark final chapter read") { store.set("lesson:"+lesson.id,"read") }.buttonStyle(.borderedProminent)
+                            if store.value("lesson:"+lesson.id)=="read" { Text("Reading pass complete. Your projects and spaced reviews are the next step.") }
+                        }
                     }
                 }.padding(24).frame(maxWidth:780)
             }.frame(maxWidth:.infinity).background(Color.academyPaper)
@@ -233,7 +280,8 @@ struct LessonReader:View {
             }
             .onDisappear{saveNote()}
             .onChange(of:phase){_,phase in if phase != .active{saveNote()}}
-        }.navigationTitle(lesson.title)
+        }.navigationTitle(lesson.title).preference(key: MikoReadingKey.self, value: true)
+            .navigationDestination(isPresented:$showNext) { if let nextLesson { LessonReader(lesson:nextLesson) } }
     }
     private func saveNote(){
         guard loaded,note != originalNote else{return}
@@ -263,10 +311,7 @@ struct PaperShelf:View {
                         }.padding(.top,12)
                     }
                     HStack{
-                        Button("Open paper ↗"){
-                            if store.value("paper:"+p.id).isEmpty{store.set("paper:"+p.id,"opened")}
-                            if let url=URL(string:p.url){openURL(url)}
-                        }.buttonStyle(.bordered)
+                        ResourceLink(title:"Open / resume paper",address:p.url,resourceTitle:p.title).buttonStyle(.bordered)
                         Button(store.value("paper:"+p.id)=="read" ? "✓ Read · undo" : "I finished reading"){store.set("paper:"+p.id,store.value("paper:"+p.id)=="read" ? "opened" : "read")}.buttonStyle(.bordered)
                     }
                     Text(store.value("paper:"+p.id).isEmpty ? "Not opened" : store.value("paper:"+p.id).capitalized).font(.caption).foregroundStyle(.secondary)
@@ -287,7 +332,7 @@ struct ResourcesView:View {
                 Text(r.study_focus)
                 Text(r.access).font(.caption)
                 HStack {
-                    Button("Open resource ↗"){if store.value("resource:"+r.id).isEmpty{store.set("resource:"+r.id,"opened")};if let url=URL(string:r.url){openURL(url)}}.buttonStyle(.bordered)
+                    ResourceLink(title:"Open / resume resource",address:r.url,resourceTitle:r.title)
                     Button(store.value("resource:"+r.id)=="read" ? "✓ Read · undo" : "Mark read"){store.set("resource:"+r.id,store.value("resource:"+r.id)=="read" ? "opened" : "read")}.buttonStyle(.bordered)
                 }
             }.padding(.vertical,10)

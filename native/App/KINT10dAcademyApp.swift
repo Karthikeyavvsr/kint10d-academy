@@ -1,13 +1,20 @@
 import SwiftUI
 @main struct KINT10dAcademyApp: App {
     @StateObject private var store=AcademyStore()
+    @StateObject private var miko=MikoSession()
     @Environment(\.scenePhase) private var phase
     var body: some Scene {
         WindowGroup {
-            AcademyRoot().environmentObject(store)
+            AcademyRoot().environmentObject(store).environmentObject(miko)
                 .tint(Color.academyAccent)
-                .task{await store.syncCloud()}
-                .onChange(of:phase){_,value in if value == .active {store.syncFolder(); Task{await store.syncCloud()}} }
+                .task{
+                    miko.changePhase(.active)
+                    #if DEBUG && os(iOS)
+                    if ProcessInfo.processInfo.arguments.contains("--miko-preview-session") { miko.start() }
+                    #endif
+                    await store.syncCloud()
+                }
+                .onChange(of:phase){_,value in miko.changePhase(value); if value == .active {store.syncFolder(); Task{await store.syncCloud()}} }
                 .alert("Academy",isPresented:Binding(get:{store.error != nil},set:{if !$0{store.error=nil}})){
                     Button("OK"){store.error=nil}
                 } message: {Text(store.error ?? "")}

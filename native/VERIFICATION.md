@@ -19,3 +19,35 @@
 - iCloud shared-folder propagation across devices if that optional path is used.
 
 A successful compile is not a claim that these remaining checks passed. The backend is deployed with authenticated read/write checks; physical multi-device pairing remains to be tested. No physical device was modified.
+
+## Miko candidate — 2026-10-21
+
+- Recovered native source and Git history from the preserved iCloud copy into a local checkout outside Desktop/Documents syncing.
+- Xcode 27.1 iOS simulator Debug build: passed.
+- macOS Release build: passed again after the shared image thumbnail adjustment.
+- AcademyCore: 12 tests passed, including motion bounds, reading frames and static Reduce Motion behaviour.
+- iPhone Release build and embedded extension: passed. `codesign --verify --deep --strict` passed.
+- Reading layout screenshot: tiny glasses-and-paws companion visible above the ledge, separate from the text surface.
+- Existing iOS 18.6 simulator Live Activity: blank, including a temporary text-only control. Full companion source restored after that experiment. This does not establish a device pass or prove a simulator-only fault.
+- Physical iPhone 17 Pro (iOS 27.0.1): signed Release update installed over the existing app by USB and launched successfully on 21 October. No uninstall was performed.
+- Physical iPhone acceptance reported by the owner on 21 October: Miko appears in the Dynamic Island and tapping it opens Academy. These two checks passed; exact reading-location restoration was not asserted.
+- Session end, elapsed break timer and Lock Screen presentation still require physical acceptance. This remains a development-signed candidate, not an App Store production release.
+- Personal Team provisioning remains time-limited. Check profile expiry when installing; never distribute this private signed bundle publicly.
+
+## Floating dock and expressive poses — 21 October
+
+- Removed detached companion/status strips in favor of one shared floating capsule; connection status moved to Settings.
+- Added seated looking, blink and paw-grooming sprite poses, gentle idle movement and a tap-to-greet response.
+- Updated Island expressions follow reading/break state using short content transitions; continuous background animation is not implemented.
+- 13 AcademyCore tests passed, including idle pose selection, travel bounds and Reduce Motion.
+- iOS simulator build passed; reading screenshot inspected for a single navigation capsule, glasses pose at its upper edge and a backdrop separating text from the companion.
+- macOS Release build passed after the shared asset and Settings changes.
+- Revised signed Release installed over the existing app on the physical iPhone 17 Pro and launched successfully on 21 October. Deep signature verification passed. Visual acceptance of the revised dock and behaviours remains pending; earlier Island acceptance applies to the previous candidate.
+
+## Reading continuity candidate — 21 October
+
+- Added bookmark save confirmation, completed-bookmark selection fix, next-chapter controls, explicit Settings input styling, and small-step/recall prompts.
+- Added an in-app resource reader with per-resource page and supported YouTube checkpoints. Read `READING-EXPERIENCE.md` for tracking limits and evidence sources.
+- 16 core tests passed. Five mock-player checks passed; these are not live third-party playback tests.
+- iPhone simulator and Mac Release builds passed; bookmark control layout inspected in the simulator.
+- Final iPhone Release build and deep signature verification passed. Updated app installed over the existing app on the physical iPhone 17 Pro on 21 October. Real course playback/playlist resume, UI acceptance and cross-device resource resume still require hands-on verification.
